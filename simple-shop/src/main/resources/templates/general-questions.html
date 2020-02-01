@@ -1,21 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8">
-    <title>General Questions</title>
+    <th:block th:include="fragments/head"></th:block>
 </head>
 <body>
-<div>
-    <nav>
-        <ul>
-            <li><a href="/laptops">Laptops</a></li>
-            <li><a href="/smartphones">Smartphones</a></li>
-            <li><a href="/smartwatches">Smartwatches</a></li>
-            <li><a href="/tablets">Tablets</a></li>
-            <li><a href="/televisions">Televisions</a></li>
-        </ul>
-    </nav>
-</div>
+<th:block th:include="fragments/nav"></th:block>
 <dl>
     <dt>
         <abbr title="Question">Q:</abbr>
@@ -66,24 +56,7 @@
     </dd>
 </dl>
 <footer>
-    <div>
-        <nav>
-            <ul>
-                <li><a href="/contacts">Contact us</a></li>
-                <li><a href="/general-questions">FAQ's</a></li>
-            </ul>
-            <ul>
-                <li><a href="https://www.instagram.com/">Instagram</a></li>
-                <li><a href="https://www.facebook.com/">Facebook</a></li>
-                <li><a href="https://www.youtube.com/">Youtube</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        ©️ 2020 All rights reserved.
-    </div>
+    <th:block th:include="fragments/footer"></th:block>
 </footer>
 </body>
 </html>
