@@ -1,1 +1,1 @@
-# simple-shop
+# e-shop
