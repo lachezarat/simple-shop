@@ -1,4 +1,4 @@
-package com.myproject.eshop.Entities;
+package com.myproject.eshop.data.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,16 +6,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
 @Entity
-@Table(name = "smartphones")
-public class Smartphone extends BaseEntity {
+@Table(name = "laptops")
+public class Laptop extends BaseEntity {
 
     private String centralProcessingUnit;
-    private double displaySize;
-    private String camera;
-    private int batteryCapacity;
+    private String graphicsProcessingUnit;
     private int storage;
     private int ram;
-    private boolean hasMemoryCardSlot = false;
     private double weight;
 
     @Column(name = "CPU", nullable = false)
@@ -27,32 +24,13 @@ public class Smartphone extends BaseEntity {
         this.centralProcessingUnit = centralProcessingUnit;
     }
 
-    @Column(name = "display_size", nullable = false)
-    public double getDisplaySize() {
-        return displaySize;
+    @Column(name = "GPU", nullable = false)
+    public String getGraphicsProcessingUnit() {
+        return graphicsProcessingUnit;
     }
 
-    public void setDisplaySize(double displaySize) {
-        this.displaySize = displaySize;
-    }
-
-    @Column(nullable = false)
-    public String getCamera() {
-        return camera;
-    }
-
-    public void setCamera(String camera) {
-        this.camera = camera;
-    }
-
-    @Column(name = "battery_capacity", nullable = false)
-    @Min(value = 0, message = "The battery capacity must be positive")
-    public int getBatteryCapacity() {
-        return batteryCapacity;
-    }
-
-    public void setBatteryCapacity(int batteryCapacity) {
-        this.batteryCapacity = batteryCapacity;
+    public void setGraphicsProcessingUnit(String graphicsProcessingUnit) {
+        this.graphicsProcessingUnit = graphicsProcessingUnit;
     }
 
     @Column(nullable = false)
@@ -73,15 +51,6 @@ public class Smartphone extends BaseEntity {
 
     public void setRam(int ram) {
         this.ram = ram;
-    }
-
-    @Column(name = "has_memory_card_slot")
-    public boolean isHasMemoryCardSlot() {
-        return hasMemoryCardSlot;
-    }
-
-    public void setHasMemoryCardSlot(boolean hasMemoryCardSlot) {
-        this.hasMemoryCardSlot = hasMemoryCardSlot;
     }
 
     @Column(nullable = false)
