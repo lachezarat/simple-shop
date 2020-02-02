@@ -10,7 +10,6 @@ import javax.validation.constraints.Min;
 public class Smartphone extends BaseEntity {
 
     private String centralProcessingUnit;
-    private double displaySize;
     private String camera;
     private int batteryCapacity;
     private int storage;
@@ -25,15 +24,6 @@ public class Smartphone extends BaseEntity {
 
     public void setCentralProcessingUnit(String centralProcessingUnit) {
         this.centralProcessingUnit = centralProcessingUnit;
-    }
-
-    @Column(name = "display_size", nullable = false)
-    public double getDisplaySize() {
-        return displaySize;
-    }
-
-    public void setDisplaySize(double displaySize) {
-        this.displaySize = displaySize;
     }
 
     @Column(nullable = false)

@@ -10,19 +10,9 @@ import javax.validation.constraints.Min;
 @Table(name = "televisions")
 public class Television extends BaseEntity {
 
-    private double displaySize;
     private int refreshRate;
     private double width;
     private double height;
-
-    @Column(name = "display_size", nullable = false)
-    public double getDisplaySize() {
-        return displaySize;
-    }
-
-    public void setDisplaySize(double displaySize) {
-        this.displaySize = displaySize;
-    }
 
     @Column(nullable = false)
     @Min(value = 0, message = "The refresh rate must be positive")
