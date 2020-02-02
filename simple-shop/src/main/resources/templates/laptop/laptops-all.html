@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <th:block th:include="fragments/head"></th:block>
+</head>
+<body>
+<a href="/">Home Page</a>
+<th:block th:include="fragments/nav"></th:block>
+<h1>Laptops:</h1>
+<br>
+<div>
+    <th:block th:each="laptop, iter : ${laptops}">
+        <ul>
+            <a href="#">
+                <h2 th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
+            </a>
+            <li th:text="${laptop.display}"></li>
+            <li th:text="${laptop.price} + '$'"></li>
+            <li th:text="${laptop.centralProcessingUnit}"></li>
+            <li th:text="${laptop.graphicsProcessingUnit}"></li>
+            <li th:text="${laptop.storage} + 'GB'"></li>
+            <li th:text="${laptop.ram} + 'GB'"></li>
+            <li th:text="${laptop.weight} + 'kg'"></li>
+        </ul>
+    </th:block>
+</div>
+<footer>
+    <th:block th:include="fragments/footer"></th:block>
+</footer>
+</body>
+</html>

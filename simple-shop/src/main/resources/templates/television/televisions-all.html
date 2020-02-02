@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <th:block th:include="fragments/head"></th:block>
+</head>
+<body>
+<a href="/">Home Page</a>
+<th:block th:include="fragments/nav"></th:block>
+<h1>Televisions:</h1>
+<br>
+<div>
+    <th:block th:each="television, iter : ${televisions}">
+        <ul>
+            <a href="#">
+                <h2 th:text="${television.brand} + ' ' + ${television.model}"></h2>
+            </a>
+            <li th:text="${television.display}"></li>
+            <li th:text="${television.price} + '$'"></li>
+            <li th:text="${television.refreshRate}"></li>
+            <li th:text="${television.width}"></li>
+            <li th:text="${television.height} + 'GB'"></li>
+        </ul>
+    </th:block>
+</div>
+<footer>
+    <th:block th:include="fragments/footer"></th:block>
+</footer>
+</body>
+</html>
