@@ -1,6 +1,7 @@
 package com.myproject.eshop.web.controllers;
 
 import com.myproject.eshop.data.entities.Television;
+import com.myproject.eshop.data.models.service.TelevisionServiceModel;
 import com.myproject.eshop.services.TelevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class TelevisionsController extends BaseController {
 
     @GetMapping("/televisions-all")
     public ModelAndView televisions(ModelAndView modelAndView) {
-        List<Television> televisions = televisionService.findAllTelevisions();
+        List<TelevisionServiceModel> televisions = televisionService.findAllTelevisions();
         modelAndView.addObject("televisions", televisions);
         return super.view(modelAndView, "/television/televisions-all");
     }

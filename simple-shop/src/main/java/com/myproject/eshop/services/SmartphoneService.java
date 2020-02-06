@@ -1,10 +1,10 @@
 package com.myproject.eshop.services;
 
-import com.myproject.eshop.data.entities.Smartphone;
+import com.myproject.eshop.data.models.service.SmartphoneServiceModel;
 
 import java.util.List;
 
 public interface SmartphoneService {
 
-    List<Smartphone> findAllSmartphones();
+    List<SmartphoneServiceModel> findAllSmartphones();
 }

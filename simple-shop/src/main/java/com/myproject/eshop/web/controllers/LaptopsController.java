@@ -1,6 +1,7 @@
 package com.myproject.eshop.web.controllers;
 
 import com.myproject.eshop.data.entities.Laptop;
+import com.myproject.eshop.data.models.service.LaptopServiceModel;
 import com.myproject.eshop.services.LaptopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class LaptopsController extends BaseController {
 
     @GetMapping("/laptops-all")
     public ModelAndView laptops(ModelAndView modelAndView) {
-        List<Laptop> laptops = laptopService.findAllLaptops();
+        List<LaptopServiceModel> laptops = laptopService.findAllLaptops();
         modelAndView.addObject("laptops", laptops);
         return super.view(modelAndView, "/laptop/laptops-all");
     }

@@ -1,10 +1,10 @@
 package com.myproject.eshop.services;
 
-import com.myproject.eshop.data.entities.Laptop;
+import com.myproject.eshop.data.models.service.LaptopServiceModel;
 
 import java.util.List;
 
 public interface LaptopService {
 
-    List<Laptop> findAllLaptops();
+    List<LaptopServiceModel> findAllLaptops();
 }

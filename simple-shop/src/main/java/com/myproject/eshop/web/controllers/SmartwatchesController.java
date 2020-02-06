@@ -1,6 +1,7 @@
 package com.myproject.eshop.web.controllers;
 
 import com.myproject.eshop.data.entities.Smartwatch;
+import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
 import com.myproject.eshop.services.SmartwatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class SmartwatchesController extends BaseController {
 
     @GetMapping("/smartwatches-all")
     public ModelAndView smartwatchesAndBands(ModelAndView modelAndView) {
-        List<Smartwatch> smartwatches = smartwatchService.findAllSmartwatches();
+        List<SmartwatchServiceModel> smartwatches = smartwatchService.findAllSmartwatches();
         modelAndView.addObject("smartwatches", smartwatches);
         return super.view(modelAndView, "/smartwatch/smartwatches-all");
     }

@@ -1,6 +1,7 @@
 package com.myproject.eshop.web.controllers;
 
 import com.myproject.eshop.data.entities.Tablet;
+import com.myproject.eshop.data.models.service.TabletServiceModel;
 import com.myproject.eshop.services.TabletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class TabletsController extends BaseController {
 
     @GetMapping("/tablets-all")
     public ModelAndView tablets(ModelAndView modelAndView) {
-        List<Tablet> tablets = tabletService.findAllTablets();
+        List<TabletServiceModel> tablets = tabletService.findAllTablets();
         modelAndView.addObject("tablets", tablets);
         return super.view(modelAndView, "/tablet/tablets-all");
     }
