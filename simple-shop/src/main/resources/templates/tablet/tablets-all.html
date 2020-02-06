@@ -16,12 +16,9 @@
                 <h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
             </a>
             <li th:text="${tablet.display}"></li>
-            <li th:text="${tablet.price} + '$'"></li>
-            <li th:text="${tablet.centralProcessingUnit}"></li>
-            <li th:text="${tablet.storage} + 'GB'"></li>
-            <li th:text="${tablet.ram} + 'GB'"></li>
             <li th:text="${tablet.camera}"></li>
-            <li th:text="${tablet.batteryCapacity}"></li>
+            <li th:text="${tablet.storage} + 'GB'"></li>
+            <li th:text="${tablet.price} + '$'"></li>
         </ul>
     </th:block>
 </div>
