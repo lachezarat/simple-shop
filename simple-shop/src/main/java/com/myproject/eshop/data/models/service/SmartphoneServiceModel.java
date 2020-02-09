@@ -1,6 +1,13 @@
 package com.myproject.eshop.data.models.service;
 
+import java.math.BigDecimal;
+
 public class SmartphoneServiceModel extends BaseServiceModel {
+
+    private String brand;
+    private String model;
+    private String display;
+    private BigDecimal price;
     private String centralProcessingUnit;
     private String camera;
     private int batteryCapacity;
@@ -8,6 +15,38 @@ public class SmartphoneServiceModel extends BaseServiceModel {
     private int ram;
     private boolean hasMemoryCardSlot = false;
     private double weight;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(String display) {
+        this.display = display;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public String getCentralProcessingUnit() {
         return centralProcessingUnit;
