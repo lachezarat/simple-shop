@@ -7,4 +7,6 @@ import java.util.List;
 public interface SmartwatchService {
 
     List<SmartwatchServiceModel> findAllSmartwatches();
+
+    SmartwatchServiceModel createSmartwatch(SmartwatchServiceModel smartwatchServiceModel);
 }

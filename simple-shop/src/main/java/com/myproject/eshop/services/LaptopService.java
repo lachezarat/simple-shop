@@ -7,4 +7,6 @@ import java.util.List;
 public interface LaptopService {
 
     List<LaptopServiceModel> findAllLaptops();
+
+    LaptopServiceModel createLaptop(LaptopServiceModel laptopServiceModel);
 }

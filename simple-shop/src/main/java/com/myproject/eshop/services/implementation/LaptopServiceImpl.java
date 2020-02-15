@@ -1,5 +1,6 @@
 package com.myproject.eshop.services.implementation;
 
+import com.myproject.eshop.data.entities.Laptop;
 import com.myproject.eshop.data.models.service.LaptopServiceModel;
 import com.myproject.eshop.repositories.LaptopRepository;
 import com.myproject.eshop.services.LaptopService;
@@ -27,5 +28,11 @@ public class LaptopServiceImpl implements LaptopService {
                 .stream()
                 .map(laptop -> modelMapper.map(laptop, LaptopServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public LaptopServiceModel createLaptop(LaptopServiceModel laptopServiceModel) {
+        Laptop laptop = modelMapper.map(laptopServiceModel, Laptop.class);
+        return modelMapper.map(laptopRepository.saveAndFlush(laptop), LaptopServiceModel.class);
     }
 }

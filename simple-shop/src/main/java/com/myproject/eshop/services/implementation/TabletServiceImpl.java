@@ -1,5 +1,6 @@
 package com.myproject.eshop.services.implementation;
 
+import com.myproject.eshop.data.entities.Tablet;
 import com.myproject.eshop.data.models.service.TabletServiceModel;
 import com.myproject.eshop.repositories.TabletRepository;
 import com.myproject.eshop.services.TabletService;
@@ -28,5 +29,11 @@ public class TabletServiceImpl implements TabletService {
                 .stream()
                 .map(tablet -> modelMapper.map(tablet, TabletServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public TabletServiceModel createTablet(TabletServiceModel tabletServiceModel) {
+        Tablet tablet = modelMapper.map(tabletServiceModel, Tablet.class);
+        return modelMapper.map(tabletRepository.saveAndFlush(tablet), TabletServiceModel.class);
     }
 }

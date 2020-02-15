@@ -1,5 +1,6 @@
 package com.myproject.eshop.services.implementation;
 
+import com.myproject.eshop.data.entities.Smartwatch;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
 import com.myproject.eshop.repositories.SmartwatchRepository;
 import com.myproject.eshop.services.SmartwatchService;
@@ -28,5 +29,11 @@ public class SmartwatchServiceImpl implements SmartwatchService {
                 .stream()
                 .map(smartwatch -> modelMapper.map(smartwatch, SmartwatchServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public SmartwatchServiceModel createSmartwatch(SmartwatchServiceModel smartwatchServiceModel) {
+        Smartwatch smartwatch = modelMapper.map(smartwatchServiceModel, Smartwatch.class);
+        return modelMapper.map(smartwatchRepository.saveAndFlush(smartwatch), SmartwatchServiceModel.class);
     }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface TabletService {
 
     List<TabletServiceModel> findAllTablets();
+
+    TabletServiceModel createTablet(TabletServiceModel tabletServiceModel);
 }

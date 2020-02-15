@@ -1,5 +1,6 @@
 package com.myproject.eshop.services.implementation;
 
+import com.myproject.eshop.data.entities.Smartphone;
 import com.myproject.eshop.data.models.service.SmartphoneServiceModel;
 import com.myproject.eshop.repositories.SmartphoneRepository;
 import com.myproject.eshop.services.SmartphoneService;
@@ -28,5 +29,11 @@ public class SmartphoneServiceImpl implements SmartphoneService {
                 .stream()
                 .map(smartphone -> modelMapper.map(smartphone, SmartphoneServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public SmartphoneServiceModel createSmartphone(SmartphoneServiceModel smartphoneServiceModel) {
+        Smartphone smartphone = modelMapper.map(smartphoneServiceModel, Smartphone.class);
+        return modelMapper.map(smartphoneRepository.saveAndFlush(smartphone), SmartphoneServiceModel.class);
     }
 }

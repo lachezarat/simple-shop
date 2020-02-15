@@ -1,11 +1,14 @@
 package com.myproject.eshop.web.controllers;
 
+import com.myproject.eshop.data.models.binding.LaptopCreateBindingModel;
+import com.myproject.eshop.data.models.service.LaptopServiceModel;
 import com.myproject.eshop.data.models.view.LaptopAllViewModel;
 import com.myproject.eshop.services.LaptopService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -31,5 +34,17 @@ public class LaptopsController extends BaseController {
                         .collect(Collectors.toList());
         modelAndView.addObject("laptops", laptops);
         return super.view(modelAndView, "/laptop/laptops-all");
+    }
+
+    @GetMapping("/laptops-create")
+    public ModelAndView create() {
+        return super.view("laptop/laptops-create");
+    }
+
+    @PostMapping("/laptops-create")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView createConfirm(@ModelAttribute LaptopCreateBindingModel model) {
+        laptopService.createLaptop(modelMapper.map(model, LaptopServiceModel.class));
+        return super.redirect("/laptops-all");
     }
 }

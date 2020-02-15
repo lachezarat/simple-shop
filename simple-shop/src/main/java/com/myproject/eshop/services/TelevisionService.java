@@ -7,4 +7,6 @@ import java.util.List;
 public interface TelevisionService {
 
     List<TelevisionServiceModel> findAllTelevisions();
+
+    TelevisionServiceModel createTelevision(TelevisionServiceModel televisionServiceModel);
 }
