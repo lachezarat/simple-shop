@@ -42,12 +42,12 @@ public class SmartwatchesController extends BaseController {
         return super.view(modelAndView, "/smartwatch/smartwatches-all");
     }
 
-    @GetMapping("/create")
+    @GetMapping("/smartwatches-create")
     public ModelAndView create() {
-        return super.view("smartwatches-create");
+        return super.view("smartwatch/smartwatches-create");
     }
 
-    @PostMapping("/create")
+    @PostMapping("/smartwatches-create")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView createConfirm(@ModelAttribute SmartwatchCreateBindingModel model) {
         smartwatchService.createSmartwatch(modelMapper.map(model, SmartwatchServiceModel.class));

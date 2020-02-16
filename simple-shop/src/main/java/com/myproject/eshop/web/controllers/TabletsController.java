@@ -41,10 +41,10 @@ public class TabletsController extends BaseController {
 
     @GetMapping("/tablets-create")
     public ModelAndView create() {
-        return super.view("tablets-create");
+        return super.view("/tablet/tablets-create");
     }
 
-    @PostMapping
+    @PostMapping("/tablets-create")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView createConfirm(@ModelAttribute TabletCreateBindingModel model) {
         tabletService.createTablet(modelMapper.map(model, TabletServiceModel.class));

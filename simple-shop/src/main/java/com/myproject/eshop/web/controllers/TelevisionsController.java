@@ -40,12 +40,12 @@ public class TelevisionsController extends BaseController {
         return super.view(modelAndView, "/television/televisions-all");
     }
 
-    @GetMapping("/television-create")
+    @GetMapping("/televisions-create")
     public ModelAndView create() {
-        return super.view("television-create");
+        return super.view("television/televisions-create");
     }
 
-    @PostMapping("/television-create")
+    @PostMapping("/televisions-create")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView createConfirm(@ModelAttribute TelevisionCreateBindingModel model) {
         televisionService.createTelevision(modelMapper.map(model, TelevisionServiceModel.class));
