@@ -2,6 +2,8 @@ package com.myproject.eshop.services.implementation;
 
 import com.myproject.eshop.data.entities.Smartphone;
 import com.myproject.eshop.data.models.service.SmartphoneServiceModel;
+import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
+import com.myproject.eshop.error.SmartphoneNotFoundException;
 import com.myproject.eshop.repositories.SmartphoneRepository;
 import com.myproject.eshop.services.SmartphoneService;
 import org.modelmapper.ModelMapper;
@@ -35,5 +37,12 @@ public class SmartphoneServiceImpl implements SmartphoneService {
     public SmartphoneServiceModel createSmartphone(SmartphoneServiceModel smartphoneServiceModel) {
         Smartphone smartphone = modelMapper.map(smartphoneServiceModel, Smartphone.class);
         return modelMapper.map(smartphoneRepository.saveAndFlush(smartphone), SmartphoneServiceModel.class);
+    }
+
+    @Override
+    public SmartphoneServiceModel findByBrandAndModel(String brand, String model) {
+        return smartphoneRepository.findByBrandAndModel(brand, model)
+                .map(smartphone -> modelMapper.map(smartphone, SmartphoneServiceModel.class))
+                .orElseThrow(() -> new SmartphoneNotFoundException("No such smartphone!"));
     }
 }

@@ -2,6 +2,7 @@ package com.myproject.eshop.services.implementation;
 
 import com.myproject.eshop.data.entities.Laptop;
 import com.myproject.eshop.data.models.service.LaptopServiceModel;
+import com.myproject.eshop.error.LaptopNotFoundException;
 import com.myproject.eshop.repositories.LaptopRepository;
 import com.myproject.eshop.services.LaptopService;
 import org.modelmapper.ModelMapper;
@@ -34,5 +35,12 @@ public class LaptopServiceImpl implements LaptopService {
     public LaptopServiceModel createLaptop(LaptopServiceModel laptopServiceModel) {
         Laptop laptop = modelMapper.map(laptopServiceModel, Laptop.class);
         return modelMapper.map(laptopRepository.saveAndFlush(laptop), LaptopServiceModel.class);
+    }
+
+    @Override
+    public LaptopServiceModel findByBrandAndModel(String brand, String model) {
+        return laptopRepository.findByBrandAndModel(brand, model)
+                .map(laptop -> modelMapper.map(laptop, LaptopServiceModel.class))
+                .orElseThrow(() -> new LaptopNotFoundException("No such laptop!"));
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,5 +53,12 @@ public class SmartwatchesController extends BaseController {
     public ModelAndView createConfirm(@ModelAttribute SmartwatchCreateBindingModel model) {
         smartwatchService.createSmartwatch(modelMapper.map(model, SmartwatchServiceModel.class));
         return super.redirect("smartwatches-all");
+    }
+
+    @GetMapping("/smartwatches/{brand}/{model}")
+    public ModelAndView view(@PathVariable("brand") String brand, @PathVariable("model") String model, ModelAndView modelAndView) {
+        SmartwatchServiceModel smartwatch = smartwatchService.findByBrandAndModel(brand, model);
+        modelAndView.addObject("smartwatch", smartwatch);
+        return super.view(modelAndView, "/smartwatch/smartwatches-single-view");
     }
 }

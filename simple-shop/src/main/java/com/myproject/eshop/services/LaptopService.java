@@ -9,4 +9,6 @@ public interface LaptopService {
     List<LaptopServiceModel> findAllLaptops();
 
     LaptopServiceModel createLaptop(LaptopServiceModel laptopServiceModel);
+
+    LaptopServiceModel findByBrandAndModel(String brand, String model);
 }

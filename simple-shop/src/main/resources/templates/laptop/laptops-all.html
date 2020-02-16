@@ -12,7 +12,7 @@
 <div>
     <th:block th:each="laptop, iter : ${laptops}">
         <ul>
-            <a href="#">
+            <a th:href="@{/laptops/{brand}/{model}(brand = ${laptop.brand}, model = ${laptop.model})}">
                 <h2 th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
             </a>
             <li th:text="${laptop.centralProcessingUnit}"></li>

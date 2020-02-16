@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,5 +51,12 @@ public class SmartphonesController extends BaseController {
     public ModelAndView createConfirm(@ModelAttribute SmartphoneCreateBindingModel model) {
         smartphoneService.createSmartphone(modelMapper.map(model, SmartphoneServiceModel.class));
         return super.redirect("/smartphones-all");
+    }
+
+    @GetMapping("/smartphones/{brand}/{model}")
+    public ModelAndView view(@PathVariable("brand") String brand, @PathVariable("model") String model, ModelAndView modelAndView) {
+        SmartphoneServiceModel smartphone = smartphoneService.findByBrandAndModel(brand, model);
+        modelAndView.addObject("smartphone", smartphone);
+        return super.view(modelAndView, "/smartphone/smartphones-single-view");
     }
 }

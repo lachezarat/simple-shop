@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Controller
 public class LaptopsController extends BaseController {
+
     private final LaptopService laptopService;
     private final ModelMapper modelMapper;
 
@@ -38,7 +39,7 @@ public class LaptopsController extends BaseController {
 
     @GetMapping("/laptops-create")
     public ModelAndView create() {
-        return super.view("laptop/laptops-create");
+        return super.view("/laptop/laptops-create");
     }
 
     @PostMapping("/laptops-create")
@@ -46,5 +47,12 @@ public class LaptopsController extends BaseController {
     public ModelAndView createConfirm(@ModelAttribute LaptopCreateBindingModel model) {
         laptopService.createLaptop(modelMapper.map(model, LaptopServiceModel.class));
         return super.redirect("/laptops-all");
+    }
+
+    @GetMapping("/laptops/{brand}/{model}")
+    public ModelAndView view(@PathVariable("brand") String brand, @PathVariable("model") String model, ModelAndView modelAndView) {
+        LaptopServiceModel laptop = laptopService.findByBrandAndModel(brand, model);
+        modelAndView.addObject("laptop", laptop);
+        return super.view(modelAndView, "/laptop/laptops-single-view");
     }
 }

@@ -9,4 +9,6 @@ public interface SmartwatchService {
     List<SmartwatchServiceModel> findAllSmartwatches();
 
     SmartwatchServiceModel createSmartwatch(SmartwatchServiceModel smartwatchServiceModel);
+
+    SmartwatchServiceModel findByBrandAndModel(String brand, String model);
 }

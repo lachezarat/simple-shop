@@ -9,4 +9,6 @@ public interface TabletService {
     List<TabletServiceModel> findAllTablets();
 
     TabletServiceModel createTablet(TabletServiceModel tabletServiceModel);
+
+    TabletServiceModel findByBrandAndModel(String brand, String model);
 }

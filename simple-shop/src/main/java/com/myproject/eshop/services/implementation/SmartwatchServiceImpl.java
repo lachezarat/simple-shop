@@ -2,6 +2,7 @@ package com.myproject.eshop.services.implementation;
 
 import com.myproject.eshop.data.entities.Smartwatch;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
+import com.myproject.eshop.error.SmartwatchNotFoundException;
 import com.myproject.eshop.repositories.SmartwatchRepository;
 import com.myproject.eshop.services.SmartwatchService;
 import org.modelmapper.ModelMapper;
@@ -35,5 +36,12 @@ public class SmartwatchServiceImpl implements SmartwatchService {
     public SmartwatchServiceModel createSmartwatch(SmartwatchServiceModel smartwatchServiceModel) {
         Smartwatch smartwatch = modelMapper.map(smartwatchServiceModel, Smartwatch.class);
         return modelMapper.map(smartwatchRepository.saveAndFlush(smartwatch), SmartwatchServiceModel.class);
+    }
+
+    @Override
+    public SmartwatchServiceModel findByBrandAndModel(String brand, String model) {
+        return smartwatchRepository.findByBrandAndModel(brand, model)
+                .map(smartwatch -> modelMapper.map(smartwatch, SmartwatchServiceModel.class))
+                .orElseThrow(() -> new SmartwatchNotFoundException("No such smartwatch!"));
     }
 }

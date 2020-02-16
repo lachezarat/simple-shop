@@ -2,6 +2,7 @@ package com.myproject.eshop.services.implementation;
 
 import com.myproject.eshop.data.entities.Tablet;
 import com.myproject.eshop.data.models.service.TabletServiceModel;
+import com.myproject.eshop.error.TabletNotFoundException;
 import com.myproject.eshop.repositories.TabletRepository;
 import com.myproject.eshop.services.TabletService;
 import org.modelmapper.ModelMapper;
@@ -35,5 +36,12 @@ public class TabletServiceImpl implements TabletService {
     public TabletServiceModel createTablet(TabletServiceModel tabletServiceModel) {
         Tablet tablet = modelMapper.map(tabletServiceModel, Tablet.class);
         return modelMapper.map(tabletRepository.saveAndFlush(tablet), TabletServiceModel.class);
+    }
+
+    @Override
+    public TabletServiceModel findByBrandAndModel(String brand, String model) {
+        return tabletRepository.findByBrandAndModel(brand, model)
+                .map(tablet -> modelMapper.map(tablet, TabletServiceModel.class))
+                .orElseThrow(() -> new TabletNotFoundException("No such tablet!"));
     }
 }

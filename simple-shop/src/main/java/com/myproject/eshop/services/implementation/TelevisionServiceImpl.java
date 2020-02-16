@@ -2,6 +2,7 @@ package com.myproject.eshop.services.implementation;
 
 import com.myproject.eshop.data.entities.Television;
 import com.myproject.eshop.data.models.service.TelevisionServiceModel;
+import com.myproject.eshop.error.TelevisionNotFoundException;
 import com.myproject.eshop.repositories.TelevisionRepository;
 import com.myproject.eshop.services.TelevisionService;
 import org.modelmapper.ModelMapper;
@@ -35,5 +36,12 @@ public class TelevisionServiceImpl implements TelevisionService {
     public TelevisionServiceModel createTelevision(TelevisionServiceModel televisionServiceModel) {
         Television television = modelMapper.map(televisionServiceModel, Television.class);
         return modelMapper.map(televisionRepository.saveAndFlush(television), TelevisionServiceModel.class);
+    }
+
+    @Override
+    public TelevisionServiceModel findByBrandAndModel(String brand, String model) {
+        return televisionRepository.findByBrandAndModel(brand, model)
+                .map(television -> modelMapper.map(television, TelevisionServiceModel.class))
+                .orElseThrow(() -> new TelevisionNotFoundException("No such television!"));
     }
 }

@@ -9,4 +9,6 @@ public interface TelevisionService {
     List<TelevisionServiceModel> findAllTelevisions();
 
     TelevisionServiceModel createTelevision(TelevisionServiceModel televisionServiceModel);
+
+    TelevisionServiceModel findByBrandAndModel(String brand, String model);
 }

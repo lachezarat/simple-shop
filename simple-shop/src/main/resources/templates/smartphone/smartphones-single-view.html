@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <th:block th:include="fragments/head"></th:block>
+</head>
+<body>
+<a href="/">Home Page</a>
+<th:block th:include="fragments/nav"></th:block>
+<br>
+<div>
+    <ul>
+        <li>
+            <h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
+        </li>
+        <li th:text="${smartphone.centralProcessingUnit}"></li>
+        <li th:text="${smartphone.ram} + 'GB'"></li>
+        <li th:text="${smartphone.storage} + 'GB'"></li>
+        <li th:text="${smartphone.price} + '$'"></li>
+    </ul>
+</div>
+<footer>
+    <th:block th:include="fragments/footer"></th:block>
+</footer>
+</body>
+</html>
