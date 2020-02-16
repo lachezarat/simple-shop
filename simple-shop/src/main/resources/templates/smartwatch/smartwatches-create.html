@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <th:block th:include="fragments/head"></th:block>
+</head>
+<body>
+<a href="/">Home Page</a>
+<th:block th:include="fragments/nav"></th:block>
+<h1>Create Smartwatche:</h1>
+<br>
+<div>
+    <form th:method="post" th:action="@{/smartwatches-create.html}">
+        <div>
+            <label for="brand">Brand:</label>
+            <input type="text" id="brand" name="brand">
+        </div>
+        <div>
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model">
+        </div>
+        <div>
+            <label for="display">Display:</label>
+            <input type="text" id="display" name="display">
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price">
+        </div>
+        <div>
+            <label for="cpu">CPU:</label>
+            <input type="text" id="cpu"
+                   name="centralProcessingUnit">
+        </div>
+        <div>
+            <label for="batteryCapacity">Battery Capacity:</label>
+            <input type="number" id="batteryCapacity" name="batteryCapacity">
+        </div>
+        <div>
+            <label for="storage">Storage:</label>
+            <input type="number" id="storage" name="storage">
+        </div>
+        <div>
+            <label for="ram">RAM:</label>
+            <input type="number" id="ram" name="ram">
+        </div>
+        <div>
+            <label for="hasCamera">Memory Card:</label>
+            <input type="radio" id="hasCamera" name="hasCamera">
+        </div>
+        <hr/>
+        <div>
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</div>
+<footer>
+    <th:block th:include="fragments/footer"></th:block>
+</footer>
+</body>
+</html>
