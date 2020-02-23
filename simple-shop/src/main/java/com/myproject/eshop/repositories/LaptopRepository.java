@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface LaptopRepository extends JpaRepository<Laptop, String> {
 
     Optional<Laptop> findByBrandAndModel(String Brand, String model);
+
+    void delete(Laptop laptop);
 }

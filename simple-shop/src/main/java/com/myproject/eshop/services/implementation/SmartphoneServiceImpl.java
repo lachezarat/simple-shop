@@ -1,5 +1,6 @@
 package com.myproject.eshop.services.implementation;
 
+import com.myproject.eshop.data.entities.Laptop;
 import com.myproject.eshop.data.entities.Smartphone;
 import com.myproject.eshop.data.models.service.SmartphoneServiceModel;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
@@ -62,5 +63,13 @@ public class SmartphoneServiceImpl implements SmartphoneService {
         smartphone.setHasMemoryCardSlot(smartphoneServiceModel.isHasMemoryCardSlot());
 
         return modelMapper.map(smartphoneRepository.saveAndFlush(smartphone), SmartphoneServiceModel.class);
+    }
+
+    @Override
+    public void deleteSmartphone(String brand, String model) {
+        Smartphone smartphone = smartphoneRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new SmartphoneNotFoundException("No such smartphone!"));
+
+        smartphoneRepository.delete(smartphone);
     }
 }

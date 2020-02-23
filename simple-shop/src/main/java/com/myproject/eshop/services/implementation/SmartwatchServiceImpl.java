@@ -60,4 +60,12 @@ public class SmartwatchServiceImpl implements SmartwatchService {
 
         return modelMapper.map(smartwatchRepository.saveAndFlush(smartwatch), SmartwatchServiceModel.class);
     }
+
+    @Override
+    public void deleteSmartwatch(String brand, String model) {
+        Smartwatch smartwatch = smartwatchRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new SmartwatchNotFoundException("No such smartwatch!"));
+
+        smartwatchRepository.delete(smartwatch);
+    }
 }

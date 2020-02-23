@@ -59,4 +59,12 @@ public class LaptopServiceImpl implements LaptopService {
 
         return modelMapper.map(laptopRepository.saveAndFlush(laptop), LaptopServiceModel.class);
     }
+
+    @Override
+    public void deleteLaptop(String brand, String model) {
+        Laptop laptop = laptopRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new LaptopNotFoundException("No such laptop!"));
+
+        laptopRepository.delete(laptop);
+    }
 }

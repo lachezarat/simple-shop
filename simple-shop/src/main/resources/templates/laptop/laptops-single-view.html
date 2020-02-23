@@ -23,6 +23,10 @@
           th:method="get">
         <button th:text="EDIT"></button>
     </form>
+    <form th:action="@{/laptops-delete/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
+          th:method="post">
+        <button th:text="DELETE"></button>
+    </form>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

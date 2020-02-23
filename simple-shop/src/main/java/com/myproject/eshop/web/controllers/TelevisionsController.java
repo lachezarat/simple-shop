@@ -72,4 +72,10 @@ public class TelevisionsController extends BaseController {
         televisionService.editTelevision(brand, model, modelMapper.map(television, TelevisionServiceModel.class));
         return super.redirect("/televisions/" + brand + "/" + model);
     }
+
+    @PostMapping("televisions-delete/{brand}/{model}")
+    public ModelAndView delete(@PathVariable String brand, @PathVariable String model) {
+        televisionService.deleteTelevision(brand, model);
+        return super.redirect("/televisions-all");
+    }
 }

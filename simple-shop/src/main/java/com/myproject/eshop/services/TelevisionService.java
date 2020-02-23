@@ -13,4 +13,6 @@ public interface TelevisionService {
     TelevisionServiceModel findByBrandAndModel(String brand, String model);
 
     TelevisionServiceModel editTelevision(String brand, String model, TelevisionServiceModel televisionServiceModel);
+
+    void deleteTelevision(String brand, String model);
 }

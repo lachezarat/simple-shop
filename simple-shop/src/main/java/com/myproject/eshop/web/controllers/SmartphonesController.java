@@ -73,4 +73,10 @@ public class SmartphonesController extends BaseController {
         smartphoneService.editSmartphone(brand, model, modelMapper.map(smartphone, SmartphoneServiceModel.class));
         return super.redirect("/smartphones/" + brand + "/" + model);
     }
+
+    @PostMapping("smartphones-delete/{brand}/{model}")
+    public ModelAndView delete(@PathVariable String brand, @PathVariable String model) {
+        smartphoneService.deleteSmartphone(brand, model);
+        return super.redirect("/smartphones-all");
+    }
 }

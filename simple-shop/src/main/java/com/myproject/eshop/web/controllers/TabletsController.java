@@ -71,4 +71,10 @@ public class TabletsController extends BaseController {
         tabletService.editTablet(brand, model, modelMapper.map(tablet, TabletServiceModel.class));
         return super.redirect("/tablets/" + brand + "/" + model);
     }
+
+    @PostMapping("tablets-delete/{brand}/{model}")
+    public ModelAndView delete(@PathVariable String brand, @PathVariable String model) {
+        tabletService.deleteTablet(brand, model);
+        return super.redirect("/tablets-all");
+    }
 }

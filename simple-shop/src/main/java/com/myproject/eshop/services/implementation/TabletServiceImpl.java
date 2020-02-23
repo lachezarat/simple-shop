@@ -59,4 +59,12 @@ public class TabletServiceImpl implements TabletService {
 
         return modelMapper.map(tabletRepository.saveAndFlush(tablet), TabletServiceModel.class);
     }
+
+    @Override
+    public void deleteTablet(String brand, String model) {
+        Tablet tablet = tabletRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new TabletNotFoundException("No such tablet!"));
+
+        tabletRepository.delete(tablet);
+    }
 }

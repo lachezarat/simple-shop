@@ -13,4 +13,6 @@ public interface LaptopService {
     LaptopServiceModel findByBrandAndModel(String brand, String model);
 
     LaptopServiceModel editLaptop(String brand, String model, LaptopServiceModel laptopServiceModel);
+
+    void deleteLaptop(String brand, String model);
 }

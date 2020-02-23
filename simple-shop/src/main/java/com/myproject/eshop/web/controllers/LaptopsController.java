@@ -68,4 +68,10 @@ public class LaptopsController extends BaseController {
         laptopService.editLaptop(brand, model, modelMapper.map(laptop, LaptopServiceModel.class));
         return super.redirect("/laptops/" + brand + "/" + model);
     }
+
+    @PostMapping("/laptops-delete/{brand}/{model}")
+    public ModelAndView delete(@PathVariable String brand, @PathVariable String model) {
+        laptopService.deleteLaptop(brand, model);
+        return redirect("/laptops-all");
+    }
 }

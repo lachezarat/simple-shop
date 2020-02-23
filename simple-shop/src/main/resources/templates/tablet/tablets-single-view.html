@@ -20,6 +20,10 @@
           th:method="get">
         <button th:text="EDIT"></button>
     </form>
+    <form th:action="@{/tablets-delete/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
+          th:method="post">
+        <button th:text="DELETE"></button>
+    </form>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

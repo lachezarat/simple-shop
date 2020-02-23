@@ -75,4 +75,10 @@ public class SmartwatchesController extends BaseController {
         smartwatchService.editSmartwatch(brand, model, modelMapper.map(smartwatch, SmartwatchServiceModel.class));
         return super.redirect("/smartwatches/" + brand + "/" + model);
     }
+
+    @PostMapping("/smartwatches-delete/{brand}/{model}")
+    public ModelAndView delete(@PathVariable String brand, @PathVariable String model) {
+        smartwatchService.deleteSmartwatch(brand, model);
+        return super.redirect("/smartwatches-all");
+    }
 }

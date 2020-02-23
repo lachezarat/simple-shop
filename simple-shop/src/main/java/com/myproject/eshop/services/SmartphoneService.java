@@ -15,4 +15,6 @@ public interface SmartphoneService {
     SmartphoneServiceModel findByBrandAndModel(String brand, String model);
 
     SmartphoneServiceModel editSmartphone(String brand, String model, SmartphoneServiceModel smartphoneServiceModel);
+
+    void deleteSmartphone(String brand, String model);
 }

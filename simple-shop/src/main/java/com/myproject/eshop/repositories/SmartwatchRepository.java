@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface SmartwatchRepository extends JpaRepository<Smartwatch, String> {
 
     Optional<Smartwatch> findByBrandAndModel(String brand, String model);
+
+    void delete(Smartwatch smartwatch);
 }

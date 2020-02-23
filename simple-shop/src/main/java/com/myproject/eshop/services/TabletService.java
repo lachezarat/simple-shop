@@ -13,4 +13,6 @@ public interface TabletService {
     TabletServiceModel findByBrandAndModel(String brand, String model);
 
     TabletServiceModel editTablet(String brand, String model, TabletServiceModel tabletServiceModel);
+
+    void deleteTablet(String brand, String model);
 }

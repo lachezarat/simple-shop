@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface TelevisionRepository extends JpaRepository<Television, String> {
 
     Optional<Television> findByBrandAndModel(String brand, String model);
+
+    void delete(Television television);
 }

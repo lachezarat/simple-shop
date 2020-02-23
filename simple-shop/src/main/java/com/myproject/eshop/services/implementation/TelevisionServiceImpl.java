@@ -58,4 +58,12 @@ public class TelevisionServiceImpl implements TelevisionService {
 
         return modelMapper.map(televisionRepository.saveAndFlush(television), TelevisionServiceModel.class);
     }
+
+    @Override
+    public void deleteTelevision(String brand, String model) {
+        Television television = televisionRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new TelevisionNotFoundException("No such television!"));
+
+        televisionRepository.delete(television);
+    }
 }
