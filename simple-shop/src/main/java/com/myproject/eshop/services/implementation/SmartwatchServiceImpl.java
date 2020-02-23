@@ -44,4 +44,20 @@ public class SmartwatchServiceImpl implements SmartwatchService {
                 .map(smartwatch -> modelMapper.map(smartwatch, SmartwatchServiceModel.class))
                 .orElseThrow(() -> new SmartwatchNotFoundException("No such smartwatch!"));
     }
+
+    @Override
+    public SmartwatchServiceModel editSmartwatch(String brand, String model, SmartwatchServiceModel smartwatchServiceModel) {
+        Smartwatch smartwatch = smartwatchRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new SmartwatchNotFoundException("No such smartwatch!"));
+
+        smartwatch.setDisplay(smartwatchServiceModel.getDisplay());
+        smartwatch.setPrice(smartwatchServiceModel.getPrice());
+        smartwatch.setCentralProcessingUnit(smartwatchServiceModel.getCentralProcessingUnit());
+        smartwatch.setStorage(smartwatchServiceModel.getStorage());
+        smartwatch.setRam(smartwatchServiceModel.getRam());
+        smartwatch.setHasCamera(smartwatchServiceModel.isHasCamera());
+        smartwatch.setBatteryCapacity(smartwatchServiceModel.getBatteryCapacity());
+
+        return modelMapper.map(smartwatchRepository.saveAndFlush(smartwatch), SmartwatchServiceModel.class);
+    }
 }

@@ -44,4 +44,19 @@ public class TabletServiceImpl implements TabletService {
                 .map(tablet -> modelMapper.map(tablet, TabletServiceModel.class))
                 .orElseThrow(() -> new TabletNotFoundException("No such tablet!"));
     }
+
+    @Override
+    public TabletServiceModel editTablet(String brand, String model, TabletServiceModel tabletServiceModel) {
+        Tablet tablet = tabletRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new TabletNotFoundException("No such tablet!"));
+
+        tablet.setDisplay(tabletServiceModel.getDisplay());
+        tablet.setCentralProcessingUnit(tabletServiceModel.getCentralProcessingUnit());
+        tablet.setPrice(tabletServiceModel.getPrice());
+        tablet.setRam(tabletServiceModel.getRam());
+        tablet.setStorage(tabletServiceModel.getStorage());
+        tablet.setCamera(tabletServiceModel.getCamera());
+
+        return modelMapper.map(tabletRepository.saveAndFlush(tablet), TabletServiceModel.class);
+    }
 }

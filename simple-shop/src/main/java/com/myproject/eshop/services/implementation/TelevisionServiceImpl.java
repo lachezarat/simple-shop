@@ -44,4 +44,18 @@ public class TelevisionServiceImpl implements TelevisionService {
                 .map(television -> modelMapper.map(television, TelevisionServiceModel.class))
                 .orElseThrow(() -> new TelevisionNotFoundException("No such television!"));
     }
+
+    @Override
+    public TelevisionServiceModel editTelevision(String brand, String model, TelevisionServiceModel televisionServiceModel) {
+        Television television = televisionRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new TelevisionNotFoundException("No such television!"));
+
+        television.setDisplay(televisionServiceModel.getDisplay());
+        television.setPrice(televisionServiceModel.getPrice());
+        television.setRefreshRate(televisionServiceModel.getRefreshRate());
+        television.setHeight(televisionServiceModel.getHeight());
+        television.setWidth(televisionServiceModel.getWidth());
+
+        return modelMapper.map(televisionRepository.saveAndFlush(television), TelevisionServiceModel.class);
+    }
 }

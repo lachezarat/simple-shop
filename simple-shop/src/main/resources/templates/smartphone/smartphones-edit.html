@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <th:block th:include="fragments/head"></th:block>
+</head>
+<body>
+<a href="/">Home Page</a>
+<th:block th:include="fragments/nav"></th:block>
+<br>
+<h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
+<div>
+    <ul>
+        <form th:action="@{/smartphones-edit/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
+              th:method="post">
+            <div>
+                <label for="display">Display:</label>
+                <input type="text" id="display" name="display" th:value="${smartphone.display}">
+            </div>
+            <div>
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" th:value="${smartphone.price}">
+            </div>
+            <div>
+                <label for="cpu">CPU:</label>
+                <input type="text" id="cpu"
+                       name="centralProcessingUnit" th:value="${smartphone.centralProcessingUnit}">
+            </div>
+            <div>
+                <label for="camera">Camera:</label>
+                <input type="text" id="camera" name="camera" th:value="${smartphone.camera}">
+            </div>
+            <div>
+                <label for="batteryCapacity">Battery Capacity:</label>
+                <input type="number" id="batteryCapacity" name="batteryCapacity"
+                       th:value="${smartphone.batteryCapacity}">
+            </div>
+            <div>
+                <label for="storage">Storage:</label>
+                <input type="number" id="storage" name="storage" th:value="${smartphone.storage}">
+            </div>
+            <div>
+                <label for="ram">RAM:</label>
+                <input type="number" id="ram" name="ram" th:value="${smartphone.ram}">
+            </div>
+            <div>
+                <label for="memoryCard">Memory Card:</label>
+                <input type="checkbox" id="memoryCard" name="hasMemoryCardSlot"
+                       th:checked="${smartphone.hasMemoryCardSlot}">
+            </div>
+            <div>
+                <label for="weight">Weight:</label>
+                <input type="number" id="weight" name="weight" step="0.01" th:value="${smartphone.weight}">
+            </div>
+            <hr/>
+            <div>
+                <button type="submit">Edit</button>
+            </div>
+        </form>
+        <hr>
+    </ul>
+</div>
+<footer>
+    <th:block th:include="fragments/footer"></th:block>
+</footer>
+</body>
+</html>

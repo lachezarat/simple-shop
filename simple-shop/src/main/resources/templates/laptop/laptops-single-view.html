@@ -19,6 +19,10 @@
         <li th:text="${laptop.storage} + 'GB'"></li>
         <li th:text="${laptop.price} + '$'"></li>
     </ul>
+    <form th:action="@{/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
+          th:method="get">
+        <button th:text="EDIT"></button>
+    </form>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

@@ -11,4 +11,6 @@ public interface TelevisionService {
     TelevisionServiceModel createTelevision(TelevisionServiceModel televisionServiceModel);
 
     TelevisionServiceModel findByBrandAndModel(String brand, String model);
+
+    TelevisionServiceModel editTelevision(String brand, String model, TelevisionServiceModel televisionServiceModel);
 }

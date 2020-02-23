@@ -11,4 +11,6 @@ public interface TabletService {
     TabletServiceModel createTablet(TabletServiceModel tabletServiceModel);
 
     TabletServiceModel findByBrandAndModel(String brand, String model);
+
+    TabletServiceModel editTablet(String brand, String model, TabletServiceModel tabletServiceModel);
 }

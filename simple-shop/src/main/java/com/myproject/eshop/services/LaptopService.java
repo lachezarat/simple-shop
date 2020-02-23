@@ -11,4 +11,6 @@ public interface LaptopService {
     LaptopServiceModel createLaptop(LaptopServiceModel laptopServiceModel);
 
     LaptopServiceModel findByBrandAndModel(String brand, String model);
+
+    LaptopServiceModel editLaptop(String brand, String model, LaptopServiceModel laptopServiceModel);
 }

@@ -59,4 +59,17 @@ public class TelevisionsController extends BaseController {
         modelAndView.addObject("television", television);
         return super.view(modelAndView, "/television/televisions-single-view");
     }
+
+    @GetMapping("/televisions-edit/{brand}/{model}")
+    public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
+        TelevisionServiceModel television = televisionService.findByBrandAndModel(brand, model);
+        modelAndView.addObject("television", television);
+        return super.view(modelAndView, "/television/televisions-edit");
+    }
+
+    @PostMapping("/televisions-edit/{brand}/{model}")
+    public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute TelevisionCreateBindingModel television) {
+        televisionService.editTelevision(brand, model, modelMapper.map(television, TelevisionServiceModel.class));
+        return super.redirect("/televisions/" + brand + "/" + model);
+    }
 }

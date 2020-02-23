@@ -43,4 +43,20 @@ public class LaptopServiceImpl implements LaptopService {
                 .map(laptop -> modelMapper.map(laptop, LaptopServiceModel.class))
                 .orElseThrow(() -> new LaptopNotFoundException("No such laptop!"));
     }
+
+    @Override
+    public LaptopServiceModel editLaptop(String brand, String model, LaptopServiceModel laptopServiceModel) {
+        Laptop laptop = laptopRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new LaptopNotFoundException("No such laptop"));
+
+        laptop.setDisplay(laptopServiceModel.getDisplay());
+        laptop.setCentralProcessingUnit(laptopServiceModel.getCentralProcessingUnit());
+        laptop.setGraphicsProcessingUnit(laptopServiceModel.getGraphicsProcessingUnit());
+        laptop.setPrice(laptopServiceModel.getPrice());
+        laptop.setRam(laptopServiceModel.getRam());
+        laptop.setStorage(laptopServiceModel.getStorage());
+        laptop.setWeight(laptopServiceModel.getWeight());
+
+        return modelMapper.map(laptopRepository.saveAndFlush(laptop), LaptopServiceModel.class);
+    }
 }

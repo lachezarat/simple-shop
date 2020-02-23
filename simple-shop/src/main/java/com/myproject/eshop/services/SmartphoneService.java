@@ -13,4 +13,6 @@ public interface SmartphoneService {
     SmartphoneServiceModel createSmartphone(SmartphoneServiceModel smartphoneServiceModel);
 
     SmartphoneServiceModel findByBrandAndModel(String brand, String model);
+
+    SmartphoneServiceModel editSmartphone(String brand, String model, SmartphoneServiceModel smartphoneServiceModel);
 }

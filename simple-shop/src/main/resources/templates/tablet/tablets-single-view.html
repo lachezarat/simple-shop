@@ -8,16 +8,18 @@
 <a href="/">Home Page</a>
 <th:block th:include="fragments/nav"></th:block>
 <br>
+<h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
 <div>
     <ul>
-        <li>
-            <h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
-        </li>
         <li th:text="${tablet.centralProcessingUnit}"></li>
         <li th:text="${tablet.ram} + 'GB'"></li>
         <li th:text="${tablet.storage} + 'GB'"></li>
         <li th:text="${tablet.price} + '$'"></li>
     </ul>
+    <form th:action="@{/tablets-edit/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
+          th:method="get">
+        <button th:text="EDIT"></button>
+    </form>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

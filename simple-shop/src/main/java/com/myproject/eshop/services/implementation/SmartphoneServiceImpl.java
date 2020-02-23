@@ -45,4 +45,22 @@ public class SmartphoneServiceImpl implements SmartphoneService {
                 .map(smartphone -> modelMapper.map(smartphone, SmartphoneServiceModel.class))
                 .orElseThrow(() -> new SmartphoneNotFoundException("No such smartphone!"));
     }
+
+    @Override
+    public SmartphoneServiceModel editSmartphone(String brand, String model, SmartphoneServiceModel smartphoneServiceModel) {
+        Smartphone smartphone = smartphoneRepository.findByBrandAndModel(brand, model)
+                .orElseThrow(() -> new SmartphoneNotFoundException("No such smartphone!"));
+
+        smartphone.setDisplay(smartphoneServiceModel.getDisplay());
+        smartphone.setCentralProcessingUnit(smartphoneServiceModel.getCentralProcessingUnit());
+        smartphone.setPrice(smartphoneServiceModel.getPrice());
+        smartphone.setCamera(smartphone.getCamera());
+        smartphone.setRam(smartphoneServiceModel.getRam());
+        smartphone.setStorage(smartphoneServiceModel.getStorage());
+        smartphone.setBatteryCapacity(smartphoneServiceModel.getBatteryCapacity());
+        smartphone.setWeight(smartphoneServiceModel.getWeight());
+        smartphone.setHasMemoryCardSlot(smartphoneServiceModel.isHasMemoryCardSlot());
+
+        return modelMapper.map(smartphoneRepository.saveAndFlush(smartphone), SmartphoneServiceModel.class);
+    }
 }

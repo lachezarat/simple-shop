@@ -50,9 +50,22 @@ public class LaptopsController extends BaseController {
     }
 
     @GetMapping("/laptops/{brand}/{model}")
-    public ModelAndView view(@PathVariable("brand") String brand, @PathVariable("model") String model, ModelAndView modelAndView) {
+    public ModelAndView view(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
         LaptopServiceModel laptop = laptopService.findByBrandAndModel(brand, model);
         modelAndView.addObject("laptop", laptop);
         return super.view(modelAndView, "/laptop/laptops-single-view");
+    }
+
+    @GetMapping("/laptops-edit/{brand}/{model}")
+    public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
+        LaptopServiceModel laptop = laptopService.findByBrandAndModel(brand, model);
+        modelAndView.addObject("laptop", laptop);
+        return super.view(modelAndView, "/laptop/laptops-edit");
+    }
+
+    @PostMapping("/laptops-edit/{brand}/{model}")
+    public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute LaptopCreateBindingModel laptop) {
+        laptopService.editLaptop(brand, model, modelMapper.map(laptop, LaptopServiceModel.class));
+        return super.redirect("/laptops/" + brand + "/" + model);
     }
 }

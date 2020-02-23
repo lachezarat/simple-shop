@@ -58,4 +58,17 @@ public class TabletsController extends BaseController {
         modelAndView.addObject("tablet", tablet);
         return super.view(modelAndView, "/tablet/tablets-single-view");
     }
+
+    @GetMapping("/tablets-edit/{brand}/{model}")
+    public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
+        TabletServiceModel tablet = tabletService.findByBrandAndModel(brand, model);
+        modelAndView.addObject("tablet", tablet);
+        return super.view(modelAndView, "/tablet/tablets-edit");
+    }
+
+    @PostMapping("/tablets-edit/{brand}/{model}")
+    public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute TabletCreateBindingModel tablet) {
+        tabletService.editTablet(brand, model, modelMapper.map(tablet, TabletServiceModel.class));
+        return super.redirect("/tablets/" + brand + "/" + model);
+    }
 }

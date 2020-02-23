@@ -1,5 +1,6 @@
 package com.myproject.eshop.web.controllers;
 
+import com.myproject.eshop.data.entities.Smartwatch;
 import com.myproject.eshop.data.models.binding.SmartwatchCreateBindingModel;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
 import com.myproject.eshop.data.models.view.SmartphoneAllViewModel;
@@ -60,5 +61,18 @@ public class SmartwatchesController extends BaseController {
         SmartwatchServiceModel smartwatch = smartwatchService.findByBrandAndModel(brand, model);
         modelAndView.addObject("smartwatch", smartwatch);
         return super.view(modelAndView, "/smartwatch/smartwatches-single-view");
+    }
+
+    @GetMapping("/smartwatches-edit/{brand}/{model}")
+    public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
+        SmartwatchServiceModel smartwatch = smartwatchService.findByBrandAndModel(brand, model);
+        modelAndView.addObject("smartwatch", smartwatch);
+        return super.view(modelAndView, "/smartwatch/smartwatches-edit");
+    }
+
+    @PostMapping("/smartwatches-edit/{brand}/{model}")
+    public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute SmartwatchCreateBindingModel smartwatch) {
+        smartwatchService.editSmartwatch(brand, model, modelMapper.map(smartwatch, SmartwatchServiceModel.class));
+        return super.redirect("/smartwatches/" + brand + "/" + model);
     }
 }

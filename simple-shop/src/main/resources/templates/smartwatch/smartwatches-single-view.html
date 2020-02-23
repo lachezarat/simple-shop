@@ -8,16 +8,18 @@
 <a href="/">Home Page</a>
 <th:block th:include="fragments/nav"></th:block>
 <br>
+<h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
 <div>
     <ul>
-        <li>
-            <h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
-        </li>
         <li th:text="${smartwatch.centralProcessingUnit}"></li>
         <li th:text="${smartwatch.ram} + 'GB'"></li>
         <li th:text="${smartwatch.storage} + 'GB'"></li>
         <li th:text="${smartwatch.price} + '$'"></li>
     </ul>
+    <form th:action="@{/smartwatches-edit/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
+          th:method="get">
+        <button th:text="EDIT"></button>
+    </form>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>
