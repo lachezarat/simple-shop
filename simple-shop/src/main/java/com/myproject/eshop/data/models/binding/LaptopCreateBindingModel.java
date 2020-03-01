@@ -6,6 +6,7 @@ public class LaptopCreateBindingModel {
 
     private String brand;
     private String model;
+    private String imgUrl;
     private String display;
     private BigDecimal price;
     private String centralProcessingUnit;
@@ -86,4 +87,12 @@ public class LaptopCreateBindingModel {
     }
 
     private double weight;
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 }

@@ -6,6 +6,8 @@ public class TabletAllViewModel {
 
     private String brand;
     private String model;
+    private String imgUrl;
+    private String centralProcessingUnit;
     private String display;
     private BigDecimal price;
     private String camera;
@@ -57,5 +59,21 @@ public class TabletAllViewModel {
 
     public void setStorage(int storage) {
         this.storage = storage;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getCentralProcessingUnit() {
+        return centralProcessingUnit;
+    }
+
+    public void setCentralProcessingUnit(String centralProcessingUnit) {
+        this.centralProcessingUnit = centralProcessingUnit;
     }
 }

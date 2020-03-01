@@ -1,9 +1,7 @@
-package com.myproject.eshop.services.implementation;
+package com.myproject.eshop.services.impl;
 
-import com.myproject.eshop.data.entities.Laptop;
 import com.myproject.eshop.data.entities.Smartphone;
 import com.myproject.eshop.data.models.service.SmartphoneServiceModel;
-import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
 import com.myproject.eshop.error.SmartphoneNotFoundException;
 import com.myproject.eshop.repositories.SmartphoneRepository;
 import com.myproject.eshop.services.SmartphoneService;
@@ -52,6 +50,7 @@ public class SmartphoneServiceImpl implements SmartphoneService {
         Smartphone smartphone = smartphoneRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new SmartphoneNotFoundException("No such smartphone!"));
 
+        smartphone.setImgUrl(smartphoneServiceModel.getImgUrl());
         smartphone.setDisplay(smartphoneServiceModel.getDisplay());
         smartphone.setCentralProcessingUnit(smartphoneServiceModel.getCentralProcessingUnit());
         smartphone.setPrice(smartphoneServiceModel.getPrice());

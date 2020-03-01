@@ -6,6 +6,7 @@ public class LaptopAllViewModel {
 
     private String brand;
     private String model;
+    private String imgUrl;
     private BigDecimal price;
     private String centralProcessingUnit;
     private String graphicsProcessingUnit;
@@ -66,5 +67,13 @@ public class LaptopAllViewModel {
 
     public void setRam(int ram) {
         this.ram = ram;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

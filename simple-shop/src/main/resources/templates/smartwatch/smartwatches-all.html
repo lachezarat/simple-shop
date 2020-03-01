@@ -12,12 +12,15 @@
 <div>
     <th:block th:each="smartwatch, iter : ${smartwatches}">
         <ul>
+            <img th:src="${smartwatch.imgUrl}" th:alt="${smartwatch.brand} + ' ' + ${smartwatch.model}" width="200">
             <a th:href="@{/smartwatches/{brand}/{model}(brand = ${smartwatch.brand}, model = ${smartwatch.model})}">
                 <h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
             </a>
             <li th:text="${smartwatch.display}"></li>
-            <li th:text="${smartwatch.price} + '$'"></li>
+            <li th:text="${smartwatch.storage} + 'GB'"></li>
+            <li th:text="${smartwatch.batteryCapacity} + 'mAh'"></li>
         </ul>
+        <h3 th:text="${smartwatch.price} + '$'"></h3>
     </th:block>
 </div>
 <footer>

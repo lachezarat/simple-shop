@@ -8,12 +8,15 @@
 <a href="/">Home Page</a>
 <th:block th:include="fragments/nav"></th:block>
 <br>
-<h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
 <div>
+    <img th:src="${smartwatch.imgUrl}" th:alt="${smartwatch.brand} + ' ' + ${smartwatch.model}">
+    <h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
     <ul>
         <li th:text="${smartwatch.centralProcessingUnit}"></li>
+        <li th:text="${smartwatch.display}"></li>
         <li th:text="${smartwatch.ram} + 'GB'"></li>
         <li th:text="${smartwatch.storage} + 'GB'"></li>
+        <li th:text="${smartwatch.hasCamera}"></li>
         <li th:text="${smartwatch.price} + '$'"></li>
     </ul>
     <form th:action="@{/smartwatches-edit/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
@@ -24,6 +27,7 @@
           th:method="post">
         <button th:text="DELETE"></button>
     </form>
+    <button th:text="BUY"></button>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

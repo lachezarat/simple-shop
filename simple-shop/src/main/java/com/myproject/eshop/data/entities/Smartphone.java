@@ -12,6 +12,7 @@ public class Smartphone extends BaseEntity {
 
     private String brand;
     private String model;
+    private String imgUrl;
     private String display;
     private BigDecimal price;
     private String centralProcessingUnit;
@@ -124,5 +125,14 @@ public class Smartphone extends BaseEntity {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    @Column(name = "image_url", nullable = false)
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

@@ -1,4 +1,4 @@
-package com.myproject.eshop.services.implementation;
+package com.myproject.eshop.services.impl;
 
 import com.myproject.eshop.data.entities.Laptop;
 import com.myproject.eshop.data.models.service.LaptopServiceModel;
@@ -49,9 +49,10 @@ public class LaptopServiceImpl implements LaptopService {
         Laptop laptop = laptopRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new LaptopNotFoundException("No such laptop"));
 
+        laptop.setImgUrl(laptopServiceModel.getImgUrl());
         laptop.setDisplay(laptopServiceModel.getDisplay());
-        laptop.setCentralProcessingUnit(laptopServiceModel.getCentralProcessingUnit());
         laptop.setGraphicsProcessingUnit(laptopServiceModel.getGraphicsProcessingUnit());
+        laptop.setCentralProcessingUnit(laptopServiceModel.getCentralProcessingUnit());
         laptop.setPrice(laptopServiceModel.getPrice());
         laptop.setRam(laptopServiceModel.getRam());
         laptop.setStorage(laptopServiceModel.getStorage());

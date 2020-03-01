@@ -1,4 +1,4 @@
-package com.myproject.eshop.services.implementation;
+package com.myproject.eshop.services.impl;
 
 import com.myproject.eshop.data.entities.Smartwatch;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
@@ -50,6 +50,7 @@ public class SmartwatchServiceImpl implements SmartwatchService {
         Smartwatch smartwatch = smartwatchRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new SmartwatchNotFoundException("No such smartwatch!"));
 
+        smartwatch.setImgUrl(smartwatchServiceModel.getImgUrl());
         smartwatch.setDisplay(smartwatchServiceModel.getDisplay());
         smartwatch.setPrice(smartwatchServiceModel.getPrice());
         smartwatch.setCentralProcessingUnit(smartwatchServiceModel.getCentralProcessingUnit());

@@ -6,6 +6,7 @@ public class SmartwatchCreateBindingModel {
 
     private String brand;
     private String model;
+    private String imgUrl;
     private String display;
     private BigDecimal price;
     private String centralProcessingUnit;
@@ -84,5 +85,13 @@ public class SmartwatchCreateBindingModel {
 
     public void setBatteryCapacity(int batteryCapacity) {
         this.batteryCapacity = batteryCapacity;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

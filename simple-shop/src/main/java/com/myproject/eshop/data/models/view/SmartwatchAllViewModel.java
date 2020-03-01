@@ -6,6 +6,9 @@ public class SmartwatchAllViewModel {
 
     private String brand;
     private String model;
+    private String imgUrl;
+    private int storage;
+    private int batteryCapacity;
     private String display;
     private BigDecimal price;
 
@@ -39,5 +42,29 @@ public class SmartwatchAllViewModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public int getBatteryCapacity() {
+        return batteryCapacity;
+    }
+
+    public void setBatteryCapacity(int batteryCapacity) {
+        this.batteryCapacity = batteryCapacity;
+    }
+
+    public int getStorage() {
+        return storage;
+    }
+
+    public void setStorage(int storage) {
+        this.storage = storage;
     }
 }

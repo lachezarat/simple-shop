@@ -7,7 +7,6 @@
                     <li><a href="/smartphones-all">Smartphones</a></li>
                     <li><a href="/smartwatches-all">Smartwatches</a></li>
                     <li><a href="/tablets-all">Tablets</a></li>
-                    <li><a href="/televisions-all">Televisions</a></li>
                 </ul>
                 <div>
                     <form th:action=@{/login} th:method="get">
@@ -28,15 +27,14 @@
                     <li><a href="/smartphones-all">Smartphones</a></li>
                     <li><a href="/smartwatches-all">Smartwatches</a></li>
                     <li><a href="/tablets-all">Tablets</a></li>
-                    <li><a href="/televisions-all">Televisions</a></li>
                     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                         <hr>
                         <li><a href="/laptops-create">Create Laptop</a></li>
                         <li><a href="/smartphones-create">Create Smartphone</a></li>
                         <li><a href="/smartwatches-create">Create Smartwatch</a></li>
                         <li><a href="/tablets-create">Create Tablet</a></li>
-                        <li><a href="/televisions-create">Create Television</a></li>
                     </th:block>
+                    <li><a href="/cart">Cart</a></li>
                     <form th:action=@{/logout} th:method="post">
                         <button>Logout</button>
                     </form>

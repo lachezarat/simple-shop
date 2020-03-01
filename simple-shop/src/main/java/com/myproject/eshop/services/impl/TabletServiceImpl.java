@@ -1,4 +1,4 @@
-package com.myproject.eshop.services.implementation;
+package com.myproject.eshop.services.impl;
 
 import com.myproject.eshop.data.entities.Tablet;
 import com.myproject.eshop.data.models.service.TabletServiceModel;
@@ -50,6 +50,7 @@ public class TabletServiceImpl implements TabletService {
         Tablet tablet = tabletRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new TabletNotFoundException("No such tablet!"));
 
+        tablet.setImgUrl(tabletServiceModel.getImgUrl());
         tablet.setDisplay(tabletServiceModel.getDisplay());
         tablet.setCentralProcessingUnit(tabletServiceModel.getCentralProcessingUnit());
         tablet.setPrice(tabletServiceModel.getPrice());

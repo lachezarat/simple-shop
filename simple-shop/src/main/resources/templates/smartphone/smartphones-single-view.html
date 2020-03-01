@@ -8,12 +8,18 @@
 <a href="/">Home Page</a>
 <th:block th:include="fragments/nav"></th:block>
 <br>
-<h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
 <div>
+    <img th:src="${smartphone.imgUrl}" th:alt="${smartphone.brand} + ' ' + ${smartphone.model}">
+    <h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
     <ul>
+        <li th:text="${smartphone.display}"></li>
         <li th:text="${smartphone.centralProcessingUnit}"></li>
+        <li th:text="${smartphone.camera}"></li>
         <li th:text="${smartphone.ram} + 'GB'"></li>
         <li th:text="${smartphone.storage} + 'GB'"></li>
+        <li th:text="${smartphone.batteryCapacity} + 'mAh'"></li>
+        <li th:text="${smartphone.hasMemoryCardSlot}"></li>
+        <li th:text="${smartphone.weight} + 'kg'"></li>
         <li th:text="${smartphone.price} + '$'"></li>
     </ul>
     <form th:action="@{/smartphones-edit/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
@@ -24,6 +30,7 @@
           th:method="post">
         <button th:text="DELETE"></button>
     </form>
+    <button th:text="BUY"></button>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

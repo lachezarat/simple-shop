@@ -1,4 +1,4 @@
-package com.myproject.eshop.services.implementation;
+package com.myproject.eshop.services.impl;
 
 import com.myproject.eshop.data.entities.Role;
 import com.myproject.eshop.data.models.service.RoleServiceModel;

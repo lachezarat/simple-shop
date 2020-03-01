@@ -12,6 +12,7 @@ public class Tablet extends BaseEntity {
 
     private String brand;
     private String model;
+    private String imgUrl;
     private String display;
     private BigDecimal price;
     private String centralProcessingUnit;
@@ -103,5 +104,14 @@ public class Tablet extends BaseEntity {
 
     public void setBatteryCapacity(int batteryCapacity) {
         this.batteryCapacity = batteryCapacity;
+    }
+
+    @Column(name = "image_url", nullable = false)
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

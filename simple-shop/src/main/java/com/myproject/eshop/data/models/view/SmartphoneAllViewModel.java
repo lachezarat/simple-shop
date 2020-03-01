@@ -6,6 +6,9 @@ public class SmartphoneAllViewModel {
 
     private String brand;
     private String model;
+    private String imgUrl;
+    private String centralProcessingUnit;
+    private int batteryCapacity;
     private String display;
     private BigDecimal price;
     private String camera;
@@ -48,5 +51,29 @@ public class SmartphoneAllViewModel {
 
     public void setCamera(String camera) {
         this.camera = camera;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getCentralProcessingUnit() {
+        return centralProcessingUnit;
+    }
+
+    public void setCentralProcessingUnit(String centralProcessingUnit) {
+        this.centralProcessingUnit = centralProcessingUnit;
+    }
+
+    public int getBatteryCapacity() {
+        return batteryCapacity;
+    }
+
+    public void setBatteryCapacity(int batteryCapacity) {
+        this.batteryCapacity = batteryCapacity;
     }
 }
