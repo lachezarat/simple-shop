@@ -19,14 +19,16 @@
         <li th:text="${smartwatch.hasCamera}"></li>
         <li th:text="${smartwatch.price} + '$'"></li>
     </ul>
-    <form th:action="@{/smartwatches-edit/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
-          th:method="get">
-        <button th:text="EDIT"></button>
-    </form>
-    <form th:action="@{/smartwatches-delete/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
-          th:method="post">
-        <button th:text="DELETE"></button>
-    </form>
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        <form th:action="@{/smartwatches-edit/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
+              th:method="get">
+            <button th:text="EDIT"></button>
+        </form>
+        <form th:action="@{/smartwatches-delete/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
+              th:method="post">
+            <button th:text="DELETE"></button>
+        </form>
+    </th:block>
     <button th:text="BUY"></button>
 </div>
 <footer>

@@ -20,14 +20,16 @@
         <li th:text="${laptop.weight} + 'kg'"></li>
         <li th:text="${laptop.price} + '$'"></li>
     </ul>
-    <form th:action="@{/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
-          th:method="get">
-        <button th:text="EDIT"></button>
-    </form>
-    <form th:action="@{/laptops-delete/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
-          th:method="post">
-        <button th:text="DELETE"></button>
-    </form>
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        <form th:action="@{/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
+              th:method="get">
+            <button th:text="EDIT"></button>
+        </form>
+        <form th:action="@{/laptops-delete/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
+              th:method="post">
+            <button th:text="DELETE"></button>
+        </form>
+    </th:block>
     <button th:text="BUY"></button>
 </div>
 <footer>
