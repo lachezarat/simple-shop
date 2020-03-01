@@ -1,22 +1,21 @@
 package com.myproject.eshop.web.controllers;
 
-import com.myproject.eshop.data.entities.Smartwatch;
 import com.myproject.eshop.data.models.binding.SmartwatchCreateBindingModel;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
-import com.myproject.eshop.data.models.view.SmartphoneAllViewModel;
 import com.myproject.eshop.data.models.view.SmartwatchAllViewModel;
 import com.myproject.eshop.services.SmartwatchService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +24,6 @@ public class SmartwatchesController extends BaseController {
 
     private final SmartwatchService smartwatchService;
     private final ModelMapper modelMapper;
-    ;
 
     @Autowired
     public SmartwatchesController(SmartwatchService smartwatchService, ModelMapper modelMapper) {
@@ -50,9 +48,8 @@ public class SmartwatchesController extends BaseController {
     }
 
     @PostMapping("/smartwatches-create")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ModelAndView createConfirm(@ModelAttribute SmartwatchCreateBindingModel model) {
-        smartwatchService.createSmartwatch(modelMapper.map(model, SmartwatchServiceModel.class));
+    public ModelAndView createConfirm(@ModelAttribute SmartwatchCreateBindingModel model, Principal principal) {
+        smartwatchService.createSmartwatch(modelMapper.map(model, SmartwatchServiceModel.class), principal);
         return super.redirect("smartwatches-all");
     }
 
@@ -71,14 +68,14 @@ public class SmartwatchesController extends BaseController {
     }
 
     @PostMapping("/smartwatches-edit/{brand}/{model}")
-    public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute SmartwatchCreateBindingModel smartwatch) {
-        smartwatchService.editSmartwatch(brand, model, modelMapper.map(smartwatch, SmartwatchServiceModel.class));
+    public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute SmartwatchCreateBindingModel smartwatch, Principal principal) {
+        smartwatchService.editSmartwatch(brand, model, modelMapper.map(smartwatch, SmartwatchServiceModel.class), principal);
         return super.redirect("/smartwatches/" + brand + "/" + model);
     }
 
     @PostMapping("/smartwatches-delete/{brand}/{model}")
-    public ModelAndView delete(@PathVariable String brand, @PathVariable String model) {
-        smartwatchService.deleteSmartwatch(brand, model);
+    public ModelAndView delete(@PathVariable String brand, @PathVariable String model, Principal principal) {
+        smartwatchService.deleteSmartwatch(brand, model, principal);
         return super.redirect("/smartwatches-all");
     }
 }

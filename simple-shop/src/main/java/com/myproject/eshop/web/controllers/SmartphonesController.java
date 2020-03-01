@@ -1,21 +1,21 @@
 package com.myproject.eshop.web.controllers;
 
-import com.myproject.eshop.data.entities.Smartphone;
 import com.myproject.eshop.data.models.binding.SmartphoneCreateBindingModel;
 import com.myproject.eshop.data.models.service.SmartphoneServiceModel;
 import com.myproject.eshop.data.models.view.SmartphoneAllViewModel;
 import com.myproject.eshop.services.SmartphoneService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,9 +48,8 @@ public class SmartphonesController extends BaseController {
     }
 
     @PostMapping("/smartphones-create")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ModelAndView createConfirm(@ModelAttribute SmartphoneCreateBindingModel model) {
-        smartphoneService.createSmartphone(modelMapper.map(model, SmartphoneServiceModel.class));
+    public ModelAndView createConfirm(@ModelAttribute SmartphoneCreateBindingModel model, Principal principal) {
+        smartphoneService.createSmartphone(modelMapper.map(model, SmartphoneServiceModel.class), principal);
         return super.redirect("/smartphones-all");
     }
 
@@ -69,14 +68,14 @@ public class SmartphonesController extends BaseController {
     }
 
     @PostMapping("/smartphones-edit/{brand}/{model}")
-    public ModelAndView editConfirm(@PathVariable String brand, @PathVariable String model, @ModelAttribute SmartphoneCreateBindingModel smartphone) {
-        smartphoneService.editSmartphone(brand, model, modelMapper.map(smartphone, SmartphoneServiceModel.class));
+    public ModelAndView editConfirm(@PathVariable String brand, @PathVariable String model, @ModelAttribute SmartphoneCreateBindingModel smartphone, Principal principal) {
+        smartphoneService.editSmartphone(brand, model, modelMapper.map(smartphone, SmartphoneServiceModel.class), principal);
         return super.redirect("/smartphones/" + brand + "/" + model);
     }
 
     @PostMapping("smartphones-delete/{brand}/{model}")
-    public ModelAndView delete(@PathVariable String brand, @PathVariable String model) {
-        smartphoneService.deleteSmartphone(brand, model);
+    public ModelAndView delete(@PathVariable String brand, @PathVariable String model, Principal principal) {
+        smartphoneService.deleteSmartphone(brand, model, principal);
         return super.redirect("/smartphones-all");
     }
 }

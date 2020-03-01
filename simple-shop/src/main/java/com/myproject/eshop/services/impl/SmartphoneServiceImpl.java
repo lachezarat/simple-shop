@@ -6,9 +6,11 @@ import com.myproject.eshop.error.SmartphoneNotFoundException;
 import com.myproject.eshop.repositories.SmartphoneRepository;
 import com.myproject.eshop.services.SmartphoneService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +19,13 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 
     private final SmartphoneRepository smartphoneRepository;
     private final ModelMapper modelMapper;
+    private final Logger logger;
 
     @Autowired
-    public SmartphoneServiceImpl(SmartphoneRepository smartphoneRepository, ModelMapper modelMapper) {
+    public SmartphoneServiceImpl(SmartphoneRepository smartphoneRepository, ModelMapper modelMapper, Logger logger) {
         this.smartphoneRepository = smartphoneRepository;
         this.modelMapper = modelMapper;
+        this.logger = logger;
     }
 
     @Override
@@ -33,9 +37,17 @@ public class SmartphoneServiceImpl implements SmartphoneService {
     }
 
     @Override
-    public SmartphoneServiceModel createSmartphone(SmartphoneServiceModel smartphoneServiceModel) {
+    public SmartphoneServiceModel createSmartphone(SmartphoneServiceModel smartphoneServiceModel, Principal principal) {
         Smartphone smartphone = modelMapper.map(smartphoneServiceModel, Smartphone.class);
-        return modelMapper.map(smartphoneRepository.saveAndFlush(smartphone), SmartphoneServiceModel.class);
+
+        smartphoneRepository.saveAndFlush(smartphone);
+
+        logger.info(String.format("%s created smartphone %s %s.",
+                principal.getName(),
+                smartphone.getBrand(),
+                smartphone.getModel()));
+
+        return modelMapper.map(smartphone, SmartphoneServiceModel.class);
     }
 
     @Override
@@ -46,7 +58,7 @@ public class SmartphoneServiceImpl implements SmartphoneService {
     }
 
     @Override
-    public SmartphoneServiceModel editSmartphone(String brand, String model, SmartphoneServiceModel smartphoneServiceModel) {
+    public SmartphoneServiceModel editSmartphone(String brand, String model, SmartphoneServiceModel smartphoneServiceModel, Principal principal) {
         Smartphone smartphone = smartphoneRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new SmartphoneNotFoundException("No such smartphone!"));
 
@@ -61,14 +73,26 @@ public class SmartphoneServiceImpl implements SmartphoneService {
         smartphone.setWeight(smartphoneServiceModel.getWeight());
         smartphone.setHasMemoryCardSlot(smartphoneServiceModel.isHasMemoryCardSlot());
 
-        return modelMapper.map(smartphoneRepository.saveAndFlush(smartphone), SmartphoneServiceModel.class);
+        smartphoneRepository.saveAndFlush(smartphone);
+
+        logger.info(String.format("%s edited smartphone %s %s.",
+                principal.getName(),
+                brand,
+                model));
+
+        return modelMapper.map(smartphone, SmartphoneServiceModel.class);
     }
 
     @Override
-    public void deleteSmartphone(String brand, String model) {
+    public void deleteSmartphone(String brand, String model, Principal principal) {
         Smartphone smartphone = smartphoneRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new SmartphoneNotFoundException("No such smartphone!"));
 
         smartphoneRepository.delete(smartphone);
+
+        logger.info(String.format("%s deleted smartphone %s %s.",
+                principal.getName(),
+                brand,
+                model));
     }
 }

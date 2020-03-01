@@ -5,6 +5,7 @@ import com.myproject.eshop.data.models.service.TabletServiceModel;
 import com.myproject.eshop.data.models.view.TabletAllViewModel;
 import com.myproject.eshop.services.TabletService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,9 +48,8 @@ public class TabletsController extends BaseController {
     }
 
     @PostMapping("/tablets-create")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ModelAndView createConfirm(@ModelAttribute TabletCreateBindingModel model) {
-        tabletService.createTablet(modelMapper.map(model, TabletServiceModel.class));
+    public ModelAndView createConfirm(@ModelAttribute TabletCreateBindingModel model, Principal principal) {
+        tabletService.createTablet(modelMapper.map(model, TabletServiceModel.class), principal);
         return super.redirect("/tablets-all");
     }
 
@@ -67,14 +68,14 @@ public class TabletsController extends BaseController {
     }
 
     @PostMapping("/tablets-edit/{brand}/{model}")
-    public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute TabletCreateBindingModel tablet) {
-        tabletService.editTablet(brand, model, modelMapper.map(tablet, TabletServiceModel.class));
+    public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute TabletCreateBindingModel tablet, Principal principal) {
+        tabletService.editTablet(brand, model, modelMapper.map(tablet, TabletServiceModel.class), principal);
         return super.redirect("/tablets/" + brand + "/" + model);
     }
 
     @PostMapping("tablets-delete/{brand}/{model}")
-    public ModelAndView delete(@PathVariable String brand, @PathVariable String model) {
-        tabletService.deleteTablet(brand, model);
+    public ModelAndView delete(@PathVariable String brand, @PathVariable String model, Principal principal) {
+        tabletService.deleteTablet(brand, model, principal);
         return super.redirect("/tablets-all");
     }
 }

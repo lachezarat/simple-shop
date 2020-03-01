@@ -6,9 +6,11 @@ import com.myproject.eshop.error.LaptopNotFoundException;
 import com.myproject.eshop.repositories.LaptopRepository;
 import com.myproject.eshop.services.LaptopService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,11 +18,13 @@ import java.util.stream.Collectors;
 public class LaptopServiceImpl implements LaptopService {
     private final LaptopRepository laptopRepository;
     private final ModelMapper modelMapper;
+    private final Logger logger;
 
     @Autowired
-    public LaptopServiceImpl(LaptopRepository laptopRepository, ModelMapper modelMapper) {
+    public LaptopServiceImpl(LaptopRepository laptopRepository, ModelMapper modelMapper, Logger logger) {
         this.laptopRepository = laptopRepository;
         this.modelMapper = modelMapper;
+        this.logger = logger;
     }
 
     @Override
@@ -32,9 +36,17 @@ public class LaptopServiceImpl implements LaptopService {
     }
 
     @Override
-    public LaptopServiceModel createLaptop(LaptopServiceModel laptopServiceModel) {
+    public LaptopServiceModel createLaptop(LaptopServiceModel laptopServiceModel, Principal principal) {
         Laptop laptop = modelMapper.map(laptopServiceModel, Laptop.class);
-        return modelMapper.map(laptopRepository.saveAndFlush(laptop), LaptopServiceModel.class);
+
+        laptopRepository.saveAndFlush(laptop);
+
+        logger.info(String.format("%s created laptop %s %s.",
+                principal.getName(),
+                laptop.getBrand(),
+                laptop.getModel()));
+
+        return modelMapper.map(laptop, LaptopServiceModel.class);
     }
 
     @Override
@@ -45,7 +57,7 @@ public class LaptopServiceImpl implements LaptopService {
     }
 
     @Override
-    public LaptopServiceModel editLaptop(String brand, String model, LaptopServiceModel laptopServiceModel) {
+    public LaptopServiceModel editLaptop(String brand, String model, LaptopServiceModel laptopServiceModel, Principal principal) {
         Laptop laptop = laptopRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new LaptopNotFoundException("No such laptop"));
 
@@ -58,14 +70,34 @@ public class LaptopServiceImpl implements LaptopService {
         laptop.setStorage(laptopServiceModel.getStorage());
         laptop.setWeight(laptopServiceModel.getWeight());
 
-        return modelMapper.map(laptopRepository.saveAndFlush(laptop), LaptopServiceModel.class);
+        laptopRepository.saveAndFlush(laptop);
+
+        logger.info(String.format("%s edited laptop %s %s.",
+                principal.getName(),
+                brand,
+                model));
+
+        return modelMapper.map(laptop, LaptopServiceModel.class);
     }
 
     @Override
-    public void deleteLaptop(String brand, String model) {
+    public void deleteLaptop(String brand, String model, Principal principal) {
         Laptop laptop = laptopRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new LaptopNotFoundException("No such laptop!"));
 
         laptopRepository.delete(laptop);
+
+        logger.info(String.format("%s deleted laptop %s %s.",
+                principal.getName(),
+                brand,
+                model));
+    }
+
+    @Override
+    public List<LaptopServiceModel> allByBrand(String brand) {
+        return laptopRepository.findAllByBrand(brand)
+                .stream()
+                .map(laptop -> modelMapper.map(laptop, LaptopServiceModel.class))
+                .collect(Collectors.toList());
     }
 }

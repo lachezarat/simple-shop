@@ -6,9 +6,11 @@ import com.myproject.eshop.error.SmartwatchNotFoundException;
 import com.myproject.eshop.repositories.SmartwatchRepository;
 import com.myproject.eshop.services.SmartwatchService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +19,13 @@ public class SmartwatchServiceImpl implements SmartwatchService {
 
     private final SmartwatchRepository smartwatchRepository;
     private final ModelMapper modelMapper;
+    private final Logger logger;
 
     @Autowired
-    public SmartwatchServiceImpl(SmartwatchRepository smartwatchRepository, ModelMapper modelMapper) {
+    public SmartwatchServiceImpl(SmartwatchRepository smartwatchRepository, ModelMapper modelMapper, Logger logger) {
         this.smartwatchRepository = smartwatchRepository;
         this.modelMapper = modelMapper;
+        this.logger = logger;
     }
 
     @Override
@@ -33,9 +37,17 @@ public class SmartwatchServiceImpl implements SmartwatchService {
     }
 
     @Override
-    public SmartwatchServiceModel createSmartwatch(SmartwatchServiceModel smartwatchServiceModel) {
+    public SmartwatchServiceModel createSmartwatch(SmartwatchServiceModel smartwatchServiceModel, Principal principal) {
         Smartwatch smartwatch = modelMapper.map(smartwatchServiceModel, Smartwatch.class);
-        return modelMapper.map(smartwatchRepository.saveAndFlush(smartwatch), SmartwatchServiceModel.class);
+
+        smartwatchRepository.saveAndFlush(smartwatch);
+
+        logger.info(String.format("%s created smartwatch %s %s.",
+                principal.getName(),
+                smartwatch.getBrand(),
+                smartwatch.getModel()));
+
+        return modelMapper.map(smartwatch, SmartwatchServiceModel.class);
     }
 
     @Override
@@ -46,7 +58,7 @@ public class SmartwatchServiceImpl implements SmartwatchService {
     }
 
     @Override
-    public SmartwatchServiceModel editSmartwatch(String brand, String model, SmartwatchServiceModel smartwatchServiceModel) {
+    public SmartwatchServiceModel editSmartwatch(String brand, String model, SmartwatchServiceModel smartwatchServiceModel, Principal principal) {
         Smartwatch smartwatch = smartwatchRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new SmartwatchNotFoundException("No such smartwatch!"));
 
@@ -59,14 +71,26 @@ public class SmartwatchServiceImpl implements SmartwatchService {
         smartwatch.setHasCamera(smartwatchServiceModel.isHasCamera());
         smartwatch.setBatteryCapacity(smartwatchServiceModel.getBatteryCapacity());
 
-        return modelMapper.map(smartwatchRepository.saveAndFlush(smartwatch), SmartwatchServiceModel.class);
+        smartwatchRepository.saveAndFlush(smartwatch);
+
+        logger.info(String.format("%s edited smartwatch %s %s.",
+                principal.getName(),
+                brand,
+                model));
+
+        return modelMapper.map(smartwatch, SmartwatchServiceModel.class);
     }
 
     @Override
-    public void deleteSmartwatch(String brand, String model) {
+    public void deleteSmartwatch(String brand, String model, Principal principal) {
         Smartwatch smartwatch = smartwatchRepository.findByBrandAndModel(brand, model)
                 .orElseThrow(() -> new SmartwatchNotFoundException("No such smartwatch!"));
 
         smartwatchRepository.delete(smartwatch);
+
+        logger.info(String.format("%s deleted smartwatch %s %s.",
+                principal.getName(),
+                brand,
+                model));
     }
 }
