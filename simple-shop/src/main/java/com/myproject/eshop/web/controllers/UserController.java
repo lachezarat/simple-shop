@@ -3,6 +3,7 @@ package com.myproject.eshop.web.controllers;
 import com.myproject.eshop.data.models.binding.UserRegisterBindingModel;
 import com.myproject.eshop.data.models.service.UserServiceModel;
 import com.myproject.eshop.services.UserService;
+import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +25,13 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/login")
+    @PageTitle(value = "Login")
     public ModelAndView login() {
         return super.view("login");
     }
 
     @GetMapping("/register")
+    @PageTitle(value = "Register")
     public ModelAndView register() {
         return super.view("register");
     }

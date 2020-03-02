@@ -4,6 +4,7 @@ import com.myproject.eshop.data.models.binding.LaptopCreateBindingModel;
 import com.myproject.eshop.data.models.service.LaptopServiceModel;
 import com.myproject.eshop.data.models.view.LaptopAllViewModel;
 import com.myproject.eshop.services.LaptopService;
+import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class LaptopsController extends BaseController {
     }
 
     @GetMapping("/laptops-all")
+    @PageTitle(value = "All Laptops")
     public ModelAndView laptops(ModelAndView modelAndView) {
         List<LaptopAllViewModel> laptops =
                 laptopService.findAllLaptops()
@@ -39,6 +41,7 @@ public class LaptopsController extends BaseController {
     }
 
     @GetMapping("/laptops-create")
+    @PageTitle(value = "Create Laptop")
     public ModelAndView create() {
         return super.view("/laptop/laptops-create");
     }
@@ -50,6 +53,7 @@ public class LaptopsController extends BaseController {
     }
 
     @GetMapping("/laptops/{brand}/{model}")
+    @PageTitle(value = "Show Laptop")
     public ModelAndView view(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
         LaptopServiceModel laptop = laptopService.findByBrandAndModel(brand, model);
         modelAndView.addObject("laptop", laptop);
@@ -57,6 +61,7 @@ public class LaptopsController extends BaseController {
     }
 
     @GetMapping("/laptops-edit/{brand}/{model}")
+    @PageTitle(value = "Edit Laptop")
     public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
         LaptopServiceModel laptop = laptopService.findByBrandAndModel(brand, model);
         modelAndView.addObject("laptop", laptop);
@@ -77,6 +82,7 @@ public class LaptopsController extends BaseController {
     }
 
     @GetMapping("/laptops-{brand}")
+    @PageTitle(value = "Laptops By Brand")
     public ModelAndView byBrand(@PathVariable String brand, ModelAndView modelAndView) {
         List<LaptopServiceModel> laptops = laptopService.allByBrand(brand);
         modelAndView.addObject("laptops", laptops);

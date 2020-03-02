@@ -4,6 +4,7 @@ import com.myproject.eshop.data.models.binding.SmartwatchCreateBindingModel;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
 import com.myproject.eshop.data.models.view.SmartwatchAllViewModel;
 import com.myproject.eshop.services.SmartwatchService;
+import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class SmartwatchesController extends BaseController {
     }
 
     @GetMapping("/smartwatches-all")
+    @PageTitle(value = "All Smartwatches")
     public ModelAndView smartwatches(ModelAndView modelAndView) {
         List<SmartwatchAllViewModel> smartwatches =
                 smartwatchService.findAllSmartwatches()
@@ -43,6 +45,7 @@ public class SmartwatchesController extends BaseController {
     }
 
     @GetMapping("/smartwatches-create")
+    @PageTitle(value = "Create Smartwatch")
     public ModelAndView create() {
         return super.view("smartwatch/smartwatches-create");
     }
@@ -54,6 +57,7 @@ public class SmartwatchesController extends BaseController {
     }
 
     @GetMapping("/smartwatches/{brand}/{model}")
+    @PageTitle(value = "Show Smartwatch")
     public ModelAndView view(@PathVariable("brand") String brand, @PathVariable("model") String model, ModelAndView modelAndView) {
         SmartwatchServiceModel smartwatch = smartwatchService.findByBrandAndModel(brand, model);
         modelAndView.addObject("smartwatch", smartwatch);
@@ -61,6 +65,7 @@ public class SmartwatchesController extends BaseController {
     }
 
     @GetMapping("/smartwatches-edit/{brand}/{model}")
+    @PageTitle(value = "Edit Smartwatch")
     public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
         SmartwatchServiceModel smartwatch = smartwatchService.findByBrandAndModel(brand, model);
         modelAndView.addObject("smartwatch", smartwatch);

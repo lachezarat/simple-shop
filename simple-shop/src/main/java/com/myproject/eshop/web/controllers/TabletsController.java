@@ -4,6 +4,7 @@ import com.myproject.eshop.data.models.binding.TabletCreateBindingModel;
 import com.myproject.eshop.data.models.service.TabletServiceModel;
 import com.myproject.eshop.data.models.view.TabletAllViewModel;
 import com.myproject.eshop.services.TabletService;
+import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class TabletsController extends BaseController {
     }
 
     @GetMapping("/tablets-all")
+    @PageTitle(value = "All Tablets")
     public ModelAndView tablets(ModelAndView modelAndView) {
         List<TabletAllViewModel> tablets =
                 tabletService.findAllTablets()
@@ -43,6 +45,7 @@ public class TabletsController extends BaseController {
     }
 
     @GetMapping("/tablets-create")
+    @PageTitle(value = "Create Tablet")
     public ModelAndView create() {
         return super.view("/tablet/tablets-create");
     }
@@ -54,6 +57,7 @@ public class TabletsController extends BaseController {
     }
 
     @GetMapping("/tablets/{brand}/{model}")
+    @PageTitle(value = "Show Tablet")
     public ModelAndView view(@PathVariable("brand") String brand, @PathVariable("model") String model, ModelAndView modelAndView) {
         TabletServiceModel tablet = tabletService.findByBrandAndModel(brand, model);
         modelAndView.addObject("tablet", tablet);
@@ -61,6 +65,7 @@ public class TabletsController extends BaseController {
     }
 
     @GetMapping("/tablets-edit/{brand}/{model}")
+    @PageTitle(value = "Edit Tablet")
     public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
         TabletServiceModel tablet = tabletService.findByBrandAndModel(brand, model);
         modelAndView.addObject("tablet", tablet);
