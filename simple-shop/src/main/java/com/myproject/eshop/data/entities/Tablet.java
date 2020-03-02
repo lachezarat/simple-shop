@@ -8,36 +8,15 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "tablets")
-public class Tablet extends BaseEntity {
+public class Tablet extends Product {
 
-    private String brand;
-    private String model;
-    private String imgUrl;
     private String display;
-    private BigDecimal price;
     private String centralProcessingUnit;
     private int storage;
     private int ram;
     private String camera;
     private int batteryCapacity;
 
-    @Column(nullable = false)
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    @Column(nullable = false)
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
 
     @Column(nullable = false)
     public String getDisplay() {
@@ -46,16 +25,6 @@ public class Tablet extends BaseEntity {
 
     public void setDisplay(String display) {
         this.display = display;
-    }
-
-    @Column
-    @Min(value = 0, message = "The price must be positive")
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     @Column(name = "CPU", nullable = false)
@@ -104,14 +73,5 @@ public class Tablet extends BaseEntity {
 
     public void setBatteryCapacity(int batteryCapacity) {
         this.batteryCapacity = batteryCapacity;
-    }
-
-    @Column(name = "image_url", nullable = false)
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
     }
 }
