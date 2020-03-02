@@ -93,4 +93,12 @@ public class SmartwatchServiceImpl implements SmartwatchService {
                 brand,
                 model));
     }
+
+    @Override
+    public List<SmartwatchServiceModel> findByBrand(String brand) {
+        return smartwatchRepository.findAllByBrand(brand)
+                .stream()
+                .map(smartwatch -> modelMapper.map(smartwatch, SmartwatchServiceModel.class))
+                .collect(Collectors.toList());
+    }
 }

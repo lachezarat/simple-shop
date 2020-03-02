@@ -83,4 +83,16 @@ public class SmartwatchesController extends BaseController {
         smartwatchService.deleteSmartwatch(brand, model, principal);
         return super.redirect("/smartwatches-all");
     }
+
+    @GetMapping("/smartwatches-brand/{brand}")
+    @PageTitle(value = "Smartwatches By Brand")
+    public ModelAndView byBrand(@PathVariable String brand, ModelAndView modelAndView) {
+        List<SmartwatchAllViewModel> smartwatches =
+                smartwatchService.findByBrand(brand)
+                        .stream()
+                        .map(smartwatch -> modelMapper.map(smartwatch, SmartwatchAllViewModel.class))
+                        .collect(Collectors.toList());
+        modelAndView.addObject("smartwatches", smartwatches);
+        return super.view(modelAndView, "/smartwatch/smartwatches-all");
+    }
 }

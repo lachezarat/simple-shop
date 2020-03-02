@@ -92,4 +92,12 @@ public class TabletServiceImpl implements TabletService {
                 brand,
                 model));
     }
+
+    @Override
+    public List<TabletServiceModel> findByBrand(String brand) {
+        return tabletRepository.findAllByBrand(brand)
+                .stream()
+                .map(tablet -> modelMapper.map(tablet, TabletServiceModel.class))
+                .collect(Collectors.toList());
+    }
 }

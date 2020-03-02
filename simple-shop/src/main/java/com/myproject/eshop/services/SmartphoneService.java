@@ -18,4 +18,6 @@ public interface SmartphoneService {
     SmartphoneServiceModel editSmartphone(String brand, String model, SmartphoneServiceModel smartphoneServiceModel, Principal principal);
 
     void deleteSmartphone(String brand, String model, Principal principal);
+
+    List<SmartphoneServiceModel> findByBrand(String brand);
 }

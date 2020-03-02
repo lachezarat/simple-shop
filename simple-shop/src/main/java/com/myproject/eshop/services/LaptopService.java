@@ -18,5 +18,5 @@ public interface LaptopService {
 
     void deleteLaptop(String brand, String model, Principal principal);
 
-    List<LaptopServiceModel> allByBrand(String brand);
+    List<LaptopServiceModel> findByBrand(String brand);
 }

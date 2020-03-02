@@ -81,10 +81,14 @@ public class LaptopsController extends BaseController {
         return redirect("/laptops-all");
     }
 
-    @GetMapping("/laptops-{brand}")
+    @GetMapping("/laptops-brand/{brand}")
     @PageTitle(value = "Laptops By Brand")
     public ModelAndView byBrand(@PathVariable String brand, ModelAndView modelAndView) {
-        List<LaptopServiceModel> laptops = laptopService.allByBrand(brand);
+        List<LaptopAllViewModel> laptops =
+                laptopService.findByBrand(brand)
+                        .stream()
+                        .map(laptop -> modelMapper.map(laptop, LaptopAllViewModel.class))
+                        .collect(Collectors.toList());
         modelAndView.addObject("laptops", laptops);
         return super.view(modelAndView, "/laptop/laptops-all");
     }

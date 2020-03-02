@@ -95,4 +95,12 @@ public class SmartphoneServiceImpl implements SmartphoneService {
                 brand,
                 model));
     }
+
+    @Override
+    public List<SmartphoneServiceModel> findByBrand(String brand) {
+        return smartphoneRepository.findAllByBrand(brand)
+                .stream()
+                .map(smartphone -> modelMapper.map(smartphone, SmartphoneServiceModel.class))
+                .collect(Collectors.toList());
+    }
 }

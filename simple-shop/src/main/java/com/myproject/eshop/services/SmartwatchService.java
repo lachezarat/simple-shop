@@ -17,4 +17,6 @@ public interface SmartwatchService {
     SmartwatchServiceModel editSmartwatch(String brand, String model, SmartwatchServiceModel smartwatchServiceModel, Principal principal);
 
     void deleteSmartwatch(String brand, String model, Principal principal);
+
+    List<SmartwatchServiceModel> findByBrand(String brand);
 }

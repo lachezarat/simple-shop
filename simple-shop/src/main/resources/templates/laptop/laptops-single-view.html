@@ -31,7 +31,10 @@
         </form>
     </th:block>
     <button th:text="BUY"></button>
+    <br>
+    <a th:href="@{/laptops-brand/{brand} (brand = ${laptop.brand})}" th:text="${laptop.brand}"></a>
 </div>
+<hr>
 <footer>
     <th:block th:include="fragments/footer"></th:block>
 </footer>

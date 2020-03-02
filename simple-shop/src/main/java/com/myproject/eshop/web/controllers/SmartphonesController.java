@@ -83,4 +83,16 @@ public class SmartphonesController extends BaseController {
         smartphoneService.deleteSmartphone(brand, model, principal);
         return super.redirect("/smartphones-all");
     }
+
+    @GetMapping("/smartphones-brand/{brand}")
+    @PageTitle(value = "Smartphones By Brand")
+    public ModelAndView byBrand(@PathVariable String brand, ModelAndView modelAndView) {
+        List<SmartphoneAllViewModel> smartphones =
+                smartphoneService.findByBrand(brand)
+                        .stream()
+                        .map(smartphone -> modelMapper.map(smartphone, SmartphoneAllViewModel.class))
+                        .collect(Collectors.toList());
+        modelAndView.addObject("smartphones", smartphones);
+        return super.view(modelAndView, "/smartphone/smartphones-all");
+    }
 }

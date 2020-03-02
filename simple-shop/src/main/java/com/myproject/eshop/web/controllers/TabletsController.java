@@ -83,4 +83,16 @@ public class TabletsController extends BaseController {
         tabletService.deleteTablet(brand, model, principal);
         return super.redirect("/tablets-all");
     }
+
+    @GetMapping("/tablets-brand/{brand}")
+    @PageTitle(value = "Tablets By Brand")
+    public ModelAndView byBrand(@PathVariable String brand, ModelAndView modelAndView) {
+        List<TabletAllViewModel> tablets =
+                tabletService.findByBrand(brand)
+                        .stream()
+                        .map(tablet -> modelMapper.map(tablet, TabletAllViewModel.class))
+                        .collect(Collectors.toList());
+        modelAndView.addObject("tablets", tablets);
+        return super.view(modelAndView, "/tablet/tablets-all");
+    }
 }

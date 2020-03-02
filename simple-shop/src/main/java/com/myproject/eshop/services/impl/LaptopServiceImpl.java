@@ -94,7 +94,7 @@ public class LaptopServiceImpl implements LaptopService {
     }
 
     @Override
-    public List<LaptopServiceModel> allByBrand(String brand) {
+    public List<LaptopServiceModel> findByBrand(String brand) {
         return laptopRepository.findAllByBrand(brand)
                 .stream()
                 .map(laptop -> modelMapper.map(laptop, LaptopServiceModel.class))
