@@ -5,24 +5,25 @@
     <th:block th:include="fragments/head"></th:block>
 </head>
 <body>
-<a href="/">Home Page</a>
-<th:block th:include="fragments/nav"></th:block>
-<h1>Smartphones:</h1>
-<br>
-<div>
-    <th:block th:each="smartphone, iter : ${smartphones}">
-        <ul>
-            <img th:src="${smartphone.imgUrl}" th:alt="${smartphone.brand} + ' ' + ${smartphone.model}" width="200">
-            <a th:href="@{/smartphones/{brand}/{model}(brand = ${smartphone.brand}, model = ${smartphone.model})}">
-                <h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
-            </a>
-            <li th:text="${smartphone.display}"></li>
-            <li th:text="${smartphone.camera} + 'MP'"></li>
-            <li th:text="${smartphone.centralProcessingUnit}"></li>
-            <li th:text="${smartphone.batteryCapacity} + 'mAh'"></li>
-        </ul>
-        <h3 th:text="${smartphone.price} + '$'"></h3>
-    </th:block>
+<th:block th:include="fragments/header"></th:block>
+<div class="container">
+    <h2 class="text-center h2">Smartphones:</h2>
+    <br>
+    <div>
+        <th:block th:each="smartphone, iter : ${smartphones}">
+            <ul>
+                <img th:src="${smartphone.imgUrl}" th:alt="${smartphone.brand} + ' ' + ${smartphone.model}" width="200">
+                <a th:href="@{/smartphones/{brand}/{model}(brand = ${smartphone.brand}, model = ${smartphone.model})}">
+                    <h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
+                </a>
+                <li th:text="${smartphone.display}"></li>
+                <li th:text="${smartphone.camera} + 'MP'"></li>
+                <li th:text="${smartphone.centralProcessingUnit}"></li>
+                <li th:text="${smartphone.batteryCapacity} + 'mAh'"></li>
+            </ul>
+            <h3 th:text="${smartphone.price} + '$'"></h3>
+        </th:block>
+    </div>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

@@ -5,64 +5,67 @@
     <th:block th:include="fragments/head"></th:block>
 </head>
 <body>
-<a href="/">Home Page</a>
-<th:block th:include="fragments/nav"></th:block>
-<br>
-<h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
-<div>
-    <ul>
-        <form th:action="@{/smartphones-edit/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
-              th:method="post">
-            <div>
-                <label for="image">Image URL:</label>
-                <input type="text" id="image" name="imgUrl">
-            </div>
-            <div>
-                <label for="display">Display:</label>
-                <input type="text" id="display" name="display" th:value="${smartphone.display}">
-            </div>
-            <div>
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price" th:value="${smartphone.price}">
-            </div>
-            <div>
-                <label for="cpu">CPU:</label>
-                <input type="text" id="cpu"
-                       name="centralProcessingUnit" th:value="${smartphone.centralProcessingUnit}">
-            </div>
-            <div>
-                <label for="camera">Camera:</label>
-                <input type="text" id="camera" name="camera" th:value="${smartphone.camera}">
-            </div>
-            <div>
-                <label for="batteryCapacity">Battery Capacity:</label>
-                <input type="number" id="batteryCapacity" name="batteryCapacity"
-                       th:value="${smartphone.batteryCapacity}">
-            </div>
-            <div>
-                <label for="storage">Storage:</label>
-                <input type="number" id="storage" name="storage" th:value="${smartphone.storage}">
-            </div>
-            <div>
-                <label for="ram">RAM:</label>
-                <input type="number" id="ram" name="ram" th:value="${smartphone.ram}">
-            </div>
-            <div>
-                <label for="memoryCard">Memory Card:</label>
-                <input type="checkbox" id="memoryCard" name="hasMemoryCardSlot"
-                       th:checked="${smartphone.hasMemoryCardSlot}">
-            </div>
-            <div>
-                <label for="weight">Weight:</label>
-                <input type="number" id="weight" name="weight" step="0.01" th:value="${smartphone.weight}">
-            </div>
-            <hr/>
-            <div>
-                <button type="submit">Edit</button>
-            </div>
-        </form>
-        <hr>
-    </ul>
+<th:block th:include="fragments/header"></th:block>
+<div class="container">
+    <h2 class="text-center h2" th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
+    <div>
+        <ul>
+            <form th:action="@{/smartphones-edit/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
+                  th:method="post">
+                <div class="form-group">
+                    <label for="image">Image URL:</label>
+                    <input class="form-control col-md-4" type="text" id="image" name="imgUrl">
+                </div>
+                <div class="form-group">
+                    <label for="display">Display:</label>
+                    <input class="form-control col-md-4" type="text" id="display" name="display"
+                           th:value="${smartphone.display}">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input class="form-control col-md-4" type="number" id="price" name="price"
+                           th:value="${smartphone.price}">
+                </div>
+                <div class="form-group">
+                    <label for="cpu">CPU:</label>
+                    <input class="form-control col-md-4" type="text" id="cpu"
+                           name="centralProcessingUnit" th:value="${smartphone.centralProcessingUnit}">
+                </div>
+                <div class="form-group">
+                    <label for="camera">Camera:</label>
+                    <input class="form-control col-md-4" type="text" id="camera" name="camera"
+                           th:value="${smartphone.camera}">
+                </div>
+                <div class="form-group">
+                    <label for="batteryCapacity">Battery Capacity:</label>
+                    <input class="form-control col-md-4" type="number" id="batteryCapacity" name="batteryCapacity"
+                           th:value="${smartphone.batteryCapacity}">
+                </div>
+                <div class="form-group">
+                    <label for="storage">Storage:</label>
+                    <input class="form-control col-md-4" type="number" id="storage" name="storage"
+                           th:value="${smartphone.storage}">
+                </div>
+                <div class="form-group">
+                    <label for="ram">RAM:</label>
+                    <input class="form-control col-md-4" type="number" id="ram" name="ram" th:value="${smartphone.ram}">
+                </div>
+                <div class="form-group">
+                    <label for="memoryCard">Memory Card:</label>
+                    <input class="form-check" type="checkbox" id="memoryCard" name="hasMemoryCardSlot"
+                           th:checked="${smartphone.hasMemoryCardSlot}">
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight:</label>
+                    <input class="form-control col-md-4" type="number" id="weight" name="weight" step="0.01"
+                           th:value="${smartphone.weight}">
+                </div>
+                <div>
+                    <button type="submit">Edit</button>
+                </div>
+            </form>
+        </ul>
+    </div>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

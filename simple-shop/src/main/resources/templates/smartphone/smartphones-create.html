@@ -5,66 +5,65 @@
     <th:block th:include="fragments/head"></th:block>
 </head>
 <body>
-<a href="/">Home Page</a>
-<th:block th:include="fragments/nav"></th:block>
-<h1>Create Smartphone:</h1>
-<br>
-<div>
-    <form th:method="post" th:action="@{/smartphones-create}">
-        <div>
-            <label for="brand">Brand:</label>
-            <input type="text" id="brand" name="brand">
-        </div>
-        <div>
-            <label for="model">Model:</label>
-            <input type="text" id="model" name="model">
-        </div>
-        <div>
-            <label for="image">Image URL:</label>
-            <input type="text" id="image" name="imgUrl">
-        </div>
-        <div>
-            <label for="display">Display:</label>
-            <input type="text" id="display" name="display">
-        </div>
-        <div>
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price">
-        </div>
-        <div>
-            <label for="cpu">CPU:</label>
-            <input type="text" id="cpu"
-                   name="centralProcessingUnit">
-        </div>
-        <div>
-            <label for="camera">Camera:</label>
-            <input type="text" id="camera" name="camera">
-        </div>
-        <div>
-            <label for="batteryCapacity">Battery Capacity:</label>
-            <input type="number" id="batteryCapacity" name="batteryCapacity">
-        </div>
-        <div>
-            <label for="storage">Storage:</label>
-            <input type="number" id="storage" name="storage">
-        </div>
-        <div>
-            <label for="ram">RAM:</label>
-            <input type="number" id="ram" name="ram">
-        </div>
-        <div>
-            <label for="memoryCard">Memory Card:</label>
-            <input type="radio" id="memoryCard" name="hasMemoryCardSlot">
-        </div>
-        <div>
-            <label for="weight">Weight:</label>
-            <input type="number" id="weight" name="weight" step="0.1">
-        </div>
-        <hr/>
-        <div>
-            <button type="submit">Create</button>
-        </div>
-    </form>
+<th:block th:include="fragments/header"></th:block>
+<div class="container">
+    <h2 class="text-center h2">Create Smartphone:</h2>
+    <div>
+        <form th:method="post" th:action="@{/smartphones-create}">
+            <div class="form-group">
+                <label for="brand">Brand:</label>
+                <input class="form-control col-md-4" type="text" id="brand" name="brand">
+            </div>
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <input class="form-control col-md-4" type="text" id="model" name="model">
+            </div>
+            <div class="form-group">
+                <label for="image">Image URL:</label>
+                <input class="form-control col-md-4" type="text" id="image" name="imgUrl">
+            </div>
+            <div class="form-group">
+                <label for="display">Display:</label>
+                <input class="form-control col-md-4" type="text" id="display" name="display">
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input class="form-control col-md-4" type="number" id="price" name="price">
+            </div>
+            <div class="form-group">
+                <label for="cpu">CPU:</label>
+                <input class="form-control col-md-4" type="text" id="cpu"
+                       name="centralProcessingUnit">
+            </div>
+            <div class="form-group">
+                <label for="camera">Camera:</label>
+                <input class="form-control col-md-4" type="text" id="camera" name="camera">
+            </div>
+            <div class="form-group">
+                <label for="batteryCapacity">Battery Capacity:</label>
+                <input class="form-control col-md-4" type="number" id="batteryCapacity" name="batteryCapacity">
+            </div>
+            <div class="form-group">
+                <label for="storage">Storage:</label>
+                <input class="form-control col-md-4" type="number" id="storage" name="storage">
+            </div>
+            <div class="form-group">
+                <label for="ram">RAM:</label>
+                <input class="form-control col-md-4" type="number" id="ram" name="ram">
+            </div>
+            <div class="form-group">
+                <label for="memoryCard">Memory Card:</label>
+                <input class="form-check" type="checkbox" id="memoryCard" name="hasMemoryCardSlot">
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight:</label>
+                <input class="form-control col-md-4" type="number" id="weight" name="weight" step="0.1">
+            </div>
+            <div>
+                <button type="submit">Create</button>
+            </div>
+        </form>
+    </div>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

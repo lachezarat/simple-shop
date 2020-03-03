@@ -5,36 +5,34 @@
     <th:block th:include="fragments/head"></th:block>
 </head>
 <body>
-<a href="/">Home Page</a>
-<th:block th:include="fragments/nav"></th:block>
-<br>
-<div>
-    <img th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}">
-    <h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
-    <ul>
-        <li th:text="${tablet.centralProcessingUnit}"></li>
-        <li th:text="${tablet.display}"></li>
-        <li th:text="${tablet.ram} + 'GB'"></li>
-        <li th:text="${tablet.storage} + 'GB'"></li>
-        <li th:text="${tablet.camera} + 'MP'"></li>
-        <li th:text="${tablet.batteryCapacity} + 'mAh'"></li>
-        <li th:text="${tablet.price} + '$'"></li>
-    </ul>
-    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-        <form th:action="@{/tablets-edit/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
-              th:method="get">
-            <button th:text="EDIT"></button>
-        </form>
-        <form th:action="@{/tablets-delete/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
-              th:method="post">
-            <button th:text="DELETE"></button>
-        </form>
-    </th:block>
-    <button th:text="BUY"></button>
-    <br>
-    <a th:href="@{/tablets-brand/{brand} (brand = ${tablet.brand})}" th:text="${tablet.brand}"></a>
+<th:block th:include="fragments/header"></th:block>
+<div class="container">
+    <div>
+        <img th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}">
+        <h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
+        <ul>
+            <li th:text="${tablet.centralProcessingUnit}"></li>
+            <li th:text="${tablet.display}"></li>
+            <li th:text="${tablet.ram} + 'GB'"></li>
+            <li th:text="${tablet.storage} + 'GB'"></li>
+            <li th:text="${tablet.camera} + 'MP'"></li>
+            <li th:text="${tablet.batteryCapacity} + 'mAh'"></li>
+            <li th:text="${tablet.price} + '$'"></li>
+        </ul>
+        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <form th:action="@{/tablets-edit/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
+                  th:method="get">
+                <button th:text="EDIT"></button>
+            </form>
+            <form th:action="@{/tablets-delete/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
+                  th:method="post">
+                <button th:text="DELETE"></button>
+            </form>
+        </th:block>
+        <button th:text="BUY"></button>
+        <a th:href="@{/tablets-brand/{brand} (brand = ${tablet.brand})}" th:text="${tablet.brand}"></a>
+    </div>
 </div>
-<hr>
 <footer>
     <th:block th:include="fragments/footer"></th:block>
 </footer>

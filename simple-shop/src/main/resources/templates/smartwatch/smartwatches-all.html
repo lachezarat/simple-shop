@@ -5,23 +5,23 @@
     <th:block th:include="fragments/head"></th:block>
 </head>
 <body>
-<a href="/">Home Page</a>
-<th:block th:include="fragments/nav"></th:block>
-<h1>Smartwatches:</h1>
-<br>
-<div>
-    <th:block th:each="smartwatch, iter : ${smartwatches}">
-        <ul>
-            <img th:src="${smartwatch.imgUrl}" th:alt="${smartwatch.brand} + ' ' + ${smartwatch.model}" width="200">
-            <a th:href="@{/smartwatches/{brand}/{model}(brand = ${smartwatch.brand}, model = ${smartwatch.model})}">
-                <h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
-            </a>
-            <li th:text="${smartwatch.display}"></li>
-            <li th:text="${smartwatch.storage} + 'GB'"></li>
-            <li th:text="${smartwatch.batteryCapacity} + 'mAh'"></li>
-        </ul>
-        <h3 th:text="${smartwatch.price} + '$'"></h3>
-    </th:block>
+<th:block th:include="fragments/header"></th:block>
+<div class="container">
+    <h2 class="text-center h2">Smartwatches:</h2>
+    <div>
+        <th:block th:each="smartwatch, iter : ${smartwatches}">
+            <ul>
+                <img th:src="${smartwatch.imgUrl}" th:alt="${smartwatch.brand} + ' ' + ${smartwatch.model}" width="200">
+                <a th:href="@{/smartwatches/{brand}/{model}(brand = ${smartwatch.brand}, model = ${smartwatch.model})}">
+                    <h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
+                </a>
+                <li th:text="${smartwatch.display}"></li>
+                <li th:text="${smartwatch.storage} + 'GB'"></li>
+                <li th:text="${smartwatch.batteryCapacity} + 'mAh'"></li>
+            </ul>
+            <h3 th:text="${smartwatch.price} + '$'"></h3>
+        </th:block>
+    </div>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

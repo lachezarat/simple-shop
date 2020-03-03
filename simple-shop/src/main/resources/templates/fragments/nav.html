@@ -1,45 +1,12 @@
 <th:block>
-    <th:block sec:authorize="isAnonymous()">
-        <div>
-            <nav>
-                <ul>
-                    <li><a href="/laptops-all">Laptops</a></li>
-                    <li><a href="/smartphones-all">Smartphones</a></li>
-                    <li><a href="/smartwatches-all">Smartwatches</a></li>
-                    <li><a href="/tablets-all">Tablets</a></li>
-                </ul>
-                <div>
-                    <form th:action=@{/login} th:method="get">
-                        <button>Sing In</button>
-                    </form>
-                    <form th:action=@{/register} th:method="get">
-                        <button>Sing Up</button>
-                    </form>
-                </div>
-            </nav>
-        </div>
-    </th:block>
-    <th:block sec:authorize="isAuthenticated()">
-        <div>
-            <nav>
-                <ul>
-                    <li><a href="/laptops-all">Laptops</a></li>
-                    <li><a href="/smartphones-all">Smartphones</a></li>
-                    <li><a href="/smartwatches-all">Smartwatches</a></li>
-                    <li><a href="/tablets-all">Tablets</a></li>
-                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                        <hr>
-                        <li><a href="/laptops-create">Create Laptop</a></li>
-                        <li><a href="/smartphones-create">Create Smartphone</a></li>
-                        <li><a href="/smartwatches-create">Create Smartwatch</a></li>
-                        <li><a href="/tablets-create">Create Tablet</a></li>
-                    </th:block>
-                    <li><a href="/cart">Cart</a></li>
-                    <form th:action=@{/logout} th:method="post">
-                        <button>Logout</button>
-                    </form>
-                </ul>
-            </nav>
-        </div>
-    </th:block>
+    <div class="container">
+        <nav class="navbar navbar-expand-sm bg-light">
+            <ul class="navbar-nav navbar-">
+                <li class="nav-item"><a class="nav-link" href="/laptops-all">Laptops</a></li>
+                <li class="nav-item"><a class="nav-link" href="/smartphones-all">Smartphones</a></li>
+                <li class="nav-item"><a class="nav-link" href="/smartwatches-all">Smartwatches</a></li>
+                <li class="nav-item"><a class="nav-link" href="/tablets-all">Tablets</a></li>
+            </ul>
+        </nav>
+    </div>
 </th:block>

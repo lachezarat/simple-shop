@@ -5,44 +5,35 @@
     <th:block th:include="fragments/head"></th:block>
 </head>
 <body>
-<a href="/">Home Page</a>
-<th:block th:include="~{fragments/nav}"></th:block>
+<th:block th:include="~{fragments/header}"></th:block>
 <div>
-    <main>
-        <div>
-            <hr/>
-            <h1>Sign up</h1>
-            <hr/>
-            <form th:method="post" th:action="@{/register}">
-                <div>
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" placeholder="Username..." name="username">
-                </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" placeholder="Password..." name="password">
-                </div>
-                <div>
-                    <label for="confirmPassword">Confirm Password:</label>
-                    <input type="password" id="confirmPassword" placeholder="Confirm Password..."
-                           name="confirmPassword">
-                </div>
-                <div>
-                    <label for="email">Email:</label>
-                    <input type="text" id="email" placeholder="Email..." name="email">
-                </div>
-                <hr/>
-                <div>
-                    <button type="submit">Sign up</button>
-                </div>
-            </form>
-            <hr/>
-            <h1>Have Account?</h1>
-            <a href="/login"><strong>Sign in</strong></a>
-            <hr/>
-        </div>
-
-    </main>
+    <div class="container">
+        <h2 class="text-center h2">Sign up</h2>
+        <hr/>
+        <form th:method="post" th:action="@{/register}">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input class="form-control col-md-4" type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input class="form-control col-md-4" type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input class="form-control col-md-4" type="password" id="confirmPassword" name="confirmPassword">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input class="form-control col-md-4" type="text" id="email" name="email">
+            </div>
+            <div>
+                <button class="btn btn-primary" type="submit">Sign up</button>
+            </div>
+        </form>
+        <hr/>
+        <h1>Have Account? <a href="/login"><strong>Sign in</strong></a></h1>
+    </div>
 </div>
 <footer>
     <th:block th:include="~{fragments/footer}"></th:block>

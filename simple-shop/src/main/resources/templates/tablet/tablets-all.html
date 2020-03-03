@@ -5,24 +5,25 @@
     <th:block th:include="fragments/head"></th:block>
 </head>
 <body>
-<a href="/">Home Page</a>
-<th:block th:include="fragments/nav"></th:block>
-<h1>Tablets:</h1>
-<br>
-<div>
-    <th:block th:each="tablet, iter : ${tablets}">
-        <ul>
-            <img th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}" width="200">
-            <a th:href="@{/tablets/{brand}/{model}(brand = ${tablet.brand}, model = ${tablet.model})}">
-                <h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
-            </a>
-            <li th:text="${tablet.centralProcessingUnit}"></li>
-            <li th:text="${tablet.display}"></li>
-            <li th:text="${tablet.camera} + 'MP'"></li>
-            <li th:text="${tablet.storage} + 'GB'"></li>
-        </ul>
-        <h3 th:text="${tablet.price} + '$'"></h3>
-    </th:block>
+<th:block th:include="fragments/header"></th:block>
+<div class="container">
+    <h2 class="text-center h2">Tablets:</h2>
+    <br>
+    <div>
+        <th:block th:each="tablet, iter : ${tablets}">
+            <ul>
+                <img th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}" width="200">
+                <a th:href="@{/tablets/{brand}/{model}(brand = ${tablet.brand}, model = ${tablet.model})}">
+                    <h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
+                </a>
+                <li th:text="${tablet.centralProcessingUnit}"></li>
+                <li th:text="${tablet.display}"></li>
+                <li th:text="${tablet.camera} + 'MP'"></li>
+                <li th:text="${tablet.storage} + 'GB'"></li>
+            </ul>
+            <h3 th:text="${tablet.price} + '$'"></h3>
+        </th:block>
+    </div>
 </div>
 <footer>
     <th:block th:include="fragments/footer"></th:block>

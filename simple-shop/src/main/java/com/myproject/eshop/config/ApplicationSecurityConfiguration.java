@@ -22,6 +22,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .csrfTokenRepository(csrfTokenRepository())
                 .and()
                 .authorizeRequests()
+                .antMatchers("/js/**", "/css/**").permitAll()
                 .antMatchers("/cart", "/profile/**").authenticated()
                 .antMatchers("/laptops-create/**", "/smartphones-create/**", "/smartwatches-create/**", "/tablets-create/**").hasRole("ADMIN")
                 .antMatchers("/laptops-edit/**", "/smartphones-edit/**", "/smartwatches-edit/**", "/tablets-edit/**").hasRole("ADMIN")

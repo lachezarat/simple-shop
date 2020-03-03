@@ -5,11 +5,16 @@
     <th:block th:include="~{fragments/head}"></th:block>
 </head>
 <body>
-<th:block th:include="~{fragments/nav}"></th:block>
-<br>
-<h3>Top selection:</h3>
-<br>
-<h3>Daily deals:</h3>
+<th:block th:include="~{fragments/header}"></th:block>
+<div class="container">
+    <div>
+        <h2 class="text-center h2">Top selection:</h2>
+    </div>
+    <hr>
+    <div>
+        <h2 class="text-center h2">Daily deals:</h2>
+    </div>
+</div>
 <footer>
     <th:block th:include="~{fragments/footer}"></th:block>
 </footer>

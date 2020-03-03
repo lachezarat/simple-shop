@@ -5,35 +5,34 @@
     <th:block th:include="fragments/head"></th:block>
 </head>
 <body>
-<a href="/">Home Page</a>
-<th:block th:include="fragments/nav"></th:block>
-<br>
-<div>
-    <img th:src="${smartwatch.imgUrl}" th:alt="${smartwatch.brand} + ' ' + ${smartwatch.model}">
-    <h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
-    <ul>
-        <li th:text="${smartwatch.centralProcessingUnit}"></li>
-        <li th:text="${smartwatch.display}"></li>
-        <li th:text="${smartwatch.ram} + 'GB'"></li>
-        <li th:text="${smartwatch.storage} + 'GB'"></li>
-        <li th:text="${smartwatch.hasCamera}"></li>
-        <li th:text="${smartwatch.price} + '$'"></li>
-    </ul>
-    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-        <form th:action="@{/smartwatches-edit/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
-              th:method="get">
-            <button th:text="EDIT"></button>
-        </form>
-        <form th:action="@{/smartwatches-delete/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
-              th:method="post">
-            <button th:text="DELETE"></button>
-        </form>
-    </th:block>
-    <button th:text="BUY"></button>
-    <br>
-    <a th:href="@{/smartwatches-brand/{brand} (brand = ${smartwatch.brand})}" th:text="${smartwatch.brand}"></a>
+<th:block th:include="fragments/header"></th:block>
+<div class="container">
+    <div>
+        <img th:src="${smartwatch.imgUrl}" th:alt="${smartwatch.brand} + ' ' + ${smartwatch.model}">
+        <h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
+        <ul>
+            <li th:text="${smartwatch.centralProcessingUnit}"></li>
+            <li th:text="${smartwatch.display}"></li>
+            <li th:text="${smartwatch.ram} + 'GB'"></li>
+            <li th:text="${smartwatch.storage} + 'GB'"></li>
+            <li th:text="${smartwatch.hasCamera}"></li>
+            <li th:text="${smartwatch.price} + '$'"></li>
+        </ul>
+        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <form th:action="@{/smartwatches-edit/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
+                  th:method="get">
+                <button th:text="EDIT"></button>
+            </form>
+            <form th:action="@{/smartwatches-delete/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
+                  th:method="post">
+                <button th:text="DELETE"></button>
+            </form>
+        </th:block>
+        <button th:text="BUY"></button>
+        <br>
+        <a th:href="@{/smartwatches-brand/{brand} (brand = ${smartwatch.brand})}" th:text="${smartwatch.brand}"></a>
+    </div>
 </div>
-<hr>
 <footer>
     <th:block th:include="fragments/footer"></th:block>
 </footer>
