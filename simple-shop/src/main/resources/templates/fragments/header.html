@@ -1,0 +1,77 @@
+<th:block>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="/">
+                    <img th:src="${logo}" alt="E-Shop" width="150">
+                </a>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Account
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-md-left">
+                        <ul>
+                            <th:block sec:authorize="isAnonymous()">
+                                <li>
+                                    <a class="dropdown-item" href="/login">Sign in</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/register">Sign up</a>
+                                </li>
+                            </th:block>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <li>
+                                    <a class="dropdown-item" href="/orders">Orders</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/cart">Cart</a>
+                                </li>
+                                <li class="dropdown-divider"></li>
+                                <li>
+                                    <form class="dropdown-item" th:action=@{/logout} th:method="post">
+                                        <button class="btn btn-link">Logout</button>
+                                    </form>
+                                </li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Create Product
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-md-left">
+                            <ul>
+                                <li class="dropdown-item">
+                                    <a href="/laptops-create">Laptop</a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a href="/smartphones-create">Smartphone</a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a href="/smartwatches-create">Smartwatch</a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a href="/tablets-create">Tablet</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            <div class="col-md-1">
+                <a href="/cart">
+                    <span>$</span>0.00</span></span>
+                    <span> Cart</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="~{fragments/nav}"></th:block>
+</th:block>
