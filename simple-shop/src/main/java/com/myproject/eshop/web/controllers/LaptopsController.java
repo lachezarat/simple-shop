@@ -40,13 +40,13 @@ public class LaptopsController extends BaseController {
         return super.view(modelAndView, "/laptop/laptops-all");
     }
 
-    @GetMapping("/laptops-create")
+    @GetMapping("/admin/laptops-create")
     @PageTitle(value = "Create Laptop")
     public ModelAndView create() {
         return super.view("/laptop/laptops-create");
     }
 
-    @PostMapping("/laptops-create")
+    @PostMapping("/admin/laptops-create")
     public ModelAndView createConfirm(@ModelAttribute LaptopCreateBindingModel model, Principal principal) {
         laptopService.createLaptop(modelMapper.map(model, LaptopServiceModel.class), principal);
         return super.redirect("/laptops-all");
@@ -60,7 +60,7 @@ public class LaptopsController extends BaseController {
         return super.view(modelAndView, "/laptop/laptops-single-view");
     }
 
-    @GetMapping("/laptops-edit/{brand}/{model}")
+    @GetMapping("/admin/laptops-edit/{brand}/{model}")
     @PageTitle(value = "Edit Laptop")
     public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
         LaptopServiceModel laptop = laptopService.findByBrandAndModel(brand, model);
@@ -68,13 +68,13 @@ public class LaptopsController extends BaseController {
         return super.view(modelAndView, "/laptop/laptops-edit");
     }
 
-    @PostMapping("/laptops-edit/{brand}/{model}")
+    @PostMapping("/admin/laptops-edit/{brand}/{model}")
     public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute LaptopCreateBindingModel laptop, Principal principal) {
         laptopService.editLaptop(brand, model, modelMapper.map(laptop, LaptopServiceModel.class), principal);
         return super.redirect("/laptops/" + brand + "/" + model);
     }
 
-    @PostMapping("/laptops-delete/{brand}/{model}")
+    @PostMapping("/admin/laptops-delete/{brand}/{model}")
     public ModelAndView delete(@PathVariable String brand, @PathVariable String model, Principal principal) {
         laptopService.deleteLaptop(brand, model, principal);
 

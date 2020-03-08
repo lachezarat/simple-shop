@@ -10,7 +10,7 @@
     <h2 class="text-center h2" th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
     <div>
         <ul>
-            <form th:action="@{/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
+            <form th:action="@{/admin/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
                   th:method="post">
                 <div class="form-group">
                     <label for="image">Image URL:</label>

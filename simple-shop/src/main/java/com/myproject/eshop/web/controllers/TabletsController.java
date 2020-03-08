@@ -44,13 +44,13 @@ public class TabletsController extends BaseController {
         return super.view(modelAndView, "/tablet/tablets-all");
     }
 
-    @GetMapping("/tablets-create")
+    @GetMapping("/admin/tablets-create")
     @PageTitle(value = "Create Tablet")
     public ModelAndView create() {
         return super.view("/tablet/tablets-create");
     }
 
-    @PostMapping("/tablets-create")
+    @PostMapping("/admin/tablets-create")
     public ModelAndView createConfirm(@ModelAttribute TabletCreateBindingModel model, Principal principal) {
         tabletService.createTablet(modelMapper.map(model, TabletServiceModel.class), principal);
         return super.redirect("/tablets-all");
@@ -64,7 +64,7 @@ public class TabletsController extends BaseController {
         return super.view(modelAndView, "/tablet/tablets-single-view");
     }
 
-    @GetMapping("/tablets-edit/{brand}/{model}")
+    @GetMapping("/admin/tablets-edit/{brand}/{model}")
     @PageTitle(value = "Edit Tablet")
     public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
         TabletServiceModel tablet = tabletService.findByBrandAndModel(brand, model);
@@ -72,13 +72,13 @@ public class TabletsController extends BaseController {
         return super.view(modelAndView, "/tablet/tablets-edit");
     }
 
-    @PostMapping("/tablets-edit/{brand}/{model}")
+    @PostMapping("/admin/tablets-edit/{brand}/{model}")
     public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute TabletCreateBindingModel tablet, Principal principal) {
         tabletService.editTablet(brand, model, modelMapper.map(tablet, TabletServiceModel.class), principal);
         return super.redirect("/tablets/" + brand + "/" + model);
     }
 
-    @PostMapping("tablets-delete/{brand}/{model}")
+    @PostMapping("/admin/tablets-delete/{brand}/{model}")
     public ModelAndView delete(@PathVariable String brand, @PathVariable String model, Principal principal) {
         tabletService.deleteTablet(brand, model, principal);
         return super.redirect("/tablets-all");

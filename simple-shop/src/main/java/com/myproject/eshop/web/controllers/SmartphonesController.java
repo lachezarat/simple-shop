@@ -44,13 +44,13 @@ public class SmartphonesController extends BaseController {
         return super.view(modelAndView, "/smartphone/smartphones-all");
     }
 
-    @GetMapping("/smartphones-create")
+    @GetMapping("/admin/smartphones-create")
     @PageTitle(value = "Create Smartphone")
     public ModelAndView create() {
         return super.view("/smartphone/smartphones-create");
     }
 
-    @PostMapping("/smartphones-create")
+    @PostMapping("/admin/smartphones-create")
     public ModelAndView createConfirm(@ModelAttribute SmartphoneCreateBindingModel model, Principal principal) {
         smartphoneService.createSmartphone(modelMapper.map(model, SmartphoneServiceModel.class), principal);
         return super.redirect("/smartphones-all");
@@ -64,7 +64,7 @@ public class SmartphonesController extends BaseController {
         return super.view(modelAndView, "/smartphone/smartphones-single-view");
     }
 
-    @GetMapping("/smartphones-edit/{brand}/{model}")
+    @GetMapping("/admin/smartphones-edit/{brand}/{model}")
     @PageTitle(value = "Edit Smartphone")
     public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
         SmartphoneServiceModel smartphone = smartphoneService.findByBrandAndModel(brand, model);
@@ -72,13 +72,13 @@ public class SmartphonesController extends BaseController {
         return super.view(modelAndView, "/smartphone/smartphones-edit");
     }
 
-    @PostMapping("/smartphones-edit/{brand}/{model}")
+    @PostMapping("/admin/smartphones-edit/{brand}/{model}")
     public ModelAndView editConfirm(@PathVariable String brand, @PathVariable String model, @ModelAttribute SmartphoneCreateBindingModel smartphone, Principal principal) {
         smartphoneService.editSmartphone(brand, model, modelMapper.map(smartphone, SmartphoneServiceModel.class), principal);
         return super.redirect("/smartphones/" + brand + "/" + model);
     }
 
-    @PostMapping("smartphones-delete/{brand}/{model}")
+    @PostMapping("/admin/smartphones-delete/{brand}/{model}")
     public ModelAndView delete(@PathVariable String brand, @PathVariable String model, Principal principal) {
         smartphoneService.deleteSmartphone(brand, model, principal);
         return super.redirect("/smartphones-all");

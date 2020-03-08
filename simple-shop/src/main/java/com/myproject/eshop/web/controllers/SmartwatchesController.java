@@ -44,13 +44,13 @@ public class SmartwatchesController extends BaseController {
         return super.view(modelAndView, "/smartwatch/smartwatches-all");
     }
 
-    @GetMapping("/smartwatches-create")
+    @GetMapping("/admin/smartwatches-create")
     @PageTitle(value = "Create Smartwatch")
     public ModelAndView create() {
         return super.view("smartwatch/smartwatches-create");
     }
 
-    @PostMapping("/smartwatches-create")
+    @PostMapping("/admin/smartwatches-create")
     public ModelAndView createConfirm(@ModelAttribute SmartwatchCreateBindingModel model, Principal principal) {
         smartwatchService.createSmartwatch(modelMapper.map(model, SmartwatchServiceModel.class), principal);
         return super.redirect("smartwatches-all");
@@ -64,7 +64,7 @@ public class SmartwatchesController extends BaseController {
         return super.view(modelAndView, "/smartwatch/smartwatches-single-view");
     }
 
-    @GetMapping("/smartwatches-edit/{brand}/{model}")
+    @GetMapping("/admin/smartwatches-edit/{brand}/{model}")
     @PageTitle(value = "Edit Smartwatch")
     public ModelAndView edit(@PathVariable String brand, @PathVariable String model, ModelAndView modelAndView) {
         SmartwatchServiceModel smartwatch = smartwatchService.findByBrandAndModel(brand, model);
@@ -72,13 +72,13 @@ public class SmartwatchesController extends BaseController {
         return super.view(modelAndView, "/smartwatch/smartwatches-edit");
     }
 
-    @PostMapping("/smartwatches-edit/{brand}/{model}")
+    @PostMapping("/admin/smartwatches-edit/{brand}/{model}")
     public ModelAndView confirmEdit(@PathVariable String brand, @PathVariable String model, @ModelAttribute SmartwatchCreateBindingModel smartwatch, Principal principal) {
         smartwatchService.editSmartwatch(brand, model, modelMapper.map(smartwatch, SmartwatchServiceModel.class), principal);
         return super.redirect("/smartwatches/" + brand + "/" + model);
     }
 
-    @PostMapping("/smartwatches-delete/{brand}/{model}")
+    @PostMapping("/admin/smartwatches-delete/{brand}/{model}")
     public ModelAndView delete(@PathVariable String brand, @PathVariable String model, Principal principal) {
         smartwatchService.deleteSmartwatch(brand, model, principal);
         return super.redirect("/smartwatches-all");

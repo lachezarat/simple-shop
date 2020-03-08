@@ -21,11 +21,11 @@
             <li th:text="${laptop.price} + '$'"></li>
         </ul>
         <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-            <form th:action="@{/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
+            <form th:action="@{/admin/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
                   th:method="get">
                 <button th:text="EDIT"></button>
             </form>
-            <form th:action="@{/laptops-delete/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
+            <form th:action="@{/admin/laptops-delete/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
                   th:method="post">
                 <button th:text="DELETE"></button>
             </form>
