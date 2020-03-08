@@ -1,15 +1,14 @@
 package com.myproject.eshop.data.models.service;
 
+import java.util.Date;
 import java.util.Set;
 
 public class UserServiceModel extends BaseServiceModel {
 
     private String username;
-
     private String password;
-
     private String email;
-
+    private Date joinDate;
     private Set<RoleServiceModel> authorities;
 
     public String getUsername() {
@@ -42,5 +41,13 @@ public class UserServiceModel extends BaseServiceModel {
 
     public void setAuthorities(Set<RoleServiceModel> authorities) {
         this.authorities = authorities;
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
     }
 }

@@ -3,6 +3,7 @@ package com.myproject.eshop.data.entities;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -12,6 +13,7 @@ public class User extends BaseEntity implements UserDetails {
     private String username;
     private String password;
     private String email;
+    private Date joinDate;
     private Set<Role> authorities;
 
     @Column(name = "username", nullable = false, unique = true, updatable = false)
@@ -60,6 +62,15 @@ public class User extends BaseEntity implements UserDetails {
 
     public void setAuthorities(Set<Role> authorities) {
         this.authorities = authorities;
+    }
+
+    @Column(name = "join_date", nullable = false)
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
     }
 
     @Override

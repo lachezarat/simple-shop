@@ -6,11 +6,15 @@ import com.myproject.eshop.services.UserService;
 import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class UserController extends BaseController {
@@ -25,18 +29,21 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/login")
+    @PreAuthorize("isAnonymous()")
     @PageTitle(value = "Login")
     public ModelAndView login() {
         return super.view("login");
     }
 
     @GetMapping("/register")
+    @PreAuthorize("isAnonymous()")
     @PageTitle(value = "Register")
     public ModelAndView register() {
         return super.view("register");
     }
 
     @PostMapping("/register")
+    @PreAuthorize("isAnonymous()")
     public ModelAndView registerConfirm(@ModelAttribute UserRegisterBindingModel model) {
         if (!model.getPassword().equals(model.getConfirmPassword())) {
             return super.view("register");
@@ -45,5 +52,27 @@ public class UserController extends BaseController {
         this.userService.registerUser(this.modelMapper.map(model, UserServiceModel.class));
 
         return super.redirect("/login");
+    }
+
+    @GetMapping("/admin/users-all")
+    @PageTitle("All Users")
+    public ModelAndView showUsers(ModelAndView modelAndView) {
+        List<UserServiceModel> users = userService.allUsers();
+
+        modelAndView.addObject("users", users);
+
+        return super.view(modelAndView, "user/users-all");
+    }
+
+    @PostMapping("/root/set-admin/{username}")
+    public ModelAndView makeAdmin(@PathVariable String username) {
+        userService.setAdminAccess(username);
+        return super.redirect("/admin/users-all");
+    }
+
+    @PostMapping("/root/set-user/{username}")
+    public ModelAndView makeUser(@PathVariable String username) {
+        userService.setUserAccess(username);
+        return super.redirect("/admin/users-all");
     }
 }

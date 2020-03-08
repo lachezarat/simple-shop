@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<th:block th:include="~{fragments/header}"></th:block>
+<div class="container">
+    <table class="table table-hover w-75 mx-auto">
+        <thead>
+        <tr class="row mx-auto">
+            <th class="col-md-1 text-center">#</th>
+            <th class="col-md-2 text-center">Username</th>
+            <th class="col-md-4 text-center">Email</th>
+            <th class="col-md-1 text-center">Roles</th>
+            <th class="col-md-2 text-center">Join Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="user, iter : ${users}">
+            <tr class="row mx-auto">
+                <th class="col-md-1 text-center" th:utext="${iter.index+ 1}"></th>
+                <td class="col-md-2 text-center" th:utext="${user.username}"></td>
+                <td class="col-md-4 text-center" th:utext="${user.email}"></td>
+                <td class="col-md-1 text-center">
+                    <ul>
+                        <li th:text="${#strings.listJoin(#lists.sort(#lists.toList(user.authorities)), ', ')}"></li>
+                    </ul>
+                </td>
+                <td class="col-md-2 text-center" th:utext="${#dates.format(user.joinDate, 'dd/MM/yyyy')}"></td>
+
+                <th:block sec:authorize="hasRole('ROLE_ROOT')">
+                    <th:block th:if="${#sets.size(user.authorities) == 2}">
+                        <td class="col-md-2 text-center">
+                            <form th:action="@{/root/set-user/{username}(username=${user.username})}" method="post">
+                                <button class="btn btn-dark btn-width">USER</button>
+                            </form>
+                        </td>
+                    </th:block>
+                </th:block>
+
+                <th:block th:if="${#sets.size(user.authorities) == 1}">
+                    <td class="col-md-2 text-center">
+                        <form th:action="@{/root/set-admin/{username}(username=${user.username})}" method="post">
+                            <button class="btn btn-dark btn-width">ADMIN</button>
+                        </form>
+                    </td>
+                </th:block>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</body>
+</html>

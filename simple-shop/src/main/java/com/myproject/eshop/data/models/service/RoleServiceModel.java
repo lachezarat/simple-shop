@@ -1,6 +1,6 @@
 package com.myproject.eshop.data.models.service;
 
-public class RoleServiceModel extends BaseServiceModel {
+public class RoleServiceModel extends BaseServiceModel implements Comparable<RoleServiceModel> {
 
     private String authority;
 
@@ -13,5 +13,15 @@ public class RoleServiceModel extends BaseServiceModel {
 
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    @Override
+    public String toString() {
+        return authority.substring(5);
+    }
+
+    @Override
+    public int compareTo(RoleServiceModel role) {
+        return (this.getAuthority().compareTo(role.getAuthority()));
     }
 }
