@@ -8,32 +8,74 @@
 <th:block th:include="fragments/header"></th:block>
 <div class="container">
     <div>
-        <img th:src="${smartphone.imgUrl}" th:alt="${smartphone.brand} + ' ' + ${smartphone.model}">
-        <h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
-        <ul>
-            <li th:text="${smartphone.display}"></li>
-            <li th:text="${smartphone.centralProcessingUnit}"></li>
-            <li th:text="${smartphone.camera}"></li>
-            <li th:text="${smartphone.ram} + 'GB'"></li>
-            <li th:text="${smartphone.storage} + 'GB'"></li>
-            <li th:text="${smartphone.batteryCapacity} + 'mAh'"></li>
-            <li th:text="${smartphone.hasMemoryCardSlot}"></li>
-            <li th:text="${smartphone.weight} + 'kg'"></li>
-            <li th:text="${smartphone.price} + '$'"></li>
-        </ul>
-        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-            <form th:action="@{/admin/smartphones-edit/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
-                  th:method="get">
-                <button th:text="EDIT"></button>
-            </form>
-            <form th:action="@{/admin/smartphones-delete/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
-                  th:method="post">
-                <button th:text="DELETE"></button>
-            </form>
-        </th:block>
-        <button th:text="BUY"></button>
-        <br>
-        <a th:href="@{/smartphones-brand/{brand} (brand = ${smartphone.brand})}" th:text="${smartphone.brand}"></a>
+        <div class="text-center">
+            <img th:src="${smartphone.imgUrl}" th:alt="${smartphone.brand} + ' ' + ${smartphone.model}">
+        </div>
+        <h2 class="h2 text-justify text-center">FULL SPECIFICATION</h2>
+        <table class="product-characteristics table">
+            <tbody>
+            <tr>
+                <th scope="row">Brand:</th>
+                <td><a th:text="${smartphone.brand}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Model:</th>
+                <td><a th:text="${smartphone.model}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">CPU:</th>
+                <td><a th:text="${smartphone.centralProcessingUnit}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Camera:</th>
+                <td><a th:text="${smartphone.camera} + 'MP'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Display:</th>
+                <td><a th:text="${smartphone.display} + ' inches'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">RAM:</th>
+                <td><a th:text="${smartphone.ram} + 'GB'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Storage:</th>
+                <td><a th:text="${smartphone.storage} + 'GB'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Battery Capacity:</th>
+                <td><a th:text="${smartphone.batteryCapacity} + 'mAh'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Memory Card:</th>
+                <td><a th:text="${smartphone.hasMemoryCardSlot} ? 'YES' : 'NO'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Weight:</th>
+                <td><a th:text="${smartphone.weight} + 'kg'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Price:</th>
+                <td><a th:text="${smartphone.price} + '$'"></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <form th:action="@{/admin/smartphones-edit/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
+                      th:method="get">
+                    <button id="btn-edit" class="btn btn-primary" th:text="EDIT"></button>
+                </form>
+                <form th:action="@{/admin/smartphones-delete/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
+                      th:method="post">
+                    <button id="btn-delete" class="btn btn-danger" th:text="DELETE"></button>
+                </form>
+            </th:block>
+            <button id="btn-buy" class="btn btn-secondary" th:text="BUY"></button>
+            <br>
+            <a th:href="@{/smartphones-brand/{brand} (brand = ${smartphone.brand})}"
+               th:text="'Smartphones ' + ${smartphone.brand}"></a>
+        </div>
     </div>
 </div>
 <footer>

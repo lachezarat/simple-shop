@@ -26,3 +26,27 @@ footer {
     height: 100px;
     text-align: center;
 }
+
+tbody tr:nth-child(2n+1) {
+    background: #f1f6ff;
+}
+
+table > tbody > tr > th {
+    width: 50%;
+}
+
+.product-characteristics {
+    margin: auto;
+    width: 50% !important;
+}
+
+#btn-buy, #btn-edit, #btn-delete, #btn-login {
+    width: 100px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.form-control {
+    margin-top: 10px;
+    width: 400px;
+}

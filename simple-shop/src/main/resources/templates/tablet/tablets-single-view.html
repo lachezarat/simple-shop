@@ -8,29 +8,61 @@
 <th:block th:include="fragments/header"></th:block>
 <div class="container">
     <div>
-        <img th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}">
-        <h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
-        <ul>
-            <li th:text="${tablet.centralProcessingUnit}"></li>
-            <li th:text="${tablet.display}"></li>
-            <li th:text="${tablet.ram} + 'GB'"></li>
-            <li th:text="${tablet.storage} + 'GB'"></li>
-            <li th:text="${tablet.camera} + 'MP'"></li>
-            <li th:text="${tablet.batteryCapacity} + 'mAh'"></li>
-            <li th:text="${tablet.price} + '$'"></li>
-        </ul>
-        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-            <form th:action="@{/admin/tablets-edit/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
-                  th:method="get">
-                <button th:text="EDIT"></button>
-            </form>
-            <form th:action="@{/admin/tablets-delete/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
-                  th:method="post">
-                <button th:text="DELETE"></button>
-            </form>
-        </th:block>
-        <button th:text="BUY"></button>
-        <a th:href="@{/tablets-brand/{brand} (brand = ${tablet.brand})}" th:text="${tablet.brand}"></a>
+        <div class="text-center">
+            <img th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}">
+        </div>
+        <h2 class="h2 text-justify text-center">FULL SPECIFICATION</h2>
+        <table class="product-characteristics table">
+            <tbody>
+            <tr>
+                <th scope="row">Brand:</th>
+                <td><a th:text="${tablet.brand}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Model:</th>
+                <td><a th:text="${tablet.model}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">CPU:</th>
+                <td><a th:text="${tablet.centralProcessingUnit}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Camera:</th>
+                <td><a th:text="${tablet.camera} + 'MP'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Display:</th>
+                <td><a th:text="${tablet.display} + ' inches'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">RAM:</th>
+                <td><a th:text="${tablet.ram} + 'GB'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Storage:</th>
+                <td><a th:text="${tablet.storage} + 'GB'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Price:</th>
+                <td><a th:text="${tablet.price} + '$'"></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <form th:action="@{/admin/tablets-edit/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
+                      th:method="get">
+                    <button id="btn-edit" class="btn btn-primary" th:text="EDIT"></button>
+                </form>
+                <form th:action="@{/admin/tablets-delete/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
+                      th:method="post">
+                    <button id="btn-delete" class="btn btn-danger" th:text="DELETE"></button>
+                </form>
+            </th:block>
+            <button id="btn-buy" class="btn btn-secondary" th:text="BUY"></button>
+            <br>
+            <a th:href="@{/tablets-brand/{brand} (brand = ${tablet.brand})}" th:text="'Tablets ' + ${tablet.brand}"></a>
+        </div>
     </div>
 </div>
 <footer>

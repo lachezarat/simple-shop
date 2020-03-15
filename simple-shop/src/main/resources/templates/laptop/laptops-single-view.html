@@ -9,30 +9,65 @@
 <div class="container">
     <br>
     <div>
-        <img th:src="${laptop.imgUrl}" th:alt="${laptop.brand} + ' ' + ${laptop.model}">
-        <h2 th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
-        <ul>
-            <li th:text="${laptop.centralProcessingUnit}"></li>
-            <li th:text="${laptop.graphicsProcessingUnit}"></li>
-            <li th:text="${laptop.display}"></li>
-            <li th:text="${laptop.ram} + 'GB'"></li>
-            <li th:text="${laptop.storage} + 'GB'"></li>
-            <li th:text="${laptop.weight} + 'kg'"></li>
-            <li th:text="${laptop.price} + '$'"></li>
-        </ul>
-        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-            <form th:action="@{/admin/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
-                  th:method="get">
-                <button th:text="EDIT"></button>
-            </form>
-            <form th:action="@{/admin/laptops-delete/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
-                  th:method="post">
-                <button th:text="DELETE"></button>
-            </form>
-        </th:block>
-        <button th:text="BUY"></button>
-        <br>
-        <a th:href="@{/laptops-brand/{brand} (brand = ${laptop.brand})}" th:text="${laptop.brand}"></a>
+        <div class="text-center">
+            <img th:src="${laptop.imgUrl}" th:alt="${laptop.brand} + ' ' + ${laptop.model}">
+        </div>
+        <h2 class="h2 text-justify text-center">FULL SPECIFICATION</h2>
+        <table class="product-characteristics table">
+            <tbody>
+            <tr>
+                <th scope="row">Brand:</th>
+                <td><a th:text="${laptop.brand}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Model:</th>
+                <td><a th:text="${laptop.model}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">CPU:</th>
+                <td><a th:text="${laptop.centralProcessingUnit}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">GPU:</th>
+                <td><a th:text="${laptop.graphicsProcessingUnit}"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Display:</th>
+                <td><a th:text="${laptop.display} + ' inches'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">RAM:</th>
+                <td><a th:text="${laptop.ram} + 'GB'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Storage:</th>
+                <td><a th:text="${laptop.storage} + 'GB'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Weight:</th>
+                <td><a th:text="${laptop.weight} + 'kg'"></a></td>
+            </tr>
+            <tr>
+                <th scope="row">Price:</th>
+                <td><a th:text="${laptop.price} + '$'"></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <form th:action="@{/admin/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
+                      th:method="get">
+                    <button id="btn-edit" class="btn btn-primary" th:text="EDIT"></button>
+                </form>
+                <form th:action="@{/admin/laptops-delete/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
+                      th:method="post">
+                    <button id="btn-delete" class="btn btn-danger" th:text="DELETE"></button>
+                </form>
+            </th:block>
+            <button id="btn-buy" class="btn btn-secondary" th:text="BUY"></button>
+            <br>
+            <a th:href="@{/laptops-brand/{brand} (brand = ${laptop.brand})}" th:text="'Laptops ' + ${laptop.brand}"></a>
+        </div>
     </div>
 </div>
 <footer>

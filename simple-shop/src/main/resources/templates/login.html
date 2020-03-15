@@ -11,19 +11,23 @@
         <div class="container">
             <h2 class="text-center h2">Sign in</h2>
             <hr/>
-            <form th:method="post" th:action="@{/login}">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input class="form-control col-md-4" type="text" id="username" name="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input class="form-control col-md-4" type="password" id="password" name="password">
-                </div>
-                <div>
-                    <button type="submit">Login</button>
-                </div>
-            </form>
+            <div class="text-center">
+                <form th:method="post" th:action="@{/login}">
+                    <div class="form-group">
+                        <label for="username">Username
+                            <input class="form-control" type="text" id="username" name="username">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password
+                            <input class="form-control" type="password" id="password" name="password">
+                        </label>
+                    </div>
+                    <div>
+                        <button id="btn-login" class="btn btn-secondary" type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
             <hr/>
             <h1>New User? <a href="/register"><strong>Sign up</strong></a></h1>
         </div>
