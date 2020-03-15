@@ -9,19 +9,22 @@
 <div class="container">
     <h2 class="text-center h2">Tablets:</h2>
     <br>
-    <div>
+    <div class="row">
         <th:block th:each="tablet, iter : ${tablets}">
-            <ul>
-                <img th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}" width="200">
-                <a th:href="@{/tablets/{brand}/{model}(brand = ${tablet.brand}, model = ${tablet.model})}">
-                    <h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
-                </a>
-                <li th:text="${tablet.centralProcessingUnit}"></li>
-                <li th:text="${tablet.display}"></li>
-                <li th:text="${tablet.camera} + 'MP'"></li>
-                <li th:text="${tablet.storage} + 'GB'"></li>
-            </ul>
-            <h3 th:text="${tablet.price} + '$'"></h3>
+            <div class="border border-dark col-md-4">
+                <ul>
+                    <img th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}" width="200">
+                    <a th:href="@{/tablets/{brand}/{model}(brand = ${tablet.brand}, model = ${tablet.model})}">
+                        <h2 th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
+                    </a>
+                    <li th:text="${tablet.centralProcessingUnit}"></li>
+                    <li th:text="${tablet.display}"></li>
+                    <li th:text="${tablet.camera} + 'MP'"></li>
+                    <li th:text="${tablet.storage} + 'GB'"></li>
+                </ul>
+                <h3 th:text="${tablet.price} + '$'"></h3>
+                <br>
+            </div>
         </th:block>
     </div>
 </div>

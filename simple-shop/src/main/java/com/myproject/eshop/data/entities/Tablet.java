@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
-import java.math.BigDecimal;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tablets")
@@ -37,7 +37,6 @@ public class Tablet extends Product {
     }
 
     @Column(nullable = false)
-    @Min(value = 0, message = "The storage must be positive")
     public int getStorage() {
         return storage;
     }
@@ -47,7 +46,6 @@ public class Tablet extends Product {
     }
 
     @Column(nullable = false)
-    @Min(value = 0, message = "The RAM must be positive")
     public int getRam() {
         return ram;
     }
@@ -66,7 +64,6 @@ public class Tablet extends Product {
     }
 
     @Column(name = "battery_capacity", nullable = false)
-    @Min(value = 0, message = "The battery capacity must be positive")
     public int getBatteryCapacity() {
         return batteryCapacity;
     }

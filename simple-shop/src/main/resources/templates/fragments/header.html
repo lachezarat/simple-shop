@@ -29,10 +29,15 @@
                                 <li>
                                     <a class="dropdown-item" href="/cart">Cart</a>
                                 </li>
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <li>
+                                        <a class="dropdown-item" href="/admin/users-all">Users</a>
+                                    </li>
+                                </th:block>
                                 <li class="dropdown-divider"></li>
                                 <li>
                                     <form class="dropdown-item" th:action=@{/logout} th:method="post">
-                                        <button class="btn btn-link">Logout</button>
+                                        <button class="btn btn-secondary">Logout</button>
                                     </form>
                                 </li>
                             </th:block>
@@ -48,17 +53,17 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-md-left">
                             <ul>
-                                <li class="dropdown-item">
-                                    <a href="/admin/laptops-create">Laptop</a>
+                                <li>
+                                    <a class="dropdown-item" href="/admin/laptops-create">Laptop</a>
                                 </li>
-                                <li class="dropdown-item">
-                                    <a href="/admin/smartphones-create">Smartphone</a>
+                                <li>
+                                    <a class="dropdown-item" href="/admin/smartphones-create">Smartphone</a>
                                 </li>
-                                <li class="dropdown-item">
-                                    <a href="/admin/smartwatches-create">Smartwatch</a>
+                                <li>
+                                    <a class="dropdown-item" href="/admin/smartwatches-create">Smartwatch</a>
                                 </li>
-                                <li class="dropdown-item">
-                                    <a href="/admin/tablets-create">Tablet</a>
+                                <li>
+                                    <a class="dropdown-item" href="/admin/tablets-create">Tablet</a>
                                 </li>
                             </ul>
                         </div>

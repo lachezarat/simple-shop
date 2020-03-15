@@ -9,19 +9,22 @@
 <div class="container">
     <h2 class="text-center h2">Laptops:</h2>
     <br>
-    <div>
+    <div class="row">
         <th:block th:each="laptop, iter : ${laptops}">
-            <ul>
-                <img th:src="${laptop.imgUrl}" th:alt="${laptop.brand} + ' ' + ${laptop.model}" width="200">
-                <a th:href="@{/laptops/{brand}/{model}(brand = ${laptop.brand}, model = ${laptop.model})}">
-                    <h2 th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
-                </a>
-                <li th:text="${laptop.centralProcessingUnit}"></li>
-                <li th:text="${laptop.graphicsProcessingUnit}"></li>
-                <li th:text="${laptop.ram} + 'GB'"></li>
-                <li th:text="${laptop.storage} + 'GB'"></li>
-            </ul>
-            <h3 th:text="${laptop.price} + '$'"></h3>
+            <div class="border border-dark col-md-4">
+                <ul>
+                    <img th:src="${laptop.imgUrl}" th:alt="${laptop.brand} + ' ' + ${laptop.model}" width="200">
+                    <a th:href="@{/laptops/{brand}/{model}(brand = ${laptop.brand}, model = ${laptop.model})}">
+                        <h2 th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
+                    </a>
+                    <li th:text="${laptop.centralProcessingUnit}"></li>
+                    <li th:text="${laptop.graphicsProcessingUnit}"></li>
+                    <li th:text="${laptop.ram} + 'GB RAM'"></li>
+                    <li th:text="${laptop.storage} + 'GB'"></li>
+                </ul>
+                <h3 th:text="${laptop.price} + '$'"></h3>
+                <br>
+            </div>
         </th:block>
     </div>
 </div>

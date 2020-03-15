@@ -9,19 +9,23 @@
 <div class="container">
     <h2 class="text-center h2">Smartphones:</h2>
     <br>
-    <div>
+    <div class="row">
         <th:block th:each="smartphone, iter : ${smartphones}">
-            <ul>
-                <img th:src="${smartphone.imgUrl}" th:alt="${smartphone.brand} + ' ' + ${smartphone.model}" width="200">
-                <a th:href="@{/smartphones/{brand}/{model}(brand = ${smartphone.brand}, model = ${smartphone.model})}">
-                    <h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
-                </a>
-                <li th:text="${smartphone.display}"></li>
-                <li th:text="${smartphone.camera} + 'MP'"></li>
-                <li th:text="${smartphone.centralProcessingUnit}"></li>
-                <li th:text="${smartphone.batteryCapacity} + 'mAh'"></li>
-            </ul>
-            <h3 th:text="${smartphone.price} + '$'"></h3>
+            <div class="border border-dark col-md-4">
+                <ul>
+                    <img th:src="${smartphone.imgUrl}" th:alt="${smartphone.brand} + ' ' + ${smartphone.model}"
+                         width="200">
+                    <a th:href="@{/smartphones/{brand}/{model}(brand = ${smartphone.brand}, model = ${smartphone.model})}">
+                        <h2 th:text="${smartphone.brand} + ' ' + ${smartphone.model}"></h2>
+                    </a>
+                    <li th:text="${smartphone.display}"></li>
+                    <li th:text="${smartphone.camera} + 'MP'"></li>
+                    <li th:text="${smartphone.centralProcessingUnit}"></li>
+                    <li th:text="${smartphone.batteryCapacity} + 'mAh'"></li>
+                </ul>
+                <h3 th:text="${smartphone.price} + '$'"></h3>
+                <br>
+            </div>
         </th:block>
     </div>
 </div>

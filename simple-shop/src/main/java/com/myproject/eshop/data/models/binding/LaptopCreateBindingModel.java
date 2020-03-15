@@ -13,6 +13,8 @@ public class LaptopCreateBindingModel {
     private String graphicsProcessingUnit;
     private int storage;
     private int ram;
+    private double weight;
+
 
     public String getBrand() {
         return brand;
@@ -85,8 +87,6 @@ public class LaptopCreateBindingModel {
     public void setWeight(double weight) {
         this.weight = weight;
     }
-
-    private double weight;
 
     public String getImgUrl() {
         return imgUrl;

@@ -2,7 +2,6 @@ package com.myproject.eshop.data.entities;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 @MappedSuperclass
@@ -41,7 +40,6 @@ public class Product extends BaseEntity {
     }
 
     @Column
-    @Min(value = 0, message = "The price must be positive")
     public BigDecimal getPrice() {
         return price;
     }

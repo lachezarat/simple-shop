@@ -3,6 +3,7 @@ package com.myproject.eshop.data.models.binding;
 import com.myproject.eshop.web.anotations.FieldMatch;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @FieldMatch.List(value = @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match!"))
@@ -23,6 +24,7 @@ public class UserRegisterBindingModel {
     }
 
     @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters!")
+    @NotBlank(message = "Username is required!")
     public String getUsername() {
         return username;
     }
@@ -32,6 +34,7 @@ public class UserRegisterBindingModel {
     }
 
     @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters!")
+    @NotBlank(message = "Password is required!")
     public String getPassword() {
         return password;
     }
@@ -50,6 +53,7 @@ public class UserRegisterBindingModel {
 
     @Email(message = "Email is not valid!",
             regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,20}")
+    @NotBlank(message = "Email is required!")
     public String getEmail() {
         return email;
     }
