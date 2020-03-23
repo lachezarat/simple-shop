@@ -22,7 +22,8 @@ footer {
     right: 0;
     bottom: 0;
     left: 0;
-    margin: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     height: 100px;
     text-align: center;
 }
@@ -43,10 +44,59 @@ table > tbody > tr > th {
 #btn-buy, #btn-edit, #btn-delete, #btn-login {
     width: 100px;
     margin-top: 15px;
-    margin-bottom: 15px;
+}
+
+#btn-account {
+    margin: 12px;
+    float: right;
 }
 
 .form-control {
     margin-top: 10px;
     width: 400px;
+}
+
+#logo {
+    height: 60px;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.nav-item {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.product-link {
+    border: 0;
+}
+
+.item-characteristic {
+    list-style-type: square;
+    margin-left: 20px;
+}
+
+.product-picture {
+    width: 200px;
+}
+
+.border-dark {
+    margin: 43px;
+}
+
+.heading {
+    margin: 35px;
+    color: #6c757d;
+}
+
+#account-dropdown {
+    width: 100px;
 }

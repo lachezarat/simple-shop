@@ -6,53 +6,61 @@
 </head>
 <body>
 <th:block th:include="fragments/header"></th:block>
-<div class="container">
-    <h2 class="text-center h2" th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
-    <div>
+<div class="container-fluid">
+    <h2 class="text-center h2 heading" th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
+    <div class="text-center">
         <ul>
             <form th:action="@{/admin/smartwatches-edit/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
                   th:method="post">
                 <div class="form-group">
-                    <label for="image">Image URL:</label>
-                    <input class="form-control col-md-4" type="text" id="image" name="imgUrl"
-                           th:value="${smartwatch.imgUrl}">
+                    <label for="image">Image URL:
+                        <input class="form-control" type="text" id="image" name="imgUrl"
+                               th:value="${smartwatch.imgUrl}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="display">Display:</label>
-                    <input class="form-control col-md-4" type="text" id="display" name="display"
-                           th:value="${smartwatch.display}">
+                    <label for="display">Display:
+                        <input class="form-control" type="text" id="display" name="display"
+                               th:value="${smartwatch.display}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input class="form-control col-md-4" type="number" id="price" name="price"
-                           th:value="${smartwatch.price}">
+                    <label for="price">Price:
+                        <input class="form-control" type="number" id="price" name="price" step="0.01"
+                               th:value="${smartwatch.price}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="cpu">CPU:</label>
-                    <input class="form-control col-md-4" type="text" id="cpu"
-                           name="centralProcessingUnit" th:value="${smartwatch.centralProcessingUnit}">
+                    <label for="cpu">CPU:
+                        <input class="form-control" type="text" id="cpu"
+                               name="centralProcessingUnit" th:value="${smartwatch.centralProcessingUnit}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="batteryCapacity">Battery Capacity:</label>
-                    <input class="form-control col-md-4" type="number" id="batteryCapacity" name="batteryCapacity"
-                           th:value="${smartwatch.batteryCapacity}">
+                    <label for="batteryCapacity">Battery Capacity:
+                        <input class="form-control" type="number" id="batteryCapacity" name="batteryCapacity"
+                               th:value="${smartwatch.batteryCapacity}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="storage">Storage:</label>
-                    <input class="form-control col-md-4" type="number" id="storage" name="storage"
-                           th:value="${smartwatch.storage}">
+                    <label for="storage">Storage:
+                        <input class="form-control" type="number" id="storage" name="storage"
+                               th:value="${smartwatch.storage}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="ram">RAM:</label>
-                    <input class="form-control col-md-4" type="number" id="ram" name="ram" th:value="${smartwatch.ram}">
+                    <label for="ram">RAM:
+                        <input class="form-control" type="number" id="ram" name="ram" th:value="${smartwatch.ram}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="hasCamera">Camera:</label>
-                    <input class="form-check" type="checkbox" id="hasCamera" name="hasCamera"
-                           th:checked="${smartwatch.hasCamera}">
+                    <label for="hasCamera">Camera:
+                        <input class="form-check form-control" type="checkbox" id="hasCamera" name="hasCamera"
+                               th:checked="${smartwatch.hasCamera}">
+                    </label>
                 </div>
                 <div>
-                    <button type="submit">Edit</button>
+                    <button class="btn btn-primary" type="submit">Edit</button>
                 </div>
             </form>
             <hr>

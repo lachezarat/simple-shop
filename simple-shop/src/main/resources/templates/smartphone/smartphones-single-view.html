@@ -6,7 +6,7 @@
 </head>
 <body>
 <th:block th:include="fragments/header"></th:block>
-<div class="container">
+<div class="container-fluid">
     <div>
         <div class="text-center">
             <img th:src="${smartphone.imgUrl}" th:alt="${smartphone.brand} + ' ' + ${smartphone.model}">
@@ -61,17 +61,25 @@
             </tbody>
         </table>
         <div class="text-center">
-            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                <form th:action="@{/admin/smartphones-edit/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
-                      th:method="get">
-                    <button id="btn-edit" class="btn btn-primary" th:text="EDIT"></button>
-                </form>
-                <form th:action="@{/admin/smartphones-delete/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
-                      th:method="post">
-                    <button id="btn-delete" class="btn btn-danger" th:text="DELETE"></button>
-                </form>
-            </th:block>
-            <button id="btn-buy" class="btn btn-secondary" th:text="BUY"></button>
+            <ul>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li class="list-inline-item">
+                        <form th:action="@{/admin/smartphones-edit/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
+                              th:method="get">
+                            <button id="btn-edit" class="btn btn-primary" th:text="EDIT"></button>
+                        </form>
+                    </li>
+                    <li class="list-inline-item">
+                        <form th:action="@{/admin/smartphones-delete/{brand}/{model} (brand = ${smartphone.brand}, model = ${smartphone.model})}"
+                              th:method="post">
+                            <button id="btn-delete" class="btn btn-danger" th:text="DELETE"></button>
+                        </form>
+                    </li>
+                </th:block>
+                <li class="list-inline-item">
+                    <button id="btn-buy" class="btn btn-secondary" th:text="BUY"></button>
+                </li>
+            </ul>
             <br>
             <a th:href="@{/smartphones-brand/{brand} (brand = ${smartphone.brand})}"
                th:text="'Smartphones ' + ${smartphone.brand}"></a>

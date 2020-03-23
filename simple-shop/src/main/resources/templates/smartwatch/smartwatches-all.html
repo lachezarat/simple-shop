@@ -6,23 +6,24 @@
 </head>
 <body>
 <th:block th:include="fragments/header"></th:block>
-<div class="container">
-    <h2 class="text-center h2">Smartwatches:</h2>
+<div class="container-fluid">
+    <h2 class="text-center h2 heading">Smartwatches:</h2>
     <br>
     <div class="row">
         <th:block th:each="smartwatch, iter : ${smartwatches}">
-            <div class="border border-dark col-md-4">
+            <div class="border border-dark col-lg-3">
                 <ul>
-                    <img th:src="${smartwatch.imgUrl}" th:alt="${smartwatch.brand} + ' ' + ${smartwatch.model}"
-                         width="200">
-                    <a th:href="@{/smartwatches/{brand}/{model}(brand = ${smartwatch.brand}, model = ${smartwatch.model})}">
+                    <a class="text-center list-group-item product-link"
+                       th:href="@{/smartwatches/{brand}/{model}(brand = ${smartwatch.brand}, model = ${smartwatch.model})}">
+                        <img class="product-picture" th:src="${smartwatch.imgUrl}"
+                             th:alt="${smartwatch.brand} + ' ' + ${smartwatch.model}">
                         <h2 th:text="${smartwatch.brand} + ' ' + ${smartwatch.model}"></h2>
                     </a>
-                    <li th:text="${smartwatch.display}"></li>
-                    <li th:text="${smartwatch.storage} + 'GB'"></li>
-                    <li th:text="${smartwatch.batteryCapacity} + 'mAh'"></li>
+                    <li class="item-characteristic" th:text="${smartwatch.display} + ' inches'"></li>
+                    <li class="item-characteristic" th:text="${smartwatch.storage} + 'GB'"></li>
+                    <li class="item-characteristic" th:text="${smartwatch.batteryCapacity} + 'mAh'"></li>
                 </ul>
-                <h3 th:text="${smartwatch.price} + '$'"></h3>
+                <h3 class="text-center text-info h3" th:text="${smartwatch.price} + '$'"></h3>
                 <br>
             </div>
         </th:block>

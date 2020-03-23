@@ -6,53 +6,61 @@
 </head>
 <body>
 <th:block th:include="fragments/header"></th:block>
-<div class="container">
-    <h2 class="text-center h2" th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
-    <div>
+<div class="container-fluid">
+    <h2 class="text-center h2 heading" th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
+    <div class="text-center">
         <ul>
             <form th:action="@{/admin/laptops-edit/{brand}/{model} (brand = ${laptop.brand}, model = ${laptop.model})}"
                   th:method="post">
                 <div class="form-group">
-                    <label for="image">Image URL:</label>
-                    <input class="form-control col-md-4" type="text" id="image" name="imgUrl"
-                           th:value="${laptop.imgUrl}">
+                    <label for="image">Image URL:
+                        <input class="form-control" type="text" id="image" name="imgUrl"
+                               th:value="${laptop.imgUrl}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="display">Display:</label>
-                    <input class="form-control col-md-4" type="text" id="display" name="display"
-                           th:value="${laptop.display}">
+                    <label for="display">Display:
+                        <input class="form-control" type="text" id="display" name="display"
+                               th:value="${laptop.display}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input class="form-control col-md-4" type="number" id="price" name="price"
-                           th:value="${laptop.price}">
+                    <label for="price">Price:
+                        <input class="form-control" type="number" id="price" name="price" step="0.01"
+                               th:value="${laptop.price}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="cpu">CPU:</label>
-                    <input class="form-control col-md-4" type="text" id="cpu"
-                           name="centralProcessingUnit" th:value="${laptop.centralProcessingUnit}">
+                    <label for="cpu">CPU:
+                        <input class="form-control" type="text" id="cpu"
+                               name="centralProcessingUnit" th:value="${laptop.centralProcessingUnit}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="gpu">GPU:</label>
-                    <input class="form-control col-md-4" type="text" id="gpu"
-                           name="graphicsProcessingUnit" th:value="${laptop.graphicsProcessingUnit}">
+                    <label for="gpu">GPU:
+                        <input class="form-control" type="text" id="gpu"
+                               name="graphicsProcessingUnit" th:value="${laptop.graphicsProcessingUnit}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="storage">Storage:</label>
-                    <input class="form-control col-md-4" type="number" id="storage" name="storage"
-                           th:value="${laptop.storage}">
+                    <label for="storage">Storage:
+                        <input class="form-control" type="number" id="storage" name="storage"
+                               th:value="${laptop.storage}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="ram">RAM:</label>
-                    <input class="form-control col-md-4" type="number" id="ram" name="ram" th:value="${laptop.ram}">
+                    <label for="ram">RAM:
+                        <input class="form-control" type="number" id="ram" name="ram" th:value="${laptop.ram}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="weight">Weight:</label>
-                    <input class="form-control col-md-4" type="number" id="weight" name="weight" step="0.1"
-                           th:value="${laptop.weight}">
+                    <label for="weight">Weight:
+                        <input class="form-control" type="number" id="weight" name="weight" step="0.1"
+                               th:value="${laptop.weight}">
+                    </label>
                 </div>
                 <div>
-                    <button type="submit">Edit</button>
+                    <button class="btn btn-primary" type="submit">Edit</button>
                 </div>
             </form>
         </ul>

@@ -6,53 +6,61 @@
 </head>
 <body>
 <th:block th:include="fragments/header"></th:block>
-<div class="container">
-    <h2 class="text-center  h2" th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
-    <div>
+<div class="container-fluid">
+    <h2 class="text-center h2 heading" th:text="${tablet.brand} + ' ' + ${tablet.model}"></h2>
+    <div class="text-center">
         <ul>
             <form th:action="@{/admin/tablets-edit/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
                   th:method="post">
                 <div class="form-group">
-                    <label for="image">Image URL:</label>
-                    <input class="form-control col-md-4" type="text" id="image" name="imgUrl"
-                           th:value="${tablet.imgUrl}">
+                    <label for="image">Image URL:
+                        <input class="form-control" type="text" id="image" name="imgUrl"
+                               th:value="${tablet.imgUrl}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="display">Display:</label>
-                    <input class="form-control col-md-4" type="text" id="display" name="display"
-                           th:value="${tablet.display}">
+                    <label for="display">Display:
+                        <input class="form-control" type="text" id="display" name="display"
+                               th:value="${tablet.display}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input class="form-control col-md-4" type="number" id="price" name="price"
-                           th:value="${tablet.price}">
+                    <label for="price">Price:
+                        <input class="form-control" type="number" id="price" name="price" step="0.01"
+                               th:value="${tablet.price}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="cpu">CPU:</label>
-                    <input class="form-control col-md-4" type="text" id="cpu"
-                           name="centralProcessingUnit" th:value="${tablet.centralProcessingUnit}">
+                    <label for="cpu">CPU:
+                        <input class="form-control" type="text" id="cpu"
+                               name="centralProcessingUnit" th:value="${tablet.centralProcessingUnit}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="camera">Camera:</label>
-                    <input class="form-control col-md-4" type="text" id="camera" name="camera"
-                           th:value="${tablet.camera}">
+                    <label for="camera">Camera:
+                        <input class="form-control" type="text" id="camera" name="camera"
+                               th:value="${tablet.camera}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="batteryCapacity">Battery Capacity:</label>
-                    <input class="form-control col-md-4" type="number" id="batteryCapacity" name="batteryCapacity"
-                           th:value="${tablet.batteryCapacity}">
+                    <label for="batteryCapacity">Battery Capacity:
+                        <input class="form-control" type="number" id="batteryCapacity" name="batteryCapacity"
+                               th:value="${tablet.batteryCapacity}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="storage">Storage:</label>
-                    <input class="form-control col-md-4" type="number" id="storage" name="storage"
-                           th:value="${tablet.storage}">
+                    <label for="storage">Storage:
+                        <input class="form-control" type="number" id="storage" name="storage"
+                               th:value="${tablet.storage}">
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="ram">RAM:</label>
-                    <input class="form-control col-md-4" type="number" id="ram" name="ram" th:value="${tablet.ram}">
+                    <label for="ram">RAM:
+                        <input class="form-control" type="number" id="ram" name="ram" th:value="${tablet.ram}">
+                    </label>
                 </div>
                 <div>
-                    <button type="submit">Edit</button>
+                    <button class="btn btn-primary" type="submit">Edit</button>
                 </div>
             </form>
         </ul>

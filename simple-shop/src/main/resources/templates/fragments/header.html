@@ -1,19 +1,16 @@
 <th:block>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
                 <a href="/">
-                    <img th:src="${logo}" alt="E-Shop" width="150">
+                    <img id="logo" th:src="${logo}" alt="E-Shop">
                 </a>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-2">
+            <div class="col-md-7 text-center">
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Account
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-md-left">
-                        <ul>
+                    <a id="btn-account" data-toggle="dropdown" class="dropdown-toggle btn btn-secondary">Account</a>
+                    <div class="dropdown-menu">
+                        <ul id="account-dropdown">
                             <th:block sec:authorize="isAnonymous()">
                                 <li>
                                     <a class="dropdown-item" href="/login">Sign in</a>
@@ -29,11 +26,6 @@
                                 <li>
                                     <a class="dropdown-item" href="/cart">Cart</a>
                                 </li>
-                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <li>
-                                        <a class="dropdown-item" href="/admin/users-all">Users</a>
-                                    </li>
-                                </th:block>
                                 <li class="dropdown-divider"></li>
                                 <li>
                                     <form class="dropdown-item" th:action=@{/logout} th:method="post">
@@ -44,37 +36,6 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                <div class="col-md-2">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Create Product
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-md-left">
-                            <ul>
-                                <li>
-                                    <a class="dropdown-item" href="/admin/laptops-create">Laptop</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/admin/smartphones-create">Smartphone</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/admin/smartwatches-create">Smartwatch</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/admin/tablets-create">Tablet</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </th:block>
-            <div class="col-md-1">
-                <a href="/cart">
-                    <span>$</span>0.00</span></span>
-                    <span> Cart</span>
-                </a>
             </div>
         </div>
     </div>

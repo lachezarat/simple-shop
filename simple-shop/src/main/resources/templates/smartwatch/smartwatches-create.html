@@ -6,53 +6,63 @@
 </head>
 <body>
 <th:block th:include="fragments/header"></th:block>
-<div class="container">
-    <h2 class="text-center h2">Create Smartwatch:</h2>
-    <div>
+<div class="container-fluid">
+    <h2 class="text-center h2 heading">Create Smartwatch:</h2>
+    <div class="text-center">
         <form th:method="post" th:action="@{/admin/smartwatches-create}">
             <div class="form-group">
-                <label for="brand">Brand:</label>
-                <input class="form-control col-md-4" type="text" id="brand" name="brand">
+                <label for="brand">Brand:
+                    <input class="form-control" type="text" id="brand" name="brand">
+                </label>
             </div>
             <div class="form-group">
-                <label for="model">Model:</label>
-                <input class="form-control col-md-4" type="text" id="model" name="model">
+                <label for="model">Model:
+                    <input class="form-control" type="text" id="model" name="model">
+                </label>
             </div>
             <div class="form-group">
-                <label for="image">Image URL:</label>
-                <input class="form-control col-md-4" type="text" id="image" name="imgUrl">
+                <label for="image">Image URL:
+                    <input class="form-control" type="text" id="image" name="imgUrl">
+                </label>
             </div>
             <div class="form-group">
-                <label for="display">Display:</label>
-                <input class="form-control col-md-4" type="text" id="display" name="display">
+                <label for="display">Display:
+                    <input class="form-control" type="text" id="display" name="display">
+                </label>
             </div>
             <div class="form-group">
-                <label for="price">Price:</label>
-                <input class="form-control col-md-4" type="number" id="price" name="price">
+                <label for="price">Price:
+                    <input class="form-control" type="number" id="price" name="price">
+                </label>
             </div>
             <div class="form-group">
-                <label for="cpu">CPU:</label>
-                <input class="form-control col-md-4" type="text" id="cpu"
-                       name="centralProcessingUnit">
+                <label for="cpu">CPU:
+                    <input class="form-control" type="text" id="cpu"
+                           name="centralProcessingUnit">
+                </label>
             </div>
             <div class="form-group">
-                <label for="batteryCapacity">Battery Capacity:</label>
-                <input class="form-control col-md-4" type="number" id="batteryCapacity" name="batteryCapacity">
+                <label for="batteryCapacity">Battery Capacity:
+                    <input class="form-control" type="number" id="batteryCapacity" name="batteryCapacity">
+                </label>
             </div>
             <div class="form-group">
-                <label for="storage">Storage:</label>
-                <input class="form-control col-md-4" type="number" id="storage" name="storage">
+                <label for="storage">Storage:
+                    <input class="form-control" type="number" id="storage" name="storage">
+                </label>
             </div>
             <div class="form-group">
-                <label for="ram">RAM:</label>
-                <input class="form-control col-md-4" type="number" id="ram" name="ram">
+                <label for="ram">RAM:
+                    <input class="form-control" type="number" id="ram" name="ram">
+                </label>
             </div>
             <div class="form-group">
-                <label for="hasCamera">Camera:</label>
-                <input class="form-check" type="checkbox" id="hasCamera" name="hasCamera">
+                <label for="hasCamera">Camera:
+                    <input class="form-check form-control" type="checkbox" id="hasCamera" name="hasCamera">
+                </label>
             </div>
             <div>
-                <button type="submit">Create</button>
+                <button class="btn btn-secondary" type="submit">Create</button>
             </div>
         </form>
     </div>

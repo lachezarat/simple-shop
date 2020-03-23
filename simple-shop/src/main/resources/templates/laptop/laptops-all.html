@@ -6,23 +6,25 @@
 </head>
 <body>
 <th:block th:include="fragments/header"></th:block>
-<div class="container">
-    <h2 class="text-center h2">Laptops:</h2>
+<div class="container-fluid">
+    <h2 class="text-center h2 heading">Laptops:</h2>
     <br>
     <div class="row">
         <th:block th:each="laptop, iter : ${laptops}">
-            <div class="border border-dark col-md-4">
+            <div class="border border-dark col-lg-3">
                 <ul>
-                    <img th:src="${laptop.imgUrl}" th:alt="${laptop.brand} + ' ' + ${laptop.model}" width="200">
-                    <a th:href="@{/laptops/{brand}/{model}(brand = ${laptop.brand}, model = ${laptop.model})}">
+                    <a class="text-center list-group-item product-link"
+                       th:href="@{/laptops/{brand}/{model}(brand = ${laptop.brand}, model = ${laptop.model})}">
+                        <img class="product-picture" th:src="${laptop.imgUrl}"
+                             th:alt="${laptop.brand} + ' ' + ${laptop.model}">
                         <h2 th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
                     </a>
-                    <li th:text="${laptop.centralProcessingUnit}"></li>
-                    <li th:text="${laptop.graphicsProcessingUnit}"></li>
-                    <li th:text="${laptop.ram} + 'GB RAM'"></li>
-                    <li th:text="${laptop.storage} + 'GB'"></li>
+                    <li class="item-characteristic" th:text="${laptop.centralProcessingUnit}"></li>
+                    <li class="item-characteristic" th:text="${laptop.graphicsProcessingUnit}"></li>
+                    <li class="item-characteristic" th:text="${laptop.ram} + 'GB RAM'"></li>
+                    <li class="item-characteristic" th:text="${laptop.storage} + 'GB'"></li>
                 </ul>
-                <h3 th:text="${laptop.price} + '$'"></h3>
+                <h3 class="text-center text-info h3" th:text="${laptop.price} + '$'"></h3>
                 <br>
             </div>
         </th:block>
