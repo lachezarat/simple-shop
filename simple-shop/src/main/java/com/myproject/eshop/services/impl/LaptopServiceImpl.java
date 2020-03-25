@@ -2,6 +2,7 @@ package com.myproject.eshop.services.impl;
 
 import com.myproject.eshop.data.entities.Laptop;
 import com.myproject.eshop.data.models.service.LaptopServiceModel;
+import com.myproject.eshop.data.models.service.ProductServiceModel;
 import com.myproject.eshop.error.LaptopNotFoundException;
 import com.myproject.eshop.repositories.LaptopRepository;
 import com.myproject.eshop.services.LaptopService;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -99,5 +101,18 @@ public class LaptopServiceImpl implements LaptopService {
                 .stream()
                 .map(laptop -> modelMapper.map(laptop, LaptopServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addLaptopToCart(HttpSession httpSession, String brand, String model) {
+        LaptopServiceModel laptopServiceModel = laptopRepository.findByBrandAndModel(brand, model)
+                .map(laptop -> modelMapper.map(laptop, LaptopServiceModel.class))
+                .orElseThrow(() -> new LaptopNotFoundException("No such laptop!"));
+
+        ProductServiceModel productServiceModel = modelMapper.map(laptopServiceModel, ProductServiceModel.class);
+
+        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("cartProducts");
+
+        products.add(productServiceModel);
     }
 }

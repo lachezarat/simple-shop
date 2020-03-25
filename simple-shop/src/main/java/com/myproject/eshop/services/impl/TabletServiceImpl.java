@@ -1,6 +1,7 @@
 package com.myproject.eshop.services.impl;
 
 import com.myproject.eshop.data.entities.Tablet;
+import com.myproject.eshop.data.models.service.ProductServiceModel;
 import com.myproject.eshop.data.models.service.TabletServiceModel;
 import com.myproject.eshop.error.TabletNotFoundException;
 import com.myproject.eshop.repositories.TabletRepository;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -99,5 +101,18 @@ public class TabletServiceImpl implements TabletService {
                 .stream()
                 .map(tablet -> modelMapper.map(tablet, TabletServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addTabletToCart(HttpSession httpSession, String brand, String model) {
+        TabletServiceModel tabletServiceModel = tabletRepository.findByBrandAndModel(brand, model)
+                .map(tablet -> modelMapper.map(tablet, TabletServiceModel.class))
+                .orElseThrow(() -> new TabletNotFoundException("No such tablet!"));
+
+        ProductServiceModel productServiceModel = modelMapper.map(tabletServiceModel, ProductServiceModel.class);
+
+        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("cartProducts");
+
+        products.add(productServiceModel);
     }
 }

@@ -9,21 +9,23 @@
 <div class="container-fluid">
     <h2 class="text-center h2 heading">Laptops:</h2>
     <br>
-    <div class="row">
+    <div>
         <th:block th:each="laptop, iter : ${laptops}">
-            <div class="border border-dark col-lg-3">
+            <div class="border border-dark list-inline-item">
                 <ul>
                     <a class="text-center list-group-item product-link"
                        th:href="@{/laptops/{brand}/{model}(brand = ${laptop.brand}, model = ${laptop.model})}">
                         <img class="product-picture" th:src="${laptop.imgUrl}"
                              th:alt="${laptop.brand} + ' ' + ${laptop.model}">
-                        <h2 th:text="${laptop.brand} + ' ' + ${laptop.model}"></h2>
+                        <h4 class="text-secondary h4" th:text="${laptop.brand} + ' ' + ${laptop.model}"></h4>
                     </a>
+                    <hr>
                     <li class="item-characteristic" th:text="${laptop.centralProcessingUnit}"></li>
                     <li class="item-characteristic" th:text="${laptop.graphicsProcessingUnit}"></li>
                     <li class="item-characteristic" th:text="${laptop.ram} + 'GB RAM'"></li>
                     <li class="item-characteristic" th:text="${laptop.storage} + 'GB'"></li>
                 </ul>
+                <hr>
                 <h3 class="text-center text-info h3" th:text="${laptop.price} + '$'"></h3>
                 <br>
             </div>

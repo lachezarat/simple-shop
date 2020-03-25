@@ -97,6 +97,14 @@ table > tbody > tr > th {
     color: #6c757d;
 }
 
-#account-dropdown {
+a:hover {
+    text-decoration: none;
+}
+
+#cart-picture {
     width: 100px;
+}
+
+item-cart-info {
+    vertical-align: -20px;
 }

@@ -65,11 +65,15 @@
                     </li>
                 </th:block>
                 <li class="list-inline-item">
-                    <button id="btn-buy" class="btn btn-secondary" th:text="BUY"></button>
+                    <form th:action="@{/cart/buy/smartwatch/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
+                          th:method="get">
+                        <button id="btn-buy" class="btn btn-secondary" th:text="BUY"></button>
+                    </form>
                 </li>
             </ul>
             <br>
-            <a th:href="@{/smartwatches-brand/{brand} (brand = ${smartwatch.brand})}"
+            <a class="text-secondary h5 page-link"
+               th:href="@{/smartwatches-brand/{brand} (brand = ${smartwatch.brand})}"
                th:text="'Smartwatches ' + ${smartwatch.brand}"></a>
         </div>
     </div>

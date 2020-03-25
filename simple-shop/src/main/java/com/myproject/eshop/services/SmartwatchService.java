@@ -3,6 +3,7 @@ package com.myproject.eshop.services;
 import com.myproject.eshop.data.entities.Smartwatch;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface SmartwatchService {
     void deleteSmartwatch(String brand, String model, Principal principal);
 
     List<SmartwatchServiceModel> findByBrand(String brand);
+
+    void addSmartwatchToCart(HttpSession httpSession, String brand, String model);
 }

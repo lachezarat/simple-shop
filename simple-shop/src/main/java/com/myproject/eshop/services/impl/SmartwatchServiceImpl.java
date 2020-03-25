@@ -1,6 +1,8 @@
 package com.myproject.eshop.services.impl;
 
+import com.myproject.eshop.data.entities.Product;
 import com.myproject.eshop.data.entities.Smartwatch;
+import com.myproject.eshop.data.models.service.ProductServiceModel;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
 import com.myproject.eshop.error.SmartwatchNotFoundException;
 import com.myproject.eshop.repositories.SmartwatchRepository;
@@ -10,6 +12,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -100,5 +103,18 @@ public class SmartwatchServiceImpl implements SmartwatchService {
                 .stream()
                 .map(smartwatch -> modelMapper.map(smartwatch, SmartwatchServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addSmartwatchToCart(HttpSession httpSession, String brand, String model) {
+        SmartwatchServiceModel smartwatchServiceModel = smartwatchRepository.findByBrandAndModel(brand, model)
+                .map(smartwatch -> modelMapper.map(smartwatch, SmartwatchServiceModel.class))
+                .orElseThrow(() -> new SmartwatchNotFoundException("No such smartwatch!"));
+
+        ProductServiceModel productServiceModel = modelMapper.map(smartwatchServiceModel, ProductServiceModel.class);
+
+        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("cartProducts");
+
+        products.add(productServiceModel);
     }
 }

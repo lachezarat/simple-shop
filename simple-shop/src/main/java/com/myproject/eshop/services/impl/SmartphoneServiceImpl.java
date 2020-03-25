@@ -1,6 +1,8 @@
 package com.myproject.eshop.services.impl;
 
+import com.myproject.eshop.data.entities.Product;
 import com.myproject.eshop.data.entities.Smartphone;
+import com.myproject.eshop.data.models.service.ProductServiceModel;
 import com.myproject.eshop.data.models.service.SmartphoneServiceModel;
 import com.myproject.eshop.error.SmartphoneNotFoundException;
 import com.myproject.eshop.repositories.SmartphoneRepository;
@@ -10,6 +12,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -102,5 +105,18 @@ public class SmartphoneServiceImpl implements SmartphoneService {
                 .stream()
                 .map(smartphone -> modelMapper.map(smartphone, SmartphoneServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addSmartphoneToCart(HttpSession httpSession, String brand, String model) {
+        SmartphoneServiceModel smartphoneServiceModel = smartphoneRepository.findByBrandAndModel(brand, model)
+                .map(smartphone -> modelMapper.map(smartphone, SmartphoneServiceModel.class))
+                .orElseThrow(() -> new SmartphoneNotFoundException("No such smartphone!"));
+
+        ProductServiceModel productServiceModel = modelMapper.map(smartphoneServiceModel, ProductServiceModel.class);
+
+        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("cartProducts");
+
+        products.add(productServiceModel);
     }
 }

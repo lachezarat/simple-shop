@@ -1,8 +1,8 @@
 package com.myproject.eshop.services;
 
-import com.myproject.eshop.data.entities.Laptop;
 import com.myproject.eshop.data.models.service.LaptopServiceModel;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 
@@ -19,4 +19,6 @@ public interface LaptopService {
     void deleteLaptop(String brand, String model, Principal principal);
 
     List<LaptopServiceModel> findByBrand(String brand);
+
+    void addLaptopToCart(HttpSession httpSession, String brand, String model);
 }
