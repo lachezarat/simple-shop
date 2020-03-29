@@ -65,9 +65,11 @@
                     </li>
                 </th:block>
                 <li class="list-inline-item">
-                    <form th:action="@{/cart/buy/smartwatch/{brand}/{model} (brand = ${smartwatch.brand}, model = ${smartwatch.model})}"
-                          th:method="get">
-                        <button id="btn-buy" class="btn btn-secondary" th:text="BUY"></button>
+                    <form action="#">
+                        <button th:attr="data-brand=${smartwatch.brand},data-model=${smartwatch.model},
+                                data-image=${smartwatch.imgUrl}, data-price=${smartwatch.price}"
+                                id="btn-buy" class="btn btn-secondary add-to-cart" th:text="BUY">
+                        </button>
                     </form>
                 </li>
             </ul>

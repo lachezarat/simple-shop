@@ -1,12 +1,18 @@
 <th:block>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 <a href="/">
                     <img id="logo" th:src="${logo}" alt="E-Shop">
                 </a>
             </div>
-            <div class="col-md-7 text-center">
+            <div class="col-sm-6">
+                <a href="#" data-toggle="modal" data-target="#cart">
+                    <img id="cart-icon" th:src="@{~/cart_icon.png}" alt="cart-icon">
+                    <span class='badge badge-info total-count' id='cart-count'></span>
+                </a>
+            </div>
+            <div class="text-center col-sm-3">
                 <div class="dropdown">
                     <a id="btn-account" data-toggle="dropdown" class="dropdown-toggle btn btn-secondary">Account</a>
                     <div class="dropdown-menu">
@@ -36,8 +42,10 @@
                         </ul>
                     </div>
                 </div>
+                <div style="clear: both;"></div>
             </div>
         </div>
     </div>
     <th:block th:include="~{fragments/nav}"></th:block>
+    <th:block th:include="~{fragments/cart}"></th:block>
 </th:block>
