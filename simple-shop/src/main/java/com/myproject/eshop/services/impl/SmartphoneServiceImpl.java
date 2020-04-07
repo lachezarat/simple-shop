@@ -115,7 +115,7 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 
         ProductServiceModel productServiceModel = modelMapper.map(smartphoneServiceModel, ProductServiceModel.class);
 
-        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("cartProducts");
+        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("shoppingCart");
 
         products.add(productServiceModel);
     }

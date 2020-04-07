@@ -111,7 +111,7 @@ public class TabletServiceImpl implements TabletService {
 
         ProductServiceModel productServiceModel = modelMapper.map(tabletServiceModel, ProductServiceModel.class);
 
-        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("cartProducts");
+        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("shoppingCart");
 
         products.add(productServiceModel);
     }

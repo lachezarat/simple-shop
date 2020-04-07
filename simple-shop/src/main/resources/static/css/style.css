@@ -41,7 +41,7 @@ table > tbody > tr > th {
     width: 50% !important;
 }
 
-#btn-buy, #btn-edit, #btn-delete, #btn-login {
+#btn-buy, #btn-edit, #btn-delete, #btn-login, #btn-order {
     width: 100px;
     margin-top: 15px;
 }
@@ -164,4 +164,45 @@ input::-webkit-inner-spin-button {
 .minus-item, .plus-item, delete-item {
     height: 37px;
     margin: 10px;
+}
+
+.required {
+    color: red;
+}
+
+#error-message {
+    margin-top: 100px;
+}
+
+#order-page {
+    display: flex;
+    flex-direction: row;
+    background: #f6f6f6;
+    border-radius: 0 0 5px 5px;
+    padding: 25px;
+}
+
+#order-page form {
+    flex: 3;
+    margin-left: 50px;
+}
+
+#Yorder {
+    flex: 2;
+}
+
+#Yorder table {
+    border-collapse: separate;
+    border-spacing: 20px 5px;
+}
+
+#order-page input[type="text"], input[type="tel"], input[type="email"], select {
+    width: 70%;
+    height: 30px;
+    padding: 5px 10px;
+    border: 1px solid #dadada;
+}
+
+#order-form label, label input {
+    display: block;
 }

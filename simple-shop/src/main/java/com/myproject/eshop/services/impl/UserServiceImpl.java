@@ -2,6 +2,7 @@ package com.myproject.eshop.services.impl;
 
 import com.myproject.eshop.data.entities.User;
 import com.myproject.eshop.data.models.service.UserServiceModel;
+import com.myproject.eshop.error.UsernameIsNotAvailableException;
 import com.myproject.eshop.repositories.UserRepository;
 import com.myproject.eshop.services.RoleService;
 import com.myproject.eshop.services.UserService;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,6 +37,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
+        Optional<User> checkUser = userRepository.findByUsername(userServiceModel.getUsername());
+
+        if (checkUser.isPresent()) {
+            throw new UsernameIsNotAvailableException("Username is not available!");
+        }
+
         this.roleService.seedRolesInDb();
         if (this.userRepository.count() == 0) {
             userServiceModel.setAuthorities(this.roleService.findAllRoles());

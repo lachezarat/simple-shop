@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<script type="text/javascript" th:src="@{/js/clear-cart.js}"></script>
+<th:block th:include="~{fragments/header}"></th:block>
+<div class="container-fluid">
+    <h3 class="h3 text-center heading">Thank you! Your order was successfully submitted!</h3>
+</div>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</body>
+</html>

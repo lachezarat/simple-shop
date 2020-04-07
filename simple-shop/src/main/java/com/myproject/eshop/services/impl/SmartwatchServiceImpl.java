@@ -113,7 +113,7 @@ public class SmartwatchServiceImpl implements SmartwatchService {
 
         ProductServiceModel productServiceModel = modelMapper.map(smartwatchServiceModel, ProductServiceModel.class);
 
-        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("cartProducts");
+        List<ProductServiceModel> products = (List<ProductServiceModel>) httpSession.getAttribute("shoppingCart");
 
         products.add(productServiceModel);
     }
