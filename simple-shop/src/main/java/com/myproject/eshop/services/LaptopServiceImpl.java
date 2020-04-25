@@ -1,4 +1,4 @@
-package com.myproject.eshop.services.impl;
+package com.myproject.eshop.services;
 
 import com.myproject.eshop.data.entities.Laptop;
 import com.myproject.eshop.data.models.service.LaptopServiceModel;

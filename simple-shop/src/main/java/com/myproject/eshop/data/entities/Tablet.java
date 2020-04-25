@@ -3,8 +3,6 @@ package com.myproject.eshop.data.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tablets")
