@@ -1,6 +1,5 @@
 package com.myproject.eshop.validation;
 
-import com.myproject.eshop.web.anotations.FieldMatch;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 

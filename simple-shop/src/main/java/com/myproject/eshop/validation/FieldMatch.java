@@ -1,6 +1,4 @@
-package com.myproject.eshop.web.anotations;
-
-import com.myproject.eshop.validation.FieldMatchValidator;
+package com.myproject.eshop.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -15,7 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = FieldMatchValidator.class)
 public @interface FieldMatch {
 
-    String message() default "{constraints.fieldmatch}";
+    String message() default "Fields are not matching!";
 
     Class<?>[] groups() default {};
 

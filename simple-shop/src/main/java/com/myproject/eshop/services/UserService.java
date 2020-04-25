@@ -14,4 +14,8 @@ public interface UserService extends UserDetailsService {
     void setAdminAccess(String username);
 
     void setUserAccess(String username);
+
+    boolean isUsernameAlreadyInUse(String username);
+
+    boolean isEmailAlreadyInUse(String email);
 }

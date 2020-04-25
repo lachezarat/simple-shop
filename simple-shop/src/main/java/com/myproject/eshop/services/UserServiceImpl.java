@@ -1,11 +1,8 @@
-package com.myproject.eshop.services.impl;
+package com.myproject.eshop.services;
 
 import com.myproject.eshop.data.entities.User;
 import com.myproject.eshop.data.models.service.UserServiceModel;
-import com.myproject.eshop.error.UsernameIsNotAvailableException;
 import com.myproject.eshop.repositories.UserRepository;
-import com.myproject.eshop.services.RoleService;
-import com.myproject.eshop.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,11 +34,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
-        Optional<User> checkUser = userRepository.findByUsername(userServiceModel.getUsername());
+        Optional<User> checkUsername = userRepository.findByUsername(userServiceModel.getUsername());
 
-        if (checkUser.isPresent()) {
-            throw new UsernameIsNotAvailableException("Username is not available!");
-        }
+        Optional<User> checkEmail = userRepository.findByEmail(userServiceModel.getEmail());
+
 
         this.roleService.seedRolesInDb();
         if (this.userRepository.count() == 0) {
@@ -94,5 +90,19 @@ public class UserServiceImpl implements UserService {
         userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
 
         userRepository.saveAndFlush(modelMapper.map(userServiceModel, User.class));
+    }
+
+    @Override
+    public boolean isUsernameAlreadyInUse(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+
+        return user.isPresent();
+    }
+
+    @Override
+    public boolean isEmailAlreadyInUse(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+
+        return user.isPresent();
     }
 }
