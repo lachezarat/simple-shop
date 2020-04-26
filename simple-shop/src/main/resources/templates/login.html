@@ -23,6 +23,7 @@
                             <input class="form-control" type="password" id="password" name="password">
                         </label>
                     </div>
+                    <p class="text-danger error" th:if="${param.error}" th:text="'Invalid username or password!'"></p>
                     <div>
                         <button id="btn-login" class="btn btn-secondary" type="submit">Login</button>
                     </div>

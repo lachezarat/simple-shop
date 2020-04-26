@@ -15,6 +15,7 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
     private Date joinDate;
     private Set<Role> authorities;
+    private boolean isEnabled;
 
     @Column(name = "username", nullable = false, unique = true, updatable = false)
     public String getUsername() {
@@ -92,8 +93,12 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
-    @Transient
+    @Column(name = "is_enabled", nullable = false)
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 }

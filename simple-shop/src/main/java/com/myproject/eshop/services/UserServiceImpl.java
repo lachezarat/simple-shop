@@ -2,6 +2,7 @@ package com.myproject.eshop.services;
 
 import com.myproject.eshop.data.entities.User;
 import com.myproject.eshop.data.models.service.UserServiceModel;
+import com.myproject.eshop.error.UserWasBlockedException;
 import com.myproject.eshop.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,6 +46,7 @@ public class UserServiceImpl implements UserService {
         }
 
         userServiceModel.setJoinDate(new Date());
+        userServiceModel.setEnabled(true);
         User user = this.modelMapper.map(userServiceModel, User.class);
         user.setPassword(bCryptPasswordEncoder.encode(userServiceModel.getPassword()));
 
@@ -56,14 +55,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found."));
+
+        if (!user.isEnabled()) {
+            throw new UserWasBlockedException("User was blocked!");
+        }
+
+        return user;
     }
 
     @Override
     public List<UserServiceModel> allUsers() {
         return userRepository.findAll()
                 .stream()
+                .sorted(Comparator.comparing(User::getJoinDate))
                 .map(user -> modelMapper.map(user, UserServiceModel.class))
                 .collect(Collectors.toList());
     }
@@ -104,5 +110,25 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findByEmail(email);
 
         return user.isPresent();
+    }
+
+    @Override
+    public void blockUser(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found."));
+
+        user.setEnabled(false);
+
+        userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public void unblockUser(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found."));
+
+        user.setEnabled(true);
+
+        userRepository.saveAndFlush(user);
     }
 }

@@ -18,4 +18,8 @@ public interface UserService extends UserDetailsService {
     boolean isUsernameAlreadyInUse(String username);
 
     boolean isEmailAlreadyInUse(String email);
+
+    void blockUser(String username);
+
+    void unblockUser(String username);
 }

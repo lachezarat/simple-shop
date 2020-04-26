@@ -7,23 +7,24 @@
 <body>
 <th:block th:include="~{fragments/header}"></th:block>
 <div class="container-fluid">
-    <table class="table table-hover w-75 mx-auto">
+    <table class="table table-hover mx-auto">
         <thead>
         <tr class="row mx-auto">
             <th class="col-md-1 text-center">#</th>
-            <th class="col-md-2 text-center">Username</th>
-            <th class="col-md-4 text-center">Email</th>
+            <th class="col-md-1 text-center">Username</th>
+            <th class="col-md-3 text-center">Email</th>
             <th class="col-md-1 text-center">Roles</th>
             <th class="col-md-2 text-center">Join Date</th>
             <th class="col-md-2 text-center">Access</th>
+            <th class="col-md-2 text-center">Block</th>
         </tr>
         </thead>
         <tbody>
         <th:block th:each="user, iter : ${users}">
             <tr class="row mx-auto">
-                <th class="col-md-1 text-center" th:utext="${iter.index+ 1}"></th>
-                <td class="col-md-2 text-center" th:utext="${user.username}"></td>
-                <td class="col-md-4 text-center" th:utext="${user.email}"></td>
+                <th class="col-md-1 text-center" th:utext="${iter.index + 1}"></th>
+                <td class="col-md-1 text-center" th:utext="${user.username}"></td>
+                <td class="col-md-3 text-center" th:utext="${user.email}"></td>
                 <td class="col-md-1 text-center">
                     <ul>
                         <li th:text="${#strings.listJoin(#lists.sort(#lists.toList(user.authorities)), ', ')}"></li>
@@ -39,12 +40,25 @@
                             </form>
                         </td>
                     </th:block>
+                    <th:block th:if="${#sets.size(user.authorities) == 1}">
+                        <td class="col-md-2 text-center">
+                            <form th:action="@{/root/set-admin/{username}(username=${user.username})}" method="post">
+                                <button class="btn btn-dark btn-width">ADMIN</button>
+                            </form>
+                        </td>
+                    </th:block>
                 </th:block>
-
-                <th:block th:if="${#sets.size(user.authorities) == 1}">
+                <th:block th:if="${user.isEnabled() == true}">
                     <td class="col-md-2 text-center">
-                        <form th:action="@{/root/set-admin/{username}(username=${user.username})}" method="post">
-                            <button class="btn btn-dark btn-width">ADMIN</button>
+                        <form th:action="@{/admin/block-user/{username}(username=${user.username})}" method="post">
+                            <button class="btn btn-dark btn-width">BLOCK</button>
+                        </form>
+                    </td>
+                </th:block>
+                <th:block th:if="${user.isEnabled() == false}">
+                    <td class="col-md-2 text-center">
+                        <form th:action="@{/admin/unblock-user/{username}(username=${user.username})}" method="post">
+                            <button class="btn btn-dark btn-width">UNBLOCK</button>
                         </form>
                     </td>
                 </th:block>

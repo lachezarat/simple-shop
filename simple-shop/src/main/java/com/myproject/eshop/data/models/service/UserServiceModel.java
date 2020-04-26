@@ -10,6 +10,7 @@ public class UserServiceModel extends BaseServiceModel {
     private String email;
     private Date joinDate;
     private Set<RoleServiceModel> authorities;
+    private boolean isEnabled;
 
     public String getUsername() {
         return username;
@@ -49,5 +50,13 @@ public class UserServiceModel extends BaseServiceModel {
 
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }

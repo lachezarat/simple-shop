@@ -77,4 +77,16 @@ public class UserController extends BaseController {
         userService.setUserAccess(username);
         return super.redirect("/admin/users-all");
     }
+
+    @PostMapping("/admin/block-user/{username}")
+    public ModelAndView blockUser(@PathVariable String username) {
+        userService.blockUser(username);
+        return super.redirect("/admin/users-all");
+    }
+
+    @PostMapping("/admin/unblock-user/{username}")
+    public ModelAndView unblockUser(@PathVariable String username) {
+        userService.unblockUser(username);
+        return super.redirect("/admin/users-all");
+    }
 }
