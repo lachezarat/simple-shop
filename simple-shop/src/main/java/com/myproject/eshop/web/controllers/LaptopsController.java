@@ -3,6 +3,7 @@ package com.myproject.eshop.web.controllers;
 import com.myproject.eshop.data.models.binding.LaptopCreateBindingModel;
 import com.myproject.eshop.data.models.service.LaptopServiceModel;
 import com.myproject.eshop.data.models.view.LaptopAllViewModel;
+import com.myproject.eshop.error.LaptopNotFoundException;
 import com.myproject.eshop.services.LaptopService;
 import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
@@ -91,5 +92,14 @@ public class LaptopsController extends BaseController {
                         .collect(Collectors.toList());
         modelAndView.addObject("laptops", laptops);
         return super.view(modelAndView, "/laptop/laptops-all");
+    }
+
+    @ExceptionHandler(LaptopNotFoundException.class)
+    public ModelAndView handleNotFoundException(LaptopNotFoundException e) {
+        ModelAndView modelAndView = new ModelAndView("error");
+
+        modelAndView.addObject("errorMessage", e.getMessage());
+
+        return modelAndView;
     }
 }

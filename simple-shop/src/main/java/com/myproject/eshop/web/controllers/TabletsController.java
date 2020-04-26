@@ -3,6 +3,7 @@ package com.myproject.eshop.web.controllers;
 import com.myproject.eshop.data.models.binding.TabletCreateBindingModel;
 import com.myproject.eshop.data.models.service.TabletServiceModel;
 import com.myproject.eshop.data.models.view.TabletAllViewModel;
+import com.myproject.eshop.error.TabletNotFoundException;
 import com.myproject.eshop.services.TabletService;
 import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
@@ -10,10 +11,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -94,5 +92,14 @@ public class TabletsController extends BaseController {
                         .collect(Collectors.toList());
         modelAndView.addObject("tablets", tablets);
         return super.view(modelAndView, "/tablet/tablets-all");
+    }
+
+    @ExceptionHandler(TabletNotFoundException.class)
+    public ModelAndView handleNotFoundException(TabletNotFoundException e) {
+        ModelAndView modelAndView = new ModelAndView("error");
+
+        modelAndView.addObject("errorMessage", e.getMessage());
+
+        return modelAndView;
     }
 }

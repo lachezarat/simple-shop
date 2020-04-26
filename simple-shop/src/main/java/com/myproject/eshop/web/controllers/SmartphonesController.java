@@ -3,17 +3,13 @@ package com.myproject.eshop.web.controllers;
 import com.myproject.eshop.data.models.binding.SmartphoneCreateBindingModel;
 import com.myproject.eshop.data.models.service.SmartphoneServiceModel;
 import com.myproject.eshop.data.models.view.SmartphoneAllViewModel;
+import com.myproject.eshop.error.SmartphoneNotFoundException;
 import com.myproject.eshop.services.SmartphoneService;
 import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -94,5 +90,14 @@ public class SmartphonesController extends BaseController {
                         .collect(Collectors.toList());
         modelAndView.addObject("smartphones", smartphones);
         return super.view(modelAndView, "/smartphone/smartphones-all");
+    }
+
+    @ExceptionHandler(SmartphoneNotFoundException.class)
+    public ModelAndView handleNotFoundException(SmartphoneNotFoundException e) {
+        ModelAndView modelAndView = new ModelAndView("error");
+
+        modelAndView.addObject("errorMessage", e.getMessage());
+
+        return modelAndView;
     }
 }

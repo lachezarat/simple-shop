@@ -3,6 +3,7 @@ package com.myproject.eshop.web.controllers;
 import com.myproject.eshop.data.models.binding.SmartwatchCreateBindingModel;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
 import com.myproject.eshop.data.models.view.SmartwatchAllViewModel;
+import com.myproject.eshop.error.SmartwatchNotFoundException;
 import com.myproject.eshop.services.SmartwatchService;
 import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
@@ -10,10 +11,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -94,5 +92,14 @@ public class SmartwatchesController extends BaseController {
                         .collect(Collectors.toList());
         modelAndView.addObject("smartwatches", smartwatches);
         return super.view(modelAndView, "/smartwatch/smartwatches-all");
+    }
+
+    @ExceptionHandler(SmartwatchNotFoundException.class)
+    public ModelAndView handleNotFoundException(SmartwatchNotFoundException e) {
+        ModelAndView modelAndView = new ModelAndView("error");
+
+        modelAndView.addObject("errorMessage", e.getMessage());
+
+        return modelAndView;
     }
 }

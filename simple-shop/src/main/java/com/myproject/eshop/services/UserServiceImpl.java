@@ -2,7 +2,6 @@ package com.myproject.eshop.services;
 
 import com.myproject.eshop.data.entities.User;
 import com.myproject.eshop.data.models.service.UserServiceModel;
-import com.myproject.eshop.error.UserWasBlockedException;
 import com.myproject.eshop.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +31,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
-        Optional<User> checkUsername = userRepository.findByUsername(userServiceModel.getUsername());
-
-        Optional<User> checkEmail = userRepository.findByEmail(userServiceModel.getEmail());
-
-
         this.roleService.seedRolesInDb();
         if (this.userRepository.count() == 0) {
             userServiceModel.setAuthorities(this.roleService.findAllRoles());
@@ -55,14 +49,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
+        return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found."));
-
-        if (!user.isEnabled()) {
-            throw new UserWasBlockedException("User was blocked!");
-        }
-
-        return user;
     }
 
     @Override
