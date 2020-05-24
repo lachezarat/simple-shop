@@ -18,7 +18,7 @@ public class Smartphone extends Product {
     private double weight;
 
 
-    @Column(nullable = false)
+    @Column(name = "display", nullable = false)
     public String getDisplay() {
         return display;
     }
@@ -36,7 +36,7 @@ public class Smartphone extends Product {
         this.centralProcessingUnit = centralProcessingUnit;
     }
 
-    @Column(nullable = false)
+    @Column(name = "camera", nullable = false)
     public String getCamera() {
         return camera;
     }
@@ -54,7 +54,7 @@ public class Smartphone extends Product {
         this.batteryCapacity = batteryCapacity;
     }
 
-    @Column(nullable = false)
+    @Column(name = "storage", nullable = false)
     public int getStorage() {
         return storage;
     }
@@ -63,7 +63,7 @@ public class Smartphone extends Product {
         this.storage = storage;
     }
 
-    @Column(nullable = false)
+    @Column(name = "ram", nullable = false)
     public int getRam() {
         return ram;
     }
@@ -72,7 +72,7 @@ public class Smartphone extends Product {
         this.ram = ram;
     }
 
-    @Column(name = "has_memory_card_slot")
+    @Column(name = "has_memory_card_slot", nullable = false)
     public boolean isHasMemoryCardSlot() {
         return hasMemoryCardSlot;
     }
@@ -81,7 +81,7 @@ public class Smartphone extends Product {
         this.hasMemoryCardSlot = hasMemoryCardSlot;
     }
 
-    @Column(nullable = false)
+    @Column(name = "weight", nullable = false)
     public double getWeight() {
         return weight;
     }

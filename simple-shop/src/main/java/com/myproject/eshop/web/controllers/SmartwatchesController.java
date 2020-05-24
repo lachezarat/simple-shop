@@ -7,9 +7,7 @@ import com.myproject.eshop.error.SmartwatchNotFoundException;
 import com.myproject.eshop.services.SmartwatchService;
 import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,7 +49,7 @@ public class SmartwatchesController extends BaseController {
     @PostMapping("/admin/smartwatches-create")
     public ModelAndView createConfirm(@ModelAttribute SmartwatchCreateBindingModel model, Principal principal) {
         smartwatchService.createSmartwatch(modelMapper.map(model, SmartwatchServiceModel.class), principal);
-        return super.redirect("smartwatches-all");
+        return super.redirect("/smartwatches-all");
     }
 
     @GetMapping("/smartwatches/{brand}/{model}")

@@ -16,7 +16,7 @@ public class Laptop extends Product {
     private double weight;
 
 
-    @Column(nullable = false)
+    @Column(name = "display", nullable = false)
     public String getDisplay() {
         return display;
     }
@@ -43,7 +43,7 @@ public class Laptop extends Product {
         this.graphicsProcessingUnit = graphicsProcessingUnit;
     }
 
-    @Column(nullable = false)
+    @Column(name = "storage", nullable = false)
     public int getStorage() {
         return storage;
     }
@@ -52,7 +52,7 @@ public class Laptop extends Product {
         this.storage = storage;
     }
 
-    @Column(nullable = false)
+    @Column(name = "ram", nullable = false)
     public int getRam() {
         return ram;
     }
@@ -61,7 +61,7 @@ public class Laptop extends Product {
         this.ram = ram;
     }
 
-    @Column(nullable = false)
+    @Column(name = "weight", nullable = false)
     public double getWeight() {
         return weight;
     }

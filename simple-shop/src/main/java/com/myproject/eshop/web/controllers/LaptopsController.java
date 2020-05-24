@@ -7,7 +7,6 @@ import com.myproject.eshop.error.LaptopNotFoundException;
 import com.myproject.eshop.services.LaptopService;
 import com.myproject.eshop.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

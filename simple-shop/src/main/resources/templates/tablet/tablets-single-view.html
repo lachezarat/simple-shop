@@ -9,18 +9,18 @@
 <div class="container-fluid">
     <div>
         <div class="text-center">
-            <img th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}">
+            <img id="imgUrl" th:src="${tablet.imgUrl}" th:alt="${tablet.brand} + ' ' + ${tablet.model}">
         </div>
         <h2 class="h2 text-justify text-center">FULL SPECIFICATION</h2>
         <table class="product-characteristics table">
             <tbody>
             <tr>
                 <th scope="row">Brand:</th>
-                <td><a th:text="${tablet.brand}"></a></td>
+                <td><a id="brand" th:text="${tablet.brand}"></a></td>
             </tr>
             <tr>
                 <th scope="row">Model:</th>
-                <td><a th:text="${tablet.model}"></a></td>
+                <td><a id="model" th:text="${tablet.model}"></a></td>
             </tr>
             <tr>
                 <th scope="row">CPU:</th>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <th scope="row">Price:</th>
-                <td><a th:text="${tablet.price} + '$'"></a></td>
+                <td><a id="price" th:text="${tablet.price} + '$'"></a></td>
             </tr>
             </tbody>
         </table>
@@ -60,14 +60,14 @@
                     <li class="list-inline-item">
                         <form th:action="@{/admin/tablets-delete/{brand}/{model} (brand = ${tablet.brand}, model = ${tablet.model})}"
                               th:method="post">
-                            <button id="btn-delete" class="btn btn-danger" th:text="DELETE"></button>
+                            <button id="btn-delete" class="btn btn-danger confirm" th:text="DELETE"></button>
                         </form>
                     </li>
                 </th:block>
                 <li class="list-inline-item">
                     <form action="#">
                         <button th:attr="data-brand=${tablet.brand},data-model=${tablet.model},
-                                data-image=${tablet.imgUrl}, data-price=${tablet.price}"
+                                data-image=${tablet.imgUrl}, data-price=${tablet.price}" data-category="tablet"
                                 id="btn-buy" class="btn btn-secondary add-to-cart" th:text="BUY">
                         </button>
                     </form>

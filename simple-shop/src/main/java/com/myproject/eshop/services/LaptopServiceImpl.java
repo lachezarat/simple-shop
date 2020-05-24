@@ -5,7 +5,6 @@ import com.myproject.eshop.data.models.service.LaptopServiceModel;
 import com.myproject.eshop.data.models.service.ProductServiceModel;
 import com.myproject.eshop.error.LaptopNotFoundException;
 import com.myproject.eshop.repositories.LaptopRepository;
-import com.myproject.eshop.services.LaptopService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,6 @@ public class LaptopServiceImpl implements LaptopService {
     @Override
     public LaptopServiceModel createLaptop(LaptopServiceModel laptopServiceModel, Principal principal) {
         Laptop laptop = modelMapper.map(laptopServiceModel, Laptop.class);
-
         laptopRepository.saveAndFlush(laptop);
 
         logger.info(String.format("%s created laptop %s %s.",

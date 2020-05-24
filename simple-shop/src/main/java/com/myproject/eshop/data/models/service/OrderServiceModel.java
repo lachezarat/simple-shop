@@ -1,6 +1,9 @@
 package com.myproject.eshop.data.models.service;
 
+import com.myproject.eshop.data.entities.Item;
+
 import java.util.Date;
+import java.util.List;
 
 public class OrderServiceModel extends BaseServiceModel {
 
@@ -10,8 +13,11 @@ public class OrderServiceModel extends BaseServiceModel {
     private String city;
     private String postcode;
     private String phone;
-    private Date date;
-
+    private String email;
+    private List<Item> orderItems;
+    private Date created;
+    private boolean isFinished;
+    private double amount;
 
     public String getFirstName() {
         return firstName;
@@ -69,13 +75,35 @@ public class OrderServiceModel extends BaseServiceModel {
         this.email = email;
     }
 
-    private String email;
-
-    public Date getDate() {
-        return date;
+    public List<Item> getOrderItems() {
+        return orderItems;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setOrderItems(List<Item> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(boolean finished) {
+        isFinished = finished;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

@@ -1,14 +1,16 @@
 package com.myproject.eshop.data.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
 
+    //Todo: add address class
     private String firstName;
     private String lastName;
     private String streetAddress;
@@ -16,7 +18,10 @@ public class Order extends BaseEntity {
     private String postcode;
     private String phone;
     private String email;
-    private Date date;
+    private List<Item> orderItems;
+    private Date created;
+    private boolean isFinished;
+    private double amount;
 
     @Column(name = "first_name", nullable = false)
     public String getFirstName() {
@@ -81,12 +86,40 @@ public class Order extends BaseEntity {
         this.email = email;
     }
 
-    @Column(name = "date", nullable = false)
-    public Date getDate() {
-        return date;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "order")
+    public List<Item> getOrderItems() {
+        return orderItems;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setOrderItems(List<Item> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    @Column(name = "created", nullable = false)
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Column(name = "is_finished", nullable = false)
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(boolean finished) {
+        isFinished = finished;
+    }
+
+    @Column(name = "amount", nullable = false)
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

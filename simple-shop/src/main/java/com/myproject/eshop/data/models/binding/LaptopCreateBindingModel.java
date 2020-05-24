@@ -1,36 +1,13 @@
 package com.myproject.eshop.data.models.binding;
 
-import java.math.BigDecimal;
+public class LaptopCreateBindingModel extends BaseProductCreateBindingModel {
 
-public class LaptopCreateBindingModel {
-
-    private String brand;
-    private String model;
-    private String imgUrl;
     private String display;
-    private BigDecimal price;
     private String centralProcessingUnit;
     private String graphicsProcessingUnit;
     private int storage;
     private int ram;
     private double weight;
-
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
 
     public String getDisplay() {
         return display;
@@ -38,14 +15,6 @@ public class LaptopCreateBindingModel {
 
     public void setDisplay(String display) {
         this.display = display;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     public String getCentralProcessingUnit() {
@@ -86,13 +55,5 @@ public class LaptopCreateBindingModel {
 
     public void setWeight(double weight) {
         this.weight = weight;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
     }
 }

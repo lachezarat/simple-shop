@@ -1,35 +1,14 @@
 package com.myproject.eshop.data.models.service;
 
-import java.math.BigDecimal;
+public class SmartwatchServiceModel extends ProductServiceModel {
 
-public class SmartwatchServiceModel extends BaseServiceModel {
-
-    private String brand;
-    private String model;
-    private String imgUrl;
     private String display;
-    private BigDecimal price;
     private String centralProcessingUnit;
     private int storage;
     private int ram;
     private boolean hasCamera = false;
     private int batteryCapacity;
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
 
     public String getDisplay() {
         return display;
@@ -37,14 +16,6 @@ public class SmartwatchServiceModel extends BaseServiceModel {
 
     public void setDisplay(String display) {
         this.display = display;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     public String getCentralProcessingUnit() {
@@ -85,13 +56,5 @@ public class SmartwatchServiceModel extends BaseServiceModel {
 
     public void setBatteryCapacity(int batteryCapacity) {
         this.batteryCapacity = batteryCapacity;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
     }
 }

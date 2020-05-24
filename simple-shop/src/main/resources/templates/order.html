@@ -10,40 +10,40 @@
 <hr>
 <div class="container-fluid">
     <div id="order-page">
-        <form th:method="POST" th:action="@{/order}" id="order-form" th:object="${order}">
+        <form action="#" id="order-form" th:object="${order}">
             <label>
                 <span>First Name <span class="required">*</span></span>
-                <input type="text" name="firstName">
+                <input id="first-name" type="text" name="firstName">
                 <p class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
             </label>
             <label>
                 <span>Last Name <span class="required">*</span></span>
-                <input type="text" name="lastName">
+                <input id="last-name" type="text" name="lastName">
                 <p class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
             </label>
             <label>
                 <span>Street Address <span class="required">*</span></span>
-                <input type="text" name="streetAddress">
+                <input id="street-address" type="text" name="streetAddress">
                 <p class="text-danger" th:if="${#fields.hasErrors('streetAddress')}" th:errors="*{streetAddress}"></p>
             </label>
             <label>
                 <span>Town / City <span class="required">*</span></span>
-                <input type="text" name="city">
+                <input id="city" type="text" name="city">
                 <p class="text-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
             </label>
             <label>
                 <span>Postcode / ZIP <span class="required">*</span></span>
-                <input type="text" name="postcode">
+                <input id="postcode" type="text" name="postcode">
                 <p class="text-danger" th:if="${#fields.hasErrors('postcode')}" th:errors="*{postcode}"></p>
             </label>
             <label>
                 <span>Phone <span class="required">*</span></span>
-                <input type="text" name="phone">
+                <input id="phone" type="text" name="phone">
                 <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
             </label>
             <label>
                 <span>Email Address <span class="required">*</span></span>
-                <input type="email" name="email">
+                <input id="email" type="email" name="email">
                 <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
             </label>
             <button id="btn-order" class="btn btn-secondary">Order</button>

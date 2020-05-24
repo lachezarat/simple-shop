@@ -1,7 +1,10 @@
 package com.myproject.eshop.data.models.binding;
 
+import com.myproject.eshop.data.entities.Item;
+
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 
 public class OrderCreateBindingModel {
 
@@ -12,7 +15,10 @@ public class OrderCreateBindingModel {
     private String postcode;
     private String phone;
     private String email;
-    private Date date;
+    private List<Item> orderItems;
+    private Date created;
+    private boolean isFinished;
+    private double amount;
 
 
     @NotBlank(message = "First name is required!")
@@ -78,11 +84,35 @@ public class OrderCreateBindingModel {
         this.email = email;
     }
 
-    public Date getDate() {
-        return date;
+    public List<Item> getOrderItems() {
+        return orderItems;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setOrderItems(List<Item> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(boolean finished) {
+        isFinished = finished;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

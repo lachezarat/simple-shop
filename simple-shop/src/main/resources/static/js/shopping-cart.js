@@ -2,19 +2,20 @@
 // Shopping Cart API
 // ************************************************
 
-var shoppingCart = (function () {
+const shoppingCart = (function () {
     // =============================
     // Private methods and properties
     // =============================
     cart = [];
 
     // Constructor
-    function Item(brand, model, image, price, count) {
+    function Item(brand, model, image, price, quantity, category) {
         this.brand = brand;
         this.model = model;
         this.image = image;
         this.price = price;
-        this.count = count;
+        this.quantity = quantity;
+        this.category = category;
     }
 
     // Save cart
@@ -35,28 +36,28 @@ var shoppingCart = (function () {
     // =============================
     // Public methods and properties
     // =============================
-    var obj = {};
+    let obj = {};
 
     // Add to cart
-    obj.addItemToCart = function (brand, model, image, price, count) {
+    obj.addItemToCart = function (brand, model, image, price, quantity, category) {
         brand = returnWhitespaces(brand);
         model = returnWhitespaces(model);
         for (let item in cart) {
             if (cart[item].brand === brand && cart[item].model === model) {
-                cart[item].count++;
+                cart[item].quantity++;
                 saveCart();
                 return;
             }
         }
-        let item = new Item(brand, model, image, price, count);
+        let item = new Item(brand, model, image, price, quantity, category);
         cart.push(item);
         saveCart();
     };
-    // Set count from item
-    obj.setCountForItem = function (brand, model, count) {
+    // Set quantity from item
+    obj.setCountForItem = function (brand, model, quantity) {
         for (const item in cart) {
             if (cart[item].brand === brand && cart[item].model === model) {
-                cart[item].count = count;
+                cart[item].quantity = quantity;
                 break;
             }
         }
@@ -67,8 +68,8 @@ var shoppingCart = (function () {
         model = returnWhitespaces(model);
         for (const item in cart) {
             if (cart[item].brand === brand && cart[item].model === model) {
-                if (cart[item].count > 1) {
-                    cart[item].count--;
+                if (cart[item].quantity > 1) {
+                    cart[item].quantity--;
                 } else {
                     break;
                 }
@@ -101,7 +102,7 @@ var shoppingCart = (function () {
     obj.totalCount = function () {
         let totalCount = 0;
         for (const item in cart) {
-            totalCount += cart[item].count;
+            totalCount += cart[item].quantity;
         }
         return totalCount;
     };
@@ -110,21 +111,21 @@ var shoppingCart = (function () {
     obj.totalCart = function () {
         let totalCart = 0;
         for (const item in cart) {
-            totalCart += cart[item].price * cart[item].count;
+            totalCart += cart[item].price * cart[item].quantity;
         }
         return Number(totalCart.toFixed(2));
     };
 
     // List cart
     obj.listCart = function () {
-        var cartCopy = [];
+        let cartCopy = [];
         for (let i in cart) {
-            item = cart[i];
-            itemCopy = {};
-            for (p in item) {
+            let item = cart[i];
+            let itemCopy = {};
+            for (let p in item) {
                 itemCopy[p] = item[p];
             }
-            itemCopy.total = Number(item.price * item.count).toFixed(2);
+            itemCopy.total = Number(item.price * item.quantity).toFixed(2);
             cartCopy.push(itemCopy)
         }
         return cartCopy;
@@ -139,11 +140,13 @@ var shoppingCart = (function () {
 // Add item
 $('.add-to-cart').click(function (event) {
     event.preventDefault();
-    var brand = $(this).data('brand');
-    var model = $(this).data('model');
-    var image = $(this).data('image');
-    var price = Number($(this).data('price'));
-    shoppingCart.addItemToCart(brand, model, image, price, 1);
+    const brand = $(this).data('brand');
+    const model = $(this).data('model');
+    const image = $(this).data('image');
+    const price = Number($(this).data('price'));
+    const quantity = 1;
+    const category = $(this).data('category');
+    shoppingCart.addItemToCart(brand, model, image, price, quantity, category);
     displayCart();
 });
 
@@ -165,7 +168,7 @@ function displayCart() {
             + "<td>" + cartArray[item].brand + " " + cartArray[item].model + "</td>"
             + "<td>(" + price + ")</td>"
             + "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-brand=" + brand + " data-model=" + model + ">-</button>"
-            + "<input type='number' class='item-count form-control' data-brand=" + brand + " data-model=" + model + "' value='" + cartArray[item].count + "'>"
+            + "<input type='number' class='item-count form-control' data-brand=" + brand + " data-model=" + model + "' value='" + cartArray[item].quantity + "'>"
             + "<button class='plus-item btn btn-primary input-group-addon' data-brand=" + brand + " data-model=" + model + ">+</button></div></td>"
             + "<td><button class='delete-item btn btn-danger' data-brand=" + brand + " data-model=" + model + ">X</button></td>"
             + " = "
@@ -202,12 +205,12 @@ $('.show-cart').on("click", ".plus-item", function (event) {
     displayCart();
 });
 
-// Item count input
+// Item quantity input
 $('.show-cart').on("change", ".item-count", function (event) {
     const brand = $(this).data('brand');
     const model = $(this).data('model');
-    const count = Number($(this).val());
-    shoppingCart.setCountForItem(brand, model, count);
+    const quantity = Number($(this).val());
+    shoppingCart.setCountForItem(brand, model, quantity);
     displayCart();
 });
 
@@ -220,3 +223,57 @@ function returnWhitespaces(str) {
 }
 
 displayCart();
+
+const getCircularReplacer = () => {
+    const seen = new WeakSet();
+    return (key, value) => {
+        if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) {
+                return;
+            }
+            seen.add(value);
+        }
+        return value;
+    };
+};
+
+
+$("#btn-order").click((async () => {
+
+    let order = {};
+    order.firstName = document.getElementById("first-name").value;
+    order.lastName = document.getElementById("last-name").value;
+    order.streetAddress = document.getElementById("street-address").value;
+    order.city = document.getElementById("city").value;
+    order.postcode = document.getElementById("postcode").value;
+    order.phone = document.getElementById("phone").value;
+    order.email = document.getElementById("email").value;
+    const shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
+    order.orderItems = shoppingCart;
+    order.orderItems.forEach(item => {
+        item.item = {};
+        item.item.brand = item.brand;
+        item.item.model = item.model;
+        item.item.price = item.price;
+        item.item.imageUrl = item.image;
+        item.item.quantity = Number(item.quantity);
+        item.item.category = item.category;
+        item.order = {};
+        item.order = order;
+    });
+    order.created = new Date();
+    order.finished = false;
+    order.amount = shoppingCart.reduce((acc, cur) => {
+        return acc + cur.price * cur.quantity;
+    }, 0);
+
+    const rawResponse = await fetch('http://localhost:8080/order', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order, getCircularReplacer())
+    });
+    // const content = await rawResponse.json();
+}));

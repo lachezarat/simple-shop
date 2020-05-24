@@ -1,12 +1,10 @@
 package com.myproject.eshop.services;
 
-import com.myproject.eshop.data.entities.Product;
 import com.myproject.eshop.data.entities.Smartphone;
 import com.myproject.eshop.data.models.service.ProductServiceModel;
 import com.myproject.eshop.data.models.service.SmartphoneServiceModel;
 import com.myproject.eshop.error.SmartphoneNotFoundException;
 import com.myproject.eshop.repositories.SmartphoneRepository;
-import com.myproject.eshop.services.SmartphoneService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

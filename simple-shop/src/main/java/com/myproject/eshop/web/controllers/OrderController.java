@@ -1,5 +1,7 @@
 package com.myproject.eshop.web.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.myproject.eshop.data.entities.Order;
 import com.myproject.eshop.data.models.binding.OrderCreateBindingModel;
 import com.myproject.eshop.data.models.service.OrderServiceModel;
 import com.myproject.eshop.services.OrderService;
@@ -8,39 +10,37 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@Controller
+@RestController
+@RequestMapping("/order")
 public class OrderController extends BaseController {
 
     private final OrderService orderService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public OrderController(OrderService orderService, ModelMapper modelMapper) {
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
-        this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/order")
+    @GetMapping
     @PageTitle("Order")
     public ModelAndView order(@ModelAttribute("order") OrderCreateBindingModel order) {
 
         return super.view("/order");
     }
 
-    @PostMapping("/order")
-    public ModelAndView orderSave(@Valid @ModelAttribute("order") OrderCreateBindingModel order, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return super.view("order");
-        }
+    @PostMapping
+    public ModelAndView orderSave(@RequestBody String orderInfoJson) throws JsonProcessingException {
+        OrderServiceModel orderServiceModel = orderService.saveOrder(orderInfoJson);
 
-        orderService.saveOrder(modelMapper.map(order, OrderServiceModel.class));
-        return super.view("success-order");
+        return redirect("/");
     }
 }

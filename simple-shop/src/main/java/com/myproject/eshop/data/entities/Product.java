@@ -3,15 +3,16 @@ package com.myproject.eshop.data.entities;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@MappedSuperclass
-public class Product extends BaseEntity {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Product extends BaseEntity {
 
     private String brand;
     private String model;
     private String imgUrl;
     private BigDecimal price;
 
-    @Column(nullable = false)
+    @Column(name = "brand", nullable = false)
     public String getBrand() {
         return brand;
     }
@@ -20,7 +21,7 @@ public class Product extends BaseEntity {
         this.brand = brand;
     }
 
-    @Column(nullable = false)
+    @Column(name = "model", nullable = false)
     public String getModel() {
         return model;
     }
@@ -29,7 +30,7 @@ public class Product extends BaseEntity {
         this.model = model;
     }
 
-    @Column(name = "image_url", nullable = false)
+    @Column(name = "image_url")
     public String getImgUrl() {
         return imgUrl;
     }
@@ -38,7 +39,7 @@ public class Product extends BaseEntity {
         this.imgUrl = imgUrl;
     }
 
-    @Column
+    @Column(name = "price", nullable = false)
     public BigDecimal getPrice() {
         return price;
     }

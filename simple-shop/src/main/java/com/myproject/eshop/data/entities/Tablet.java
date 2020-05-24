@@ -16,7 +16,7 @@ public class Tablet extends Product {
     private int batteryCapacity;
 
 
-    @Column(nullable = false)
+    @Column(name = "display", nullable = false)
     public String getDisplay() {
         return display;
     }
@@ -34,7 +34,7 @@ public class Tablet extends Product {
         this.centralProcessingUnit = centralProcessingUnit;
     }
 
-    @Column(nullable = false)
+    @Column(name = "storage", nullable = false)
     public int getStorage() {
         return storage;
     }
@@ -43,7 +43,7 @@ public class Tablet extends Product {
         this.storage = storage;
     }
 
-    @Column(nullable = false)
+    @Column(name = "ram", nullable = false)
     public int getRam() {
         return ram;
     }
@@ -52,7 +52,7 @@ public class Tablet extends Product {
         this.ram = ram;
     }
 
-    @Column(nullable = false)
+    @Column(name = "camera", nullable = false)
     public String getCamera() {
         return camera;
     }
