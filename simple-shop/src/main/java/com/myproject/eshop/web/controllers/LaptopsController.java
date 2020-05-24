@@ -92,13 +92,4 @@ public class LaptopsController extends BaseController {
         modelAndView.addObject("laptops", laptops);
         return super.view(modelAndView, "/laptop/laptops-all");
     }
-
-    @ExceptionHandler(LaptopNotFoundException.class)
-    public ModelAndView handleNotFoundException(LaptopNotFoundException e) {
-        ModelAndView modelAndView = new ModelAndView("error");
-
-        modelAndView.addObject("errorMessage", e.getMessage());
-
-        return modelAndView;
-    }
 }

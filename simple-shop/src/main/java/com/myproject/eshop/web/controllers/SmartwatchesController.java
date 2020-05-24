@@ -91,13 +91,4 @@ public class SmartwatchesController extends BaseController {
         modelAndView.addObject("smartwatches", smartwatches);
         return super.view(modelAndView, "/smartwatch/smartwatches-all");
     }
-
-    @ExceptionHandler(SmartwatchNotFoundException.class)
-    public ModelAndView handleNotFoundException(SmartwatchNotFoundException e) {
-        ModelAndView modelAndView = new ModelAndView("error");
-
-        modelAndView.addObject("errorMessage", e.getMessage());
-
-        return modelAndView;
-    }
 }

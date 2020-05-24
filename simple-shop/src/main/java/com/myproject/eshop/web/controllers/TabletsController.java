@@ -91,13 +91,4 @@ public class TabletsController extends BaseController {
         modelAndView.addObject("tablets", tablets);
         return super.view(modelAndView, "/tablet/tablets-all");
     }
-
-    @ExceptionHandler(TabletNotFoundException.class)
-    public ModelAndView handleNotFoundException(TabletNotFoundException e) {
-        ModelAndView modelAndView = new ModelAndView("error");
-
-        modelAndView.addObject("errorMessage", e.getMessage());
-
-        return modelAndView;
-    }
 }

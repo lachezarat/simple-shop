@@ -91,13 +91,4 @@ public class SmartphonesController extends BaseController {
         modelAndView.addObject("smartphones", smartphones);
         return super.view(modelAndView, "/smartphone/smartphones-all");
     }
-
-    @ExceptionHandler(SmartphoneNotFoundException.class)
-    public ModelAndView handleNotFoundException(SmartphoneNotFoundException e) {
-        ModelAndView modelAndView = new ModelAndView("error");
-
-        modelAndView.addObject("errorMessage", e.getMessage());
-
-        return modelAndView;
-    }
 }
