@@ -1,7 +1,7 @@
-package com.myproject.eshop.web.controllers;
+package com.myproject.eshop.web.controllers.view;
 
 import com.myproject.eshop.web.anotations.PageTitle;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.myproject.eshop.web.controllers.base.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;

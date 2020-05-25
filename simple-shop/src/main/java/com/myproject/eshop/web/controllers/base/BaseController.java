@@ -1,4 +1,4 @@
-package com.myproject.eshop.web.controllers;
+package com.myproject.eshop.web.controllers.base;
 
 import org.springframework.web.servlet.ModelAndView;
 

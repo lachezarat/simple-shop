@@ -7,14 +7,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myproject.eshop.data.entities.*;
 import com.myproject.eshop.data.models.service.OrderServiceModel;
 import com.myproject.eshop.error.InvalidItemException;
+import com.myproject.eshop.error.OrderNotFoundException;
 import com.myproject.eshop.repositories.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -25,22 +27,25 @@ public class OrderServiceImpl implements OrderService {
     private final SmartphoneRepository smartphoneRepository;
     private final SmartwatchRepository smartwatchRepository;
     private final TabletRepository tabletRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, ItemRepository itemRepository,
                             LaptopRepository laptopRepository, SmartphoneRepository smartphoneRepository,
                             SmartwatchRepository smartwatchRepository, TabletRepository tabletRepository,
-                            ModelMapper modelMapper) {
+                            UserRepository userRepository, ModelMapper modelMapper) {
         this.orderRepository = orderRepository;
         this.itemRepository = itemRepository;
         this.laptopRepository = laptopRepository;
         this.smartphoneRepository = smartphoneRepository;
         this.smartwatchRepository = smartwatchRepository;
         this.tabletRepository = tabletRepository;
+        this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
 
+    //TODO refactor
     @Override
     public OrderServiceModel saveOrder(String orderInfo) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -110,5 +115,30 @@ public class OrderServiceImpl implements OrderService {
 
         return modelMapper.map(order, OrderServiceModel.class);
     }
-    //TODO refactor
+
+    @Override
+    public List<OrderServiceModel> showUserOrders(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+
+        return orderRepository.findAllByEmail(user.getEmail())
+                .stream()
+                .map(order -> modelMapper.map(order, OrderServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public OrderServiceModel showOrder(String username, String orderId) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found!"));
+
+        if (!order.getEmail().equals(user.getEmail())) {
+            throw new OrderNotFoundException("Order not found!");
+        } else {
+            return modelMapper.map(order, OrderServiceModel.class);
+        }
+    }
 }

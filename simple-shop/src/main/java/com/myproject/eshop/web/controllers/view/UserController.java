@@ -1,9 +1,10 @@
-package com.myproject.eshop.web.controllers;
+package com.myproject.eshop.web.controllers.view;
 
 import com.myproject.eshop.data.models.binding.UserRegisterBindingModel;
 import com.myproject.eshop.data.models.service.UserServiceModel;
 import com.myproject.eshop.services.UserService;
 import com.myproject.eshop.web.anotations.PageTitle;
+import com.myproject.eshop.web.controllers.base.BaseController;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

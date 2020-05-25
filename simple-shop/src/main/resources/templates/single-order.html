@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<th:block th:include="~{fragments/header}"></th:block>
+<div class="container-fluid">
+    <h2 class="text-center h2 heading">Order № <span th:text="${order.id}"></span></h2>
+    <br>
+    <div>
+        <table class="table table-hover mx-auto">
+            <thead>
+            <tr class="row mx-auto">
+                <th class="col-md-6 text-center">Product</th>
+                <th class="col-md-2 text-center">Price</th>
+                <th class="col-md-2 text-center">Quantity</th>
+                <th class="col-md-2 text-center">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="item, iter : ${order.orderItems}">
+                <tr class="row mx-auto">
+                    <!--                    Todo: make product name as link-->
+                    <td class="col-md-4 text-center"><img th:src="${item.imgUrl}" width="50px"></td>
+                    <td class="col-md-2 text-center" th:text="${item.brand} + ' ' + ${item.model}"></td>
+                    <td class="col-md-2 text-center" th:text="${item.price}"></td>
+                    <td class="col-md-2 text-center" th:text="${item.quantity}"></td>
+                    <td class="col-md-2 text-center" th:text="${item.price} * ${item.quantity}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</body>
+</html>

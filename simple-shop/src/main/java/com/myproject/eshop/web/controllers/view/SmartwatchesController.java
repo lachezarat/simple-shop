@@ -1,11 +1,11 @@
-package com.myproject.eshop.web.controllers;
+package com.myproject.eshop.web.controllers.view;
 
 import com.myproject.eshop.data.models.binding.SmartwatchCreateBindingModel;
 import com.myproject.eshop.data.models.service.SmartwatchServiceModel;
 import com.myproject.eshop.data.models.view.SmartwatchAllViewModel;
-import com.myproject.eshop.error.SmartwatchNotFoundException;
 import com.myproject.eshop.services.SmartwatchService;
 import com.myproject.eshop.web.anotations.PageTitle;
+import com.myproject.eshop.web.controllers.base.BaseController;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
